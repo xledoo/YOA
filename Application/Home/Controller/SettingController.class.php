@@ -2,7 +2,7 @@
 namespace Home\Controller;
 use Common\Controller\BaseController;
 class SettingController extends BaseController {
-    public function login(){
+    public function slogin(){
     	$this->display();
     }
 
