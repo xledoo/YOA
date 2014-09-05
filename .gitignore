@@ -1,3 +1,6 @@
 Application/Runtime/
-phpmyadmin/
+Application/Common/Conf/
 ThinkPHP/
+phpmyadmin/
+
+.htaccess
