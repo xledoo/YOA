@@ -1,20 +1,20 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
-class FinancingController extends BaseController {
+class MarketController extends BaseController {
     public function index(){
     	$this->display();
     }
 
-    public function fcash(){
+    public function weixin(){
     	$this->display();
     }
 
-    public function fCard(){
+    public function sms(){
     	$this->display();
     }
 
-    public function borrow(){
+    public function email(){
     	$this->display();
     }
 }
