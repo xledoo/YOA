@@ -1,1 +1,19 @@
-菜单项目维护
+<form name="sidebar_form" action="{:U('home/setting/sidebar')}" method="post">
+<table class="table">
+	<thead><tr><th>ID</th><th>菜单名称</th><th>控制器</th><th>操作名</th><th>图标</th><th>排序</th></tr></thead>
+	<tbody>
+	<volist name="sidebar" id="vo">
+		<tr>
+			<td style="border:none; padding-top:18px;">{$vo.id}</td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][title]" class="form-control input-small" value="{$vo.title}"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][controller]" class="form-control input-small" value="{$vo.controller}"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][action]" class="form-control input-small" value="{$vo.action}"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][icon]" class="form-control input-small" value="{$vo.icon}"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][displayorder]" value="{$vo.displayorder}" class="form-control" style="width:50px;"></td>
+		</tr>
+	</volist>
+	<tr><td></td><td><input type="text" name="addtitle" class="form-control input-small" value=""></td><td><input type="text" name="addcontroller" class="form-control input-small" value=""></td><td><input type="text" name="addaction" class="form-control input-small" value=""></td><td><input type="text" name="addicon" class="form-control input-small" value=""></td><td><input type="text" name="adddisplayorder" class="form-control" value="" style="width:50px;"></td></tr>
+	</tbody>
+</table>
+<input type="submit" name="submit_sidebar" class="btn btn-default" value="提交" />
+</form>

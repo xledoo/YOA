@@ -11,6 +11,14 @@ class SettingController extends BaseController {
     }
 
     public function sidebar(){
-    	$this->display();
+    	if(IS_POST){
+    		foreach ($_POST['edit'] as $key => $value) {
+
+    			M('admincp_sidebar')->where("id=%d", $key)->save($value);
+    		}
+    	} else {
+    		$this->display();	
+    	}
+    	
     }
 }
