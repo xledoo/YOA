@@ -3,3 +3,16 @@
 html,body,div,span,li,ul,a,p,i,input,button,select,option {
 font-family:"Microsoft YaHei", "微软雅黑", "SimSun", "宋体";
 }
+
+.table{}
+
+.table table{
+	border:1px solid #ccc;
+	width:100%;
+}
+
+.table table thead tr th,
+.table table tbody tr td{
+	width:auto;
+	border:1px solid #ccc;
+}
