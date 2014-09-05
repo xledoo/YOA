@@ -40,12 +40,21 @@ class BaseController extends Controller{
 	}
 
 	function init_sidebar(){
-    	$sidebar	=	M('admincp_sidebar')->where('upid=0')->cache('admincp_sidebar', 60)->order('displayorder ASC')->select();
-
-    	foreach ($sidebar as $key => $value) {
-    		$sidebar[$key]['submenu']	=	M('admincp_sidebar')->where("upid='%d'", array($value['id']))->select();
+    	$sidebar = M('admincp_sidebar')->cache('sidebar', 60)->select();
+    	foreach($sidebar as $key => $value) {
+    		if($value['upid']	==	0){
+    			$this->_G['sidebar'][$value['controller']]	=	$value;
+    		} else {
+    			$submenu[$value['controller']][]	=	$value;
+    		}
+    		foreach ($submenu[$value['controller']] as $k => $v) {
+    			$this->_G['sidebar'][$value['controller']]['submenu'][$v['action']]	=	$v;
+    		}
+    		unset($submenu);
+    		$this->_G['sidebar'][$value['controller']]['submenu'] = array_sort($this->_G['sidebar'][$value['controller']]['submenu'], 'displayorder', 'asc');
     	}
-    	$this->_G['sidebar']	=	$sidebar;
+    	$this->_G['sidebar']	=	array_sort($this->_G['sidebar'], 'displayorder', 'asc');
+		return $this->_G['sidebar'];
 	}
 }
 
