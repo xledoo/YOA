@@ -1,1 +1,58 @@
-管理面板首页
+<div class="col-md-12">
+					<!-- BEGIN CONDENSED TABLE PORTLET-->
+					<div class="portlet box green">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-picture"></i>Condensed Table
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse">
+								</a>
+								<a href="#portlet-config" data-toggle="modal" class="config">
+								</a>
+								<a href="javascript:;" class="reload">
+								</a>
+								<a href="javascript:;" class="remove">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-responsive">
+								<table class="table table-condensed table-hover">
+									<thead>
+									<tr>
+										<th>
+											 #
+										</th>
+										<th>
+											 First Name
+										</th>
+										<th>
+											 Last Name
+										</th>
+										<th>
+											 Username
+										</th>
+										<th>
+											 Status
+										</th>
+									</tr>
+									</thead>
+									<tbody>
+										<volist name="sidebar" id="vo">
+											<tr>
+												<td style="border:none; padding-top:18px;">{$vo.id}</td>
+												<td style="border:none;"><input type="text" name="newtitle[{$vo.id}]" class="form-control input-small" value="{$vo.title}"></td>
+												<td style="border:none;"><input type="text" name="newcontroller[{$vo.id}]" class="form-control input-small" value="{$vo.controller}"></td>
+												<td style="border:none;"><input type="text" name="newaction[{$vo.id}]" class="form-control input-small" value="{$vo.action}"></td>
+												<td style="border:none;"><input type="text" name="newicon[{$vo.id}]" class="form-control input-small" value="{$vo.icon}"></td>
+												<td style="border:none;"><input type="text" name="newdisplayorder[{$vo.id}]" value="{$vo.displayorder}" class="form-control" style="width:50px;"></td>
+											</tr>
+										</volist>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- END CONDENSED TABLE PORTLET-->
+				</div>
