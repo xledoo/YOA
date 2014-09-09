@@ -2,7 +2,6 @@
 namespace Home\Controller;
 use Common\Controller\BaseController;
 class FinancingController extends BaseController {
-
     public function fcash(){
     	$this->display();
     }

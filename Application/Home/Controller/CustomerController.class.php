@@ -2,7 +2,7 @@
 namespace Home\Controller;
 use Common\Controller\BaseController;
 class CustomerController extends BaseController {
-    public function clist(){
+	public function clist(){
     	$this->display();
     }
 }
