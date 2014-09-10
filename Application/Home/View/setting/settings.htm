@@ -1,1 +1,15 @@
-系统参数设置
+<form name="settings_form" action="{:U('home/setting/settings')}" method="post">
+<table class="table table-condensed table-hover">
+	<thead><tr><th>参数名称</th><th>参数描述</th><th>参数值</th><th>参数类型</th></tr></thead>
+	<tbody>
+	<volist name="setting" id="vo">
+		<tr>
+			<td style="border:none;"><input type="text" name="edit[{$vo.skey}][skey]" class="form-control input-small" value="{$vo.skey}"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.skey}][title]" class="form-control input-small" value="{$vo.title}"></td>
+			<td style="border:none;"><textarea name="edit[{$vo.skey}][svalue]" class="form-control input-middle" >{$vo.svalue}</textarea></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.skey}][stype]" class="form-control input-small" value="{$vo.stype}"></td>			
+		</tr>
+	</volist>
+</table>
+<input type="submit" name="submit_settings" class="btn btn-default" value="提交" />
+</form>

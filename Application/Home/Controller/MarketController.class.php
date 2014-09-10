@@ -2,10 +2,6 @@
 namespace Home\Controller;
 use Common\Controller\BaseController;
 class MarketController extends BaseController {
-    public function index(){
-    	$this->display();
-    }
-
     public function weixin(){
     	$this->display();
     }

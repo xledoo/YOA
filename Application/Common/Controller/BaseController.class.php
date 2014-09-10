@@ -15,7 +15,7 @@ class BaseController extends Controller{
 	var $_G	=	array();
 
 	/*
-	初始化
+	系统自动初始化全局变量
 	*/
 	function _initialize(){
 		self::init_setting();
@@ -23,13 +23,17 @@ class BaseController extends Controller{
 		self::init_sidebar();
 
 		$this->assign('sidebar', $this->_G['sidebar']);
+		$this->assign('setting', $this->_G['setting']);
 	}
 	
 	/*
-	初始化数据库配置项目
+	初始化系统参数设置项目
 	*/
 	function init_setting(){
-		$this->_G = M('common_setting')->cache()->select();
+		$setting = M('common_setting')->cache('setting',60)->select();
+		foreach ($setting as $key => $value) {
+			$this->_G['setting'][$value['skey']] = $value;
+		}
 	}
 
 	/*
@@ -39,6 +43,9 @@ class BaseController extends Controller{
 		
 	}
 
+	/*
+	初始化菜单栏信息
+	*/
 	function init_sidebar(){
     	$sidebar = M('admincp_sidebar')->cache('sidebar', 60)->select();
     	foreach($sidebar as $key => $value) {

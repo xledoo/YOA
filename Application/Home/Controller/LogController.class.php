@@ -2,11 +2,12 @@
 namespace Home\Controller;
 use Common\Controller\BaseController;
 class LogController extends BaseController {
-    public function index(){
-    	$this->display();
-    }
+<<<<<<< HEAD
 
     public function login(){
+=======
+    public function llogin(){
+>>>>>>> a8eb5bad094f299d7865cc8a936bae26d06436b2
     	$this->display();
     }
 
