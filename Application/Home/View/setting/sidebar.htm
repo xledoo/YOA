@@ -1,61 +1,40 @@
 <form name="sidebar_form" action="{:U('home/setting/sidebar')}" method="post">
 <table class="table table-condensed table-hover">
-	<thead>
-		<tr>
-			<th></th>
-			<th>ID</th>
-			<th>排序</th>
-			<th>菜单名称</th>
-			<th>控制器</th>
-			<th>操作名</th>
-			<th>图标</th>
-		</tr>
-	</thead>
+	<thead><tr><th>ID</th><th>UPID</th><th>排序</th><th>菜单名称</th><th>控制器</th><th>操作名</th><th>图标</th></tr></thead>
 	<tbody>
 	<volist name="sidebar" id="vo">
 		<tr>
-			<td style="border:none; padding-top:18px;"><i class="fa fa-plus-square"></i></td>
-			<td style="border:none; padding-top:18px;">{$vo.id}</td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.id}][displayorder]" value="{$vo.displayorder}" class="form-control" style="width:50px;"></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.id}][title]" class="form-control input-small" value="{$vo.title}"></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.id}][controller]" class="form-control input-small" value="{$vo.controller}"></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.id}][action]" class="form-control input-small" value="{$vo.action}"></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.id}][icon]" class="form-control input-small" value="{$vo.icon}"></td>
+			<td style="border:none; padding-top:10px;font:bold 16px Microsoft YaHei;">{$vo.id}</td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][upid]" value="{$vo.upid}" class="form-control" style="width:50px;font:bold 16px Microsoft YaHei;"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][displayorder]" value="{$vo.displayorder}" class="form-control" style="width:50px;font:bold 15px Microsoft YaHei;"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][title]" value="{$vo.title}" class="form-control" style="width:150px;font:bold 16px Microsoft YaHei;"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][controller]" value="{$vo.controller}" class="form-control input-small" style="font:bold 16px Microsoft YaHei;"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][action]" value="{$vo.action}" class="form-control input-small" style="font:bold 16px Microsoft YaHei;"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][icon]" value="{$vo.icon}" class="form-control" style="width:150px;font:bold 16px Microsoft YaHei;"></td>			
 		</tr>
-		<tr>
-			<td class="details" colspan="7">
-				<table style="margin-left:50px; background-color:#FAEBD7;">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>排序</th>
-							<th>菜单名称</th>
-							<th>控制器</th>
-							<th>操作名</th>
-							<th>图标</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td style="border:none; padding:10px 10px;">111</td>
-							<td style="border:none; padding:10px 10px;"><input type="text" value="111111"></td>
-							<td style="border:none; padding:10px 10px;"><input type="text" value="111111"></td>
-							<td style="border:none; padding:10px 10px;"><input type="text" value="111111"></td>
-							<td style="border:none; padding:10px 10px;"><input type="text" value="111111"></td>
-							<td style="border:none; padding:10px 10px;"><input type="text" value="111111"></td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-		</tr>
+		<notempty name="vo['submenu']">
+			<volist name="vo['submenu']" id="sub">
+				<tr>
+					<td style="border:none; padding-top:15px;">{$sub.id}</td>
+					<td style="border:none;"><input type="text" name="edit[{$sub.id}][upid]" value="{$sub.upid}" class="form-control" style="width:50px;"></td>
+					<td style="border:none;"><input type="text" name="edit[{$sub.id}][displayorder]" value="{$sub.displayorder}" class="form-control" style="width:50px;"></td>
+					<td style="border:none;"><input type="text" name="edit[{$sub.id}][title]" value="{$sub.title}" class="form-control" style="width:150px;"></td>
+					<td style="border:none;"><input type="text" name="edit[{$sub.id}][controller]" value="{$sub.controller}" class="form-control input-small"></td>
+					<td style="border:none;"><input type="text" name="edit[{$sub.id}][action]" value="{$sub.action}" class="form-control input-small"></td>
+					<td style="border:none;"><input type="text" name="edit[{$sub.id}][icon]" value="{$sub.icon}" class="form-control" style="width:150px;"></td>			
+				</tr>
+			</volist>
+		</notempty>
 	</volist>
+					
 	<tr>
-		<td style="border:none;"></td>
+		<td style="border:none; padding-top:18px;"></td>
+		<td style="border:none;"><input type="text" name="add[upid]" class="form-control" value="" style="width:50px;"></td>
 		<td style="border:none;"><input type="text" name="add[displayorder]" class="form-control" value="" style="width:50px;"></td>
-		<td style="border:none;"><input type="text" name="add[title]" class="form-control input-small" value=""></td>
+		<td style="border:none;"><input type="text" name="add[title]" class="form-control" style="width:150px;"></td>
 		<td style="border:none;"><input type="text" name="add[controller]" class="form-control input-small" value=""></td>
 		<td style="border:none;"><input type="text" name="add[action]" class="form-control input-small" value=""></td>
-		<td style="border:none;"><input type="text" name="add[icon]" class="form-control input-small" value=""></td>	
+		<td style="border:none;"><input type="text" name="add[icon]" class="form-control" value="" style="width:150px;"></td>	
 	</tr>
 	</tbody>
 </table>
