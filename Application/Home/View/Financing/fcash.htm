@@ -1,1 +1,31 @@
-融资现金业务
+<a href="{:U('home/financing/add', array('stype' => 'cash'))}" class="btn btn-info pull-right"><i class="fa fa-plus"></i> 新增现金方式融资</a>
+<table class="table table-condensed table-hover">
+	<thead >
+		<tr>
+			<th>ID</th>
+			<th>融资人</th>
+			<th>融资金额</th>
+			<th>融资时间</th>
+			<th>持续时间</th>
+			<th>利息</th>
+			<th>手机号</th>
+			<th>认证状态</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody >
+		<volist name="fcash" id="vo">
+			<tr>
+				<td>{$vo.id}</td>
+				<td>{$vo.customer}</td>
+				<td>{$vo.money}</td>
+				<td>{$vo.startime|date="Y-m-d",###}</td>
+				<td><php>echo intval((NOW_TIME - $vo['startime'])/(3600*24)).'天';</php></td>
+				<td>{$vo.rate}</td>
+				<td>{$vo.mobile}</td>
+				<td><if condition="$vo[status] eq 0"><span class="text-danger">未审核</span><elseif condition="$vo[status] eq 1"/><span class="text-success">已审核</span></if></td>
+				<td><a href="{:U('home/financing/cashinfo', array('id' => $vo['id']))}">详情</a></td>
+			</tr>
+		</volist>
+	</tbody>
+</table>

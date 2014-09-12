@@ -1,15 +1,23 @@
 <form name="settings_form" action="{:U('home/setting/settings')}" method="post">
-<table class="table table-condensed table-hover">
-	<thead><tr><th>参数名称</th><th>参数描述</th><th>参数值</th><th>参数类型</th></tr></thead>
-	<tbody>
 	<volist name="setting" id="vo">
-		<tr>
-			<td style="border:none;"><input type="text" name="edit[{$vo.skey}][skey]" class="form-control input-small" value="{$vo.skey}"></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.skey}][title]" class="form-control input-small" value="{$vo.title}"></td>
-			<td style="border:none;"><textarea name="edit[{$vo.skey}][svalue]" class="form-control input-middle" >{$vo.svalue}</textarea></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.skey}][stype]" class="form-control input-small" value="{$vo.stype}"></td>			
-		</tr>
-	</volist>
+<table class="table table-condensed table-hover">
+	<tbody>
+		<tr><td><h4><strong>{$vo.stitle}</strong></h4></td><td></td></tr>
+		<tr><td style="border:none;width:300px;"><php>echo input_build($vo['skey'], $vo['stype'], $vo['svalue']);</php></td><td style="border:none;">{$vo.sremark}</td></tr>
+	</tbody>
 </table>
+	</volist>
+	skey:<input type="text" name="skey" class="form-control input-small" />
+	svalue:<input type="text" name="svalue" class="form-control input-small" />
+	stitle:<input type="text" name="stitle" class="form-control input-small" />
+	sremark:<input type="text" name="sremark" class="form-control input-small" />
+	stype:<select name="stype">
+		<option value="off">开关</option>
+		<option value="text">文本框</option>
+		<option value="radio">单选框</option>
+		<option value="checkbox">复选框</option>
+		<option value="select">下拉菜单</option>
+		<option value="textarea">复文本框</option>
+	</select>
 <input type="submit" name="submit_settings" class="btn btn-default" value="提交" />
 </form>

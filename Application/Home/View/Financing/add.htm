@@ -1,0 +1,28 @@
+<h4><strong>新增现金融资业务</strong></h4>
+<form name="add_cash" action="{:U('home/financing/add', array('stype' => 'cash'))}" method="post">
+<div class="form-body">
+	<h5>客户名</h5>
+	<input type="text" name="customer" class="form-control input-large" />
+	<h5>融资金额</h5>
+	<input type="text" name="money" class="form-control input-large" />
+	<h5>融资时间</h5>
+	<div class="input-group input-medium date date-picker" data-date-format="yyyy/dd/mm" data-date-start-date="+0d">
+		<input type="text" class="form-control input-middle" readonly="" name="startime">
+		<span class="input-group-btn">
+			<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+		</span>
+	</div>
+	<h5>利息</h5>
+	<input type="text" name="rate" class="form-control input-large" />
+	<h5>手机号</h5>
+	<input type="text" name="mobile" class="form-control input-large" />
+	<h5>银行名</h5>
+	<input type="text" name="bankname" class="form-control input-large" />
+	<h5>银行卡号</h5>
+	<input type="text" name="cardnum" class="form-control input-large" />
+	<h5>推荐人</h5>
+	<input type="text" name="sponsor" class="form-control input-large" />
+</div>
+
+<input type="submit" name="submit_addcash" class="btn btn-info" value="提交" />
+</form>
