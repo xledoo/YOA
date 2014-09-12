@@ -4,18 +4,18 @@
 	<tbody>
 	<volist name="sidebar" id="vo">
 		<tr>
-			<td style="border:none; padding-top:18px;">{$vo.id}</td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.id}][upid]" value="{$vo.upid}" class="form-control" style="width:50px;"></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.id}][displayorder]" value="{$vo.displayorder}" class="form-control" style="width:50px;"></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.id}][title]" value="{$vo.title}" class="form-control" style="width:150px;"></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.id}][controller]" value="{$vo.controller}" class="form-control input-small"></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.id}][action]" value="{$vo.action}" class="form-control input-small"></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.id}][icon]" value="{$vo.icon}" class="form-control" style="width:150px;"></td>			
+			<td style="border:none; padding-top:10px;font:bold 16px Microsoft YaHei;">{$vo.id}</td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][upid]" value="{$vo.upid}" class="form-control" style="width:50px;font:bold 16px Microsoft YaHei;"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][displayorder]" value="{$vo.displayorder}" class="form-control" style="width:50px;font:bold 15px Microsoft YaHei;"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][title]" value="{$vo.title}" class="form-control" style="width:150px;font:bold 16px Microsoft YaHei;"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][controller]" value="{$vo.controller}" class="form-control input-small" style="font:bold 16px Microsoft YaHei;"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][action]" value="{$vo.action}" class="form-control input-small" style="font:bold 16px Microsoft YaHei;"></td>
+			<td style="border:none;"><input type="text" name="edit[{$vo.id}][icon]" value="{$vo.icon}" class="form-control" style="width:150px;font:bold 16px Microsoft YaHei;"></td>			
 		</tr>
 		<notempty name="vo['submenu']">
 			<volist name="vo['submenu']" id="sub">
 				<tr>
-					<td style="border:none; padding-top:18px;">{$sub.id}</td>
+					<td style="border:none; padding-top:15px;">{$sub.id}</td>
 					<td style="border:none;"><input type="text" name="edit[{$sub.id}][upid]" value="{$sub.upid}" class="form-control" style="width:50px;"></td>
 					<td style="border:none;"><input type="text" name="edit[{$sub.id}][displayorder]" value="{$sub.displayorder}" class="form-control" style="width:50px;"></td>
 					<td style="border:none;"><input type="text" name="edit[{$sub.id}][title]" value="{$sub.title}" class="form-control" style="width:150px;"></td>
