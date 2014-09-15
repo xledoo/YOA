@@ -361,7 +361,7 @@ function input_build($name, $type, $value = ''){
 			$input = '<input type="text" class="form-control" style="height:25px;border-style:inset;" name="'.$name.'" value="'.$value.'" />';
 			break;
 		case 'textarea':
-			$input = '<textarea name="'.$name.'" rows="5" cols="45">"'.$value.'"</textarea>';
+			$input = '<textarea name="'.$name.'" rows="5" cols="45">'.$value.'</textarea>';
 			break;
 		default:
 			# code...
