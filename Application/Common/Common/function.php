@@ -378,7 +378,7 @@ function build_md5($str, $key = 'finabao.com'){
 
 //数组加密
 function array_md5($array){
-	build_md5(implode('GLOBAL_AUTH_KEY', array_reverse($array)));
+	return build_md5(implode('GLOBAL_AUTH_KEY', array_reverse($array)));
 }
 
 ?>
