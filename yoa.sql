@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?09 �?12 �?17:49
+-- 生成日期: 2014 �?09 �?15 �?14:25
 -- 服务器版本: 5.6.10
 -- PHP 版本: 5.6.0beta4
 
@@ -72,6 +72,44 @@ INSERT INTO `pre_admincp_sidebar` (`id`, `upid`, `controller`, `action`, `title`
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `pre_common_banks`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_common_banks` (
+  `bid` mediumint(5) NOT NULL AUTO_INCREMENT,
+  `bankname` char(20) NOT NULL,
+  `sign` char(20) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`bid`),
+  UNIQUE KEY `bankname` (`bankname`) USING BTREE,
+  UNIQUE KEY `bankname_2` (`bankname`) USING BTREE,
+  UNIQUE KEY `sign` (`sign`) USING BTREE
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED AUTO_INCREMENT=17 ;
+
+--
+-- 转存表中的数据 `pre_common_banks`
+--
+
+INSERT INTO `pre_common_banks` (`bid`, `bankname`, `sign`, `status`) VALUES
+(1, '农业银行', 'abc', 1),
+(2, '建设银行', 'ccb', 1),
+(3, '工商银行', 'icbc', 1),
+(4, '交通银行', 'boco', 1),
+(5, '中国银行', 'boc', 1),
+(6, '招商银行', 'cmb', 1),
+(7, '广发银行', 'gdb', 1),
+(8, '民生银行', 'cmbc', 1),
+(9, '光大银行', 'cebb', 1),
+(10, '中信银行', 'ecitic', 1),
+(11, '平安银行', 'pingan', 1),
+(13, '华夏银行', 'hxb', 1),
+(14, '邮政储蓄银行', 'post', 1),
+(15, '浦发银行', 'spdb', 1),
+(16, '兴业银行', 'cib', 1);
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `pre_common_setting`
 --
 
@@ -105,23 +143,27 @@ CREATE TABLE IF NOT EXISTS `pre_finance_cash` (
   `customer` varchar(20) NOT NULL,
   `money` float(10,2) NOT NULL,
   `startime` int(10) NOT NULL,
+  `endtime` int(10) NOT NULL DEFAULT '0',
   `rate` int(3) NOT NULL DEFAULT '20',
   `mobile` varchar(11) NOT NULL,
   `bankname` varchar(20) NOT NULL,
   `cardnum` varchar(25) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `sponsor` varchar(10) NOT NULL,
+  `verify` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `pre_finance_cash`
 --
 
-INSERT INTO `pre_finance_cash` (`id`, `customer`, `money`, `startime`, `rate`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`) VALUES
-(1, '徐力', 100000.00, 1402555555, 20, '18687444499', '中国工商银行', '666666666666666', 1, '徐力'),
-(2, '李大嘴', 202265.00, 1391111111, 20, '15633332222', '中国工商银行', '6222223333333', 0, '李大嘴'),
-(4, '李大嘴', 22222.00, 1400000000, 20, '15633332222', '中国工商银行', '666666666666666', 0, '李大嘴');
+INSERT INTO `pre_finance_cash` (`id`, `customer`, `money`, `startime`, `endtime`, `rate`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`, `verify`) VALUES
+(1, '徐力', 100000.00, 1402555555, 0, 20, '18687444499', '中国工商银行', '666666666666666', 1, '徐力', ''),
+(2, '李大嘴', 202265.00, 1391111111, 0, 20, '15633332222', '中国工商银行', '6222223333333', 0, '李大嘴', ''),
+(4, '李大嘴', 22222.00, 1400000000, 0, 20, '15633332222', '中国工商银行', '666666666666666', 0, '李大嘴', ''),
+(5, '', 0.00, 1412697600, 0, 0, '', '', '', 0, '', ''),
+(6, '1', 0.00, 1409673600, 0, 0, 'e', 'w', 'r', 0, 'r', '');
 
 -- --------------------------------------------------------
 

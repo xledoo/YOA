@@ -334,7 +334,7 @@ function formcheck($subname){
 	return IS_POST && isset($_POST[$subname]) && $_POST['formhash'] == formhash() ? true : false;
 }
 
-
+//数组排序
 function array_sort($arr,$keys,$type='asc'){ 
 	$keysvalue = $new_array = array();
 	foreach ($arr as $k=>$v){
@@ -352,6 +352,7 @@ function array_sort($arr,$keys,$type='asc'){
 	return $new_array; 
 } 
 
+//系统参数设置模板中表单元素的生成
 function input_build($name, $type, $value = ''){
 	switch ($type) {
 		case 'off':
@@ -361,7 +362,7 @@ function input_build($name, $type, $value = ''){
 			$input = '<input type="text" class="form-control" style="height:25px;border-style:inset;" name="'.$name.'" value="'.$value.'" />';
 			break;
 		case 'textarea':
-			$input = '<textarea name="'.$name.'" rows="5" cols="45">"'.$value.'"</textarea>';
+			$input = '<textarea name="'.$name.'" rows="5" cols="45">'.$value.'</textarea>';
 			break;
 		default:
 			# code...

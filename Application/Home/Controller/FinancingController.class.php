@@ -23,9 +23,11 @@ class FinancingController extends BaseController {
     //添加现金融资业务
     public function addcash($stype){
     	if(IS_POST){
-    		zecho($_REQUEST);
-            M('finance_cash')->add();
+    		// zecho($_REQUEST);
+            $_POST['add']['startime'] = strtotime($_POST['add']['startime']);
+            M('finance_cash')->add($_POST['add']);
     	} else {
+            $this->assign('banks', $this->_G['banks']);
     		$this->display();
     	}
     }
