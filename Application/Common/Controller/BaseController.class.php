@@ -10,7 +10,7 @@ use Think\Controller;
 class BaseController extends Controller{
 
 	/*
-	全局变量用于保存登录及配置信息
+	初始化全局变量用于保存登录及配置信息$_G
 	*/
 	var $_G	=	array();
 
@@ -27,7 +27,7 @@ class BaseController extends Controller{
 	}
 	
 	/*
-	初始化系统参数设置项目
+	初始化系统参数设置
 	*/
 	function init_setting(){
 		$setting = M('common_setting')->cache('setting',60)->select();
@@ -37,7 +37,7 @@ class BaseController extends Controller{
 	}
 
 	/*
-	用户登录信息
+	初始化用户登录信息
 	*/
 	function init_member(){
 		

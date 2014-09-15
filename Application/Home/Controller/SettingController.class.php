@@ -2,10 +2,13 @@
 namespace Home\Controller;
 use Common\Controller\BaseController;
 class SettingController extends BaseController {
+
+    //账号登录设置
     public function slogin(){
     	$this->display();
     }
 
+    //系统参数设置
     public function settings(){
         if(IS_POST){
             zecho($_POST);
@@ -18,6 +21,7 @@ class SettingController extends BaseController {
         }
     }
 
+    //菜单项目维护
     public function sidebar(){
     	if(IS_POST){
             // zecho($this->_G['sidebar']);
