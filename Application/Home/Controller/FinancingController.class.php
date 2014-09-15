@@ -27,6 +27,7 @@ class FinancingController extends BaseController {
             $_POST['add']['startime'] = strtotime($_POST['add']['startime']);
             M('finance_cash')->add($_POST['add']);
     	} else {
+            $this->assign('banks', $this->_G['banks']);
     		$this->display();
     	}
     }

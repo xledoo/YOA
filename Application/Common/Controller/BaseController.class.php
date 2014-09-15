@@ -21,6 +21,7 @@ class BaseController extends Controller{
 		self::init_setting();
 		self::init_member();
 		self::init_sidebar();
+		self::init_banks();
 
 		$this->assign('sidebar', $this->_G['sidebar']);
 		$this->assign('setting', $this->_G['setting']);
@@ -41,6 +42,13 @@ class BaseController extends Controller{
 	*/
 	function init_member(){
 		
+	}
+
+	function init_banks(){
+		$banks	=	M('common_banks')->cache('banks', 60)->select();
+		foreach ($banks as $key => $value) {
+			$this->_G['banks'][$value['sign']]	=	$value;
+		}
 	}
 
 	/*
