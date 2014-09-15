@@ -352,5 +352,26 @@ function array_sort($arr,$keys,$type='asc'){
 	return $new_array; 
 } 
 
+function input_build($name, $type, $value = ''){
+	switch ($type) {
+		case 'off':
+			$input = '<div class="radio-list"><label class="radio-inline"><input type="radio" class="form-control" name="'.$name.'" value="1" /> 开启 </label><label class="radio-inline"><input type="radio" class="form-control" name="'.$name.'" value="0" '.($value == 0 ? "checked" : "").' /> 关闭</label>';
+			break;
+		case 'text':
+			$input = '<input type="text" class="form-control" style="height:25px;border-style:inset;" name="'.$name.'" value="'.$value.'" />';
+			break;
+		case 'textarea':
+			$input = '<textarea name="'.$name.'" rows="5" cols="45">"'.$value.'"</textarea>';
+			break;
+		default:
+			# code...
+			break;
+	}
+	return $input;
+}
+
+
+
+
 
 ?>

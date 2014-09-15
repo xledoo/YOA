@@ -1,15 +1,43 @@
 <form name="settings_form" action="{:U('home/setting/settings')}" method="post">
-<table class="table table-condensed table-hover">
-	<thead><tr><th>参数名称</th><th>参数描述</th><th>参数值</th><th>参数类型</th></tr></thead>
-	<tbody>
+<div class="form-body">
 	<volist name="setting" id="vo">
-		<tr>
-			<td style="border:none;"><input type="text" name="edit[{$vo.skey}][skey]" class="form-control input-small" value="{$vo.skey}"></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.skey}][title]" class="form-control input-small" value="{$vo.title}"></td>
-			<td style="border:none;"><textarea name="edit[{$vo.skey}][svalue]" class="form-control input-middle" >{$vo.svalue}</textarea></td>
-			<td style="border:none;"><input type="text" name="edit[{$vo.skey}][stype]" class="form-control input-small" value="{$vo.stype}"></td>			
-		</tr>
+		<table class="table table-condensed table-hover">
+			<tbody>
+				<tr><td><h4><strong>{$vo.stitle}</strong></h4></td><td></td></tr>
+				<tr>
+					<td style="border:none;width:300px;"><php>echo input_build($vo['skey'], $vo['stype'], $vo['svalue']);</php></td>
+					<td style="border:none;">{$vo.sremark}</td>
+				</tr>
+			</tbody>
+		</table>
 	</volist>
-</table>
-<input type="submit" name="submit_settings" class="btn btn-default" value="提交" />
+	<div class="form-group">
+		<label>Skey</label>
+		<input type="text" name="add[skey]" class="form-control input-large" />
+	</div>
+	<div class="form-group">
+		<label>Svalue</label>
+		<input type="text" name="add[svalue]" class="form-control input-large" />
+	</div>
+	<div class="form-group">
+		<label>描述</label>
+		<input type="text" name="add[stitle]" class="form-control input-large" />
+	</div>
+	<div class="form-group">
+		<label>备注</label>
+		<input type="text" name="add[sremark]" class="form-control input-large" />
+	</div>
+		<div class="form-group">
+		<label>类型</label>
+		<select class="form-control input-xsmall" name="add[stype]">
+			<option value="off">开关</option>
+			<option value="text">文本框</option>
+			<option value="radio">单选框</option>
+			<option value="checkbox">复选框</option>
+			<option value="select">下拉菜单</option>
+			<option value="textarea">复文本框</option>
+		</select>
+		</div>
+</div>
+<input type="submit" name="submit_settings" class="btn btn-info" value="提交" />
 </form>

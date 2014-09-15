@@ -9,6 +9,7 @@ class SettingController extends BaseController {
     public function settings(){
         if(IS_POST){
             zecho($_POST);
+            M('Common_setting')->add($_POST['add']);
         } else {
             $this->display();   
         }
