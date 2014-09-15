@@ -24,7 +24,7 @@ class FinancingController extends BaseController {
     public function addcash($stype){
     	if(IS_POST){
     		zecho($_REQUEST);
-            M('finance_cash')->add();
+            M('finance_cash')->add($_POST['add']);
     	} else {
     		$this->display();
     	}
