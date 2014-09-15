@@ -23,7 +23,7 @@ class FinancingController extends BaseController {
     //添加现金融资业务
     public function addcash($stype){
     	if(IS_POST){
-    		// zecho($_REQUEST);
+    		zecho($_REQUEST);
             $_POST['add']['startime'] = strtotime($_POST['add']['startime']);
             M('finance_cash')->add($_POST['add']);
     	} else {
@@ -40,5 +40,14 @@ class FinancingController extends BaseController {
     	$this->assign('cash', $info);
     	$this->assign('cashlog', $ralog);
     	$this->display();
+    }
+
+    //现金融资提现
+    public function wcash($id){
+        zecho(M('finance_cash')->getfield('id','customer'));
+        $v['endtime'] = time();
+        // $v['verify'] = ;
+        M('finance_cash')->where("id='%d'",$id)->save();
+        $this->display();
     }
 }

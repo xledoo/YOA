@@ -371,8 +371,14 @@ function input_build($name, $type, $value = ''){
 	return $input;
 }
 
+//字符串加密
+function build_md5($str, $key = 'finabao.com'){
+    return '' === $str ? '' : md5(sha1($str).$key);
+}
 
-
-
+//数组加密
+function array_md5($array){
+	build_md5(implode('GLOBAL_AUTH_KEY', array_reverse($array)));
+}
 
 ?>

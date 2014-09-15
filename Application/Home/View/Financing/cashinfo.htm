@@ -1,30 +1,51 @@
-<a href="{:U('home/financing/fcash')}" class="btn btn-info pull-right"><i class="fa fa-replay"></i>返回上一页</a>
+<a href="{:U('home/financing/fcash')}" class="btn btn-info pull-right">返&nbsp;回&nbsp;<i class="fa fa-reply"></i></a>
 <div style="font:bold 16px Microsoft YaHei;">现金融资详情</div>
 <table class="table table-bordered table-hover">
-<tbody>
-	<tr><th>ID</th><th>客户名称</th><th>联系电话</th><th>融资时间</th></tr>
-	<tr style="color:DodgerBlue;"><td>{$cash.id}</td><td>{$cash.customer}</td><td>{$cash.mobile}</td><td>{$cash.startime|date="Y-m-d", ###}</td></tr>
-	<tr><th>融资金额</th><th>融资利息</th><th>持续时间</th><th>当前状态</th></tr>
-	<tr style="color:DodgerBlue;"><td>{$cash.money}</td><td>{$cash.rate}</td><td><php>echo intval((NOW_TIME - $cash['startime'])/(3600*24)).'天';</php></td><td><if condition="$cash[status] eq 0"><span class="text-danger">未审核</span><elseif condition="$cash[status] eq 1"/><span class="text-success">已审核</span></if></td></tr>
-	<tr><th>打款银行</th><th colspan="2">打款卡号</th><th>介绍人</th></tr>
-	<tr style="color:DodgerBlue;"><td>{$cash.bankname}</td><td colspan="2">{$cash.cardnum}</td><td>{$cash.sponsor}</td></tr>
-</tbody>
+	<tbody>
+		<tr><th>ID</th><th>客户名称</th><th>联系电话</th><th>融资时间</th></tr>
+		<tr style="color:DodgerBlue;">
+			<td>{$cash.id}</td>
+			<td>{$cash.customer}</td>
+			<td>{$cash.mobile}</td>
+			<td>{$cash.startime|date="Y-m-d", ###}</td>
+		</tr>
+		<tr><th>融资金额</th><th>融资利息</th><th>持续时间</th><th>当前状态</th></tr>
+		<tr style="color:DodgerBlue;">
+			<td>{$cash.money}</td>
+			<td>{$cash.rate}</td>
+			<td><php>echo intval((NOW_TIME - $cash['startime'])/(3600*24)).'天';</php></td>
+			<td><if condition="$cash[status] eq 0"><span class="text-danger">未审核</span><elseif condition="$cash[status] eq 1"/><span class="text-success">已审核</span></if></td>
+		</tr>
+		<tr><th>打款银行</th><th colspan="2">打款卡号</th><th>介绍人</th></tr>
+		<tr style="color:DodgerBlue;">
+			<td>{$cash.bankname}</td>
+			<td colspan="2">{$cash.cardnum}</td>
+			<td>{$cash.sponsor}</td>
+		</tr>
+	</tbody>
 </table>
+
+<div class="">
+	<div class="clearfix pull-right">
+		<a href="{:U('home/Financing/cashinfo')}" class="btn btn-primary">审&nbsp;核</a>
+		<a href="{:U('home/Financing/wcash',array('id' => $cash['id']))}" class="btn btn-success">提&nbsp;现</a>
+	</div>
+</div>
 
 <div style="font:bold 16px Microsoft YaHei;">打款详情</div>
 <table class="table table-condensed table-hover">
-<tbody>
-	<tr><th>客户名</th><th>手机号</th><th>打款类型</th><th>打款时间</th><th>金额</th><th>利息</th><th>打款备注</th></tr>
-	<volist name="cashlog" id="cashlog">
-		<tr style="color:DodgerBlue;" title="{$cashlog.bankname}，卡号：{$cashlog.cardnum}">
-			<td style="border:none;">{$cashlog.customer}</td>
-			<td style="border:none;">{$cashlog.mobile}</td>
-			<td style="border:none;">{$cashlog.stype}</td>		
-			<td style="border:none;">{$cashlog.dateline|date="Y-m-d",###}</td>
-			<td style="border:none;">{$cashlog.money}</td>
-			<td style="border:none;">{$cashlog.rate}</td>
-			<td style="border:none;">{$cashlog.remark}</td>
-		</tr>
-	</volist>
-</tbody>
+	<tbody>
+		<tr><th>客户名</th><th>手机号</th><th>打款类型</th><th>打款时间</th><th>金额</th><th>利息</th><th>打款备注</th></tr>
+		<volist name="cashlog" id="cashlog">
+			<tr style="color:DodgerBlue;" title="{$cashlog.bankname}，卡号：{$cashlog.cardnum}">
+				<td style="border:none;">{$cashlog.customer}</td>
+				<td style="border:none;">{$cashlog.mobile}</td>
+				<td style="border:none;">{$cashlog.stype}</td>		
+				<td style="border:none;">{$cashlog.dateline|date="Y-m-d",###}</td>
+				<td style="border:none;">{$cashlog.money}</td>
+				<td style="border:none;">{$cashlog.rate}</td>
+				<td style="border:none;">{$cashlog.remark}</td>
+			</tr>
+		</volist>
+	</tbody>
 </table>
