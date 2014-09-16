@@ -23,7 +23,15 @@
 				<td><php>echo intval((NOW_TIME - $vo['startime'])/(3600*24)).'天';</php></td>
 				<td>{$vo.rate}</td>
 				<td>{$vo.mobile}</td>
-				<td><if condition="$vo[status] eq 0"><span class="text-danger">未审核</span><elseif condition="$vo[status] eq 1"/><span class="text-success">已审核</span></if></td>
+				<td>
+					<php>
+					if(D("financecash")->review_verify($vo['id'])){
+						echo $kills[0].'(<span class="text-success">已审核</span>)';
+					} else {
+						echo $kills[0].'(<span class="text-danger">未审核</span>)';
+					}
+					</php>
+				</td>
 				<td><a href="{:U('home/financing/cashinfo', array('id' => $vo['id']))}">详情</a></td>
 			</tr>
 		</volist>

@@ -364,6 +364,13 @@ function input_build($name, $type, $value = ''){
 		case 'textarea':
 			$input = '<textarea name="'.$name.'" rows="5" cols="45">'.$value.'</textarea>';
 			break;
+		// case 'array':
+
+		// 	break;
+		// case 'select':
+		// 	$input = '<select name="'.$name.'"">';
+		// 	$input .= '</select>';
+		// 	break;
 		default:
 			# code...
 			break;
@@ -378,7 +385,7 @@ function build_md5($str, $key = 'finabao.com'){
 
 //数组加密
 function array_md5($array){
-	return build_md5(implode('GLOBAL_AUTH_KEY', array_reverse($array)));
+	return build_md5(implode(C('GLOBAL_AUTH_KEY'), array_reverse($array)));
 }
 
 ?>

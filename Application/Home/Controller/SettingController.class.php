@@ -15,7 +15,7 @@ class SettingController extends BaseController {
             foreach($_POST as $ke => $va){
                 M('common_setting')->where("skey='s%'",$ke)->save($va);
             }
-            M('common_setting')->add($_POST['add']);
+            // M('common_setting')->add($_POST['add']);
         } else {
             $this->display();   
         }
