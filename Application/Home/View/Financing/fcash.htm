@@ -25,11 +25,11 @@
 				<td>{$vo.mobile}</td>
 				<td>
 					<php>
-					if(D("financecash")->review_verify($vo['id'])){
-						echo $kills[0].'(<span class="text-success">已审核</span>)';
-					} else {
-						echo $kills[0].'(<span class="text-danger">未审核</span>)';
-					}
+						if(D("financecash")->review_verify($vo['id'])){
+							echo $kills[$vo['status']].'(<span class="text-success">已审核</span>)';
+						} else {
+							echo $kills[$vo['status']].'(<span class="text-danger">未审核</span>)';
+						}
 					</php>
 				</td>
 				<td><a href="{:U('home/financing/cashinfo', array('id' => $vo['id']))}">详情</a></td>

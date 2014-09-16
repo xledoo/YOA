@@ -7,7 +7,15 @@
 			<td>{$wcash.id}</td>
 			<td>{$wcash.customer}</td>
 			<td>{$wcash.mobile}</td>
-			<td><if condition="$wcash[status] eq 0"><span class="text-danger">未审核</span><elseif condition="$wcash[status] eq 1"/><span class="text-success">已审核</span></if></td>
+			<td>
+				<php>
+					if(D("financecash")->review_verify($wcash['id'])){
+						echo $kills[$wcash['status']].'(<span class="text-success">已审核</span>)';
+					} else {
+						echo $kills[$wcash['status']].'(<span class="text-danger">未审核</span>)';
+					}
+				</php>
+			</td>
 		</tr>
 
 		<tr><th>融资金额</th><th>融资利息</th><th>融资时间</th><th>提现时间</th></tr>
@@ -26,3 +34,12 @@
 		</tr>
 	</tbody>
 </table>
+
+<div class="">
+	<div class="clearfix pull-right">
+		<a href="{:U('home/Financing/review', array('id' => $wcash['id']))}" class="btn btn-primary">审&nbsp;核</a>
+		<a href="#" class="btn btn-success">提&nbsp;现</a>
+		<a href="#" class="btn btn-warning">编辑</a>
+		<a href="#" class="btn btn-danger">删除</a>
+	</div>
+</div>
