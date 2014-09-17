@@ -1,0 +1,42 @@
+<a href="{:U('home/financing/cardinfo',array('id' => $wcard['id']))}" class="btn btn-md blue pull-right">返&nbsp;回&nbsp;<i class="fa fa-reply"></i></a>
+<div style="font:bold 16px Microsoft YaHei;">融资提现</div>
+<table class="table table-bordered table-hover">
+	<tbody>
+		<tr><th>ID</th><th>融资人</th><th>联系电话</th><th>当前状态</th></tr>
+		<tr style="color:DodgerBlue;">
+			<td>{$wcard.id}</td>
+			<td>{$wcard.customer}</td>
+			<td>{$wcard.mobile}</td>
+			<td>
+				<php>
+					if(D("financecash")->review_verify($wcard['id'])){
+						echo $kills[$wcard['status']].'(<span class="text-success">已审核</span>)';
+					} else {
+						echo $kills[$wcard['status']].'(<span class="text-danger">未审核</span>)';
+					}
+				</php>
+			</td>
+		</tr>
+
+		<tr><th>信用卡额度</th><th>融资利息</th><th>融资时间</th><th>提现时间</th></tr>
+		<tr style="color:DodgerBlue;">
+			<td>{$wcard.money}</td>
+			<td>{$wcard.rate}</td>
+			<td>{$wcard.startime|date="Y-m-d", ###}</td>
+			<td>{$wcard.endtime|date="Y-m-d",###}</td>
+		</tr>
+
+		<tr><th>打款银行</th><th colspan="2">打款卡号</th><th>介绍人</th></tr>
+		<tr style="color:DodgerBlue;">
+			<td>{$wcard.bankname}</td>
+			<td colspan="2">{$wcard.cardnum}</td>
+			<td>{$wcard.sponsor}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="">
+	<div class="clearfix pull-right">
+		<a href="#" class="btn btn-md green">提&nbsp;现&nbsp;<i class="fa fa-link"></i></a>
+	</div>
+</div>

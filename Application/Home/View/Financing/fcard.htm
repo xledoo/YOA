@@ -1,1 +1,57 @@
-融资信用卡业务
+<a href="{:U('home/financing/addcard')}" class="btn blue pull-right"><i class="fa fa-plus"></i> 新增信用卡融资</a>
+<table class="table table-condensed table-hover">
+	<thead >
+		<tr>
+			<th>ID</th>
+			<th>融资人</th>
+			<th>信用额度</th>
+			<th>融资时间</th>
+			<th>持续时间</th>
+			<th>利息</th>
+			<th>手机号</th>
+			<th>发卡行</th>
+			<th>信用卡尾号</th>
+			<th>当前状态</th>
+			<th style="text-align:center;">操作</th>
+		</tr>
+	</thead>
+	<tbody >
+		<volist name="fcard" id="vo">
+			<tr>
+				<td>{$vo.id}</td>
+				<td>{$vo.customer}</td>
+				<td>{$vo.money}</td>
+				<td>{$vo.startime|date="Y-m-d",###}</td>
+				<td><php>echo intval((NOW_TIME - $vo['startime'])/(3600*24)).'天';</php></td>
+				<td>{$vo.rate}</td>
+				<td>{$vo.mobile}</td>
+				<td>
+					<php>
+						echo $banks[$vo['cbankname']]['bankname'];
+					</php>
+				</td>
+				<td>****{$vo.ccardnum|substr=-4}</td>
+				<td>
+					<php>
+						if(D("financecash")->review_verify($vo['id'])){
+							echo $kills[$vo['status']].'(<span class="text-success">已审核</span>)';
+						} else {
+							echo $kills[$vo['status']].'(<span class="text-danger">未审核</span>)';
+						}
+					</php>
+				</td>
+				<td style="text-align:center;">
+					<a href="{:U('home/financing/cardinfo', array('id' => $vo['id']))}" class="btn btn-xs green">详&nbsp;情</a>
+					<a href="{:U('home/Financing/review', array('id' => $vo['id']))}" class="btn btn-xs blue">审&nbsp;核</a>
+					<a href="{:U('home/Financing/delfina',array('id' => $vo['id']))}" class="btn btn-xs red" id="delf">删&nbsp;除</a>
+				</td>
+			</tr>
+		</volist>
+	</tbody>
+</table>
+
+<script>
+	jQuery("#delf").click(funciton(){
+		
+	})
+</script>

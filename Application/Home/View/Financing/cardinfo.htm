@@ -1,0 +1,63 @@
+<a href="{:U('home/financing/fcard')}" class="btn btn-md blue pull-right">返&nbsp;回&nbsp;<i class="fa fa-reply"></i></a>
+<div style="font:bold 16px Microsoft YaHei;">信用卡融资详情</div>
+<table class="table table-bordered table-hover">
+	<tbody>
+		<tr><th>ID</th><th>融资人</th><th>联系电话</th><th>融资时间</th></tr>
+		<tr style="color:DodgerBlue;">
+			<td>{$card.id}</td>
+			<td>{$card.customer}</td>
+			<td>{$card.mobile}</td>
+			<td>{$card.startime|date="Y-m-d", ###}</td>
+		</tr>
+		<tr><th>信用卡额度</th><th>融资利息</th><th>持续时间</th><th>当前状态</th></tr>
+		<tr style="color:DodgerBlue;">
+			<td>{$card.money}</td>
+			<td>{$card.rate}</td>
+			<td><php>echo intval((NOW_TIME - $card['startime'])/(3600*24)).'天';</php></td>
+			<td>
+				<php>
+					if(D("financecash")->review_verify($card['id'])){
+						echo $kills[$card['status']].'(<span class="text-success">已审核</span>)';
+					} else {
+						echo $kills[$card['status']].'(<span class="text-danger">未审核</span>)';
+					}
+				</php>
+			</td>
+		</tr>
+		<tr><th>发卡银行</th><th colspan="2">信用卡号</th><th>介绍人</th></tr>
+		<tr style="color:DodgerBlue;">
+			<td>
+					<php>
+						echo $banks[$card['cbankname']]['bankname'];
+					</php>
+			</td>
+			<td colspan="2">{$card.ccardnum}</td>
+			<td>{$card.sponsor}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="">
+	<div class="clearfix pull-right">
+		<a href="{:U('home/Financing/editcard',array('id' => $card['id']))}" class="btn btn-md blue">编&nbsp;辑&nbsp;<i class="fa fa-edit"></i></a>
+		<a href="{:U('home/Financing/wcard',array('id' => $card['id']))}" class="btn btn-md green">提&nbsp;现&nbsp;<i class="fa fa-link"></i></a>
+	</div>
+</div>
+
+<div style="font:bold 16px Microsoft YaHei;">打款详情</div>
+<table class="table table-condensed table-hover">
+	<tbody>
+		<tr><th>客户名</th><th>手机号</th><th>打款类型</th><th>打款时间</th><th>金额</th><th>利息</th><th>打款备注</th></tr>
+		<volist name="cardlog" id="cardlog">
+			<tr style="color:DodgerBlue;" title="{$cardlog.bankname}，卡号：{$cardlog.cardnum}">
+				<td style="border:none;">{$cardlog.customer}</td>
+				<td style="border:none;">{$cardlog.mobile}</td>
+				<td style="border:none;">{$cardlog.stype}</td>		
+				<td style="border:none;">{$cardlog.dateline|date="Y-m-d",###}</td>
+				<td style="border:none;">{$cardlog.money}</td>
+				<td style="border:none;">{$cardlog.rate}</td>
+				<td style="border:none;">{$cardlog.remark}</td>
+			</tr>
+		</volist>
+	</tbody>
+</table>

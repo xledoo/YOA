@@ -1,4 +1,4 @@
-<a href="{:U('home/financing/addcash', array('stype' => 'cash'))}" class="btn btn-info pull-right"><i class="fa fa-plus"></i> 新增现金方式融资</a>
+<a href="{:U('home/financing/addcash')}" class="btn blue pull-right"><i class="fa fa-plus"></i> 新增现金方式融资</a>
 <table class="table table-condensed table-hover">
 	<thead >
 		<tr>
@@ -9,8 +9,8 @@
 			<th>持续时间</th>
 			<th>利息</th>
 			<th>手机号</th>
-			<th>认证状态</th>
-			<th>操作</th>
+			<th>当前状态</th>
+			<th style="text-align:center;">操作</th>
 		</tr>
 	</thead>
 	<tbody >
@@ -32,7 +32,11 @@
 						}
 					</php>
 				</td>
-				<td><a href="{:U('home/financing/cashinfo', array('id' => $vo['id']))}">详情</a></td>
+				<td style="text-align:center;">
+					<a href="{:U('home/financing/cashinfo', array('id' => $vo['id']))}" class="btn btn-xs green">详&nbsp;情</a>
+					<a href="{:U('home/Financing/review', array('id' => $vo['id']))}" class="btn btn-xs blue">审&nbsp;核</a>
+					<a href="{:U('home/Financing/delfina',array('id' => $vo['id']))}" class="btn btn-xs red" id="delf">删&nbsp;除</a>
+				</td>
 			</tr>
 		</volist>
 	</tbody>

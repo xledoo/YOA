@@ -1,6 +1,6 @@
 
-<form name="add_cash" action="{:U('home/financing/addcash')}" method="post">
-	<h4><strong>新增现金融资业务</strong></h4>
+<form name="add_cash" action="{:U('home/financing/addcard')}" method="post">
+	<h4><strong>新增信用卡融资业务</strong></h4>
 	<div class="form-body">
 		<div class="row">
 			<div class="col-md-6">
@@ -11,7 +11,7 @@
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label>融资金额</label>
+					<label>信用卡额度</label>
 					<input type="text" name="add[money]" class="form-control input-large" />
 				</div>
 			</div>
@@ -44,8 +44,8 @@
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label>开户行</label>
-					<select name="add[bankname]" class="form-control input-large">
+					<label>发卡行</label>
+					<select name="add[cbankname]" class="form-control input-large">
 						<volist name="banks" id="vo">
 						<option value="{$vo.sign}">------{$vo.bankname}------</option>
 						</volist>
@@ -62,13 +62,13 @@
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label>银行卡号</label>
-					<input type="text" name="add[cardnum]" class="form-control input-large" />
+					<label>信用卡号</label>
+					<input type="text" name="add[ccardnum]" class="form-control input-large" />
 				</div>
 			</div>
 		</div>	
 	</div>
 	<div>
-		<input type="submit" name="submit_addcash" class="btn blue btn-block"  value="提交" />
+		<input type="submit" name="submit_addcard" class="btn blue btn-block"  value="提交" />
 	</div>
 </form>
