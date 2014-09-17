@@ -5,7 +5,7 @@ class FinancingController extends BaseController {
 
     //现金融资
     public function fcash(){
-    	$fc = M('finance_cash')->select();
+    	$fc = M('finance_cash')->where("stype='cash'")->select();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
@@ -29,6 +29,7 @@ class FinancingController extends BaseController {
     public function addcash($stype){
     	if(IS_POST){
     		// zecho($_REQUEST);
+            $_POST['add']['stype']  =   'cash';
             $_POST['add']['startime'] = strtotime($_POST['add']['startime']);
             M('finance_cash')->add($_POST['add']) ? $this->success('业务添加成功！') : $this->error('业务添加失败！');
     	} else {
