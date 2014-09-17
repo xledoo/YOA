@@ -37,18 +37,6 @@ class FinancingController extends BaseController {
     	}
     }
 
-    //编辑现金融资业务
-    public function editcash($id){
-        if(IS_POST){
-            zecho($_REQUEST);
-            $_POST['edit']['startime'] = strtotime($_POST['edit']['startime']);
-            M('finance_cash')->save($_POST['edit']) ? $this->success('业务添加成功！') : $this->error('业务添加失败！');
-        } else {
-            $this->assign('banks', $this->_G['banks']);
-            $this->display();
-        }
-    }
-
     //现金融资详情
     public function cashinfo($id){
     	$info	=	M('finance_cash')->where("id=%d", $id)->find();
@@ -61,6 +49,21 @@ class FinancingController extends BaseController {
         $this->assign('cash', $info);
     	$this->assign('cashlog', $ralog);
     	$this->display();
+    }
+
+    //编辑现金融资业务
+    public function editcash($id){
+        if(IS_POST){
+            // zecho($_POST);
+            $_POST['edit']['startime'] = strtotime($_POST['edit']['startime']);
+            $_POST['edit']['endtime'] = strtotime($_POST['edit']['endtime']);
+            M('finance_cash')->where("id='%d'", $id)->save($_POST['edit']) ? $this->success('信息修改成功！') : $this->error('信息修改失败！');
+        } else {
+            $info   =   M('finance_cash')->where("id='%d'", $id)->find();
+            $this->assign('banks', $this->_G['banks']);
+            $this->assign('ecash',$info);
+            $this->display();
+        }
     }
 
     //现金融资提现
@@ -84,6 +87,11 @@ class FinancingController extends BaseController {
 
     //审核
     public function review($id){
-        return D("financecash")->review_pass($id) ? $this->success('审核通过') : $this->error('审核失败或已审核');
+        $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
+        foreach($ko as $k => $v){
+            $ex[] = explode("=",$v)[1];
+        }
+        $info   =   M('finance_cash')->where("id=%d", $id)->getField('status');
+        return D("financecash")->review_pass($id) ? $this->success($ex[$info].'审核通过') : $this->error($ex[$info].'审核失败或已审核');
     }
 }
