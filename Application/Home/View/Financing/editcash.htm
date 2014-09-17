@@ -36,11 +36,9 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label>融资时间</label>
-					<div class="input-group input-large date date-picker" data-date="date()" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
-						<input type="text" class="form-control" name="edit[startime]">
-						<span class="input-group-btn">
-							<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-						</span>
+					<div class="input-group input-large">
+						<input type="text" class="form-control" name="edit[startime]" value="{$ecash.startime|date='Y-m-d',###}">
+						
 					</div>
 				</div>
 			</div>
