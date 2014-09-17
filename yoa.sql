@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?09 �?16 �?09:33
--- 服务器版本: 5.7.4
+-- 生成日期: 2014 �?09 �?17 �?12:15
+-- 服务器版本: 5.6.10
 -- PHP 版本: 5.6.0beta4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -141,17 +141,22 @@ INSERT INTO `pre_common_setting` (`skey`, `svalue`, `stype`, `stitle`, `sremark`
 
 CREATE TABLE IF NOT EXISTS `pre_finance_cash` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `stype` enum('cash','card') NOT NULL,
   `customer` varchar(20) NOT NULL,
   `money` float(10,2) NOT NULL,
   `startime` int(10) NOT NULL,
   `endtime` int(10) NOT NULL DEFAULT '0',
   `rate` int(3) NOT NULL DEFAULT '20',
-  `mobile` varchar(11) NOT NULL,
+  `cbankname` varchar(20) NOT NULL,
+  `ccardnum` varchar(25) NOT NULL,
+  `zday` tinyint(2) NOT NULL,
+  `hkday` tinyint(2) NOT NULL,
+  `mobile` char(11) NOT NULL,
   `bankname` varchar(20) NOT NULL,
   `cardnum` varchar(25) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `sponsor` varchar(10) NOT NULL,
-  `verify` varchar(32) NOT NULL,
+  `verify` char(32) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
@@ -159,10 +164,10 @@ CREATE TABLE IF NOT EXISTS `pre_finance_cash` (
 -- 转存表中的数据 `pre_finance_cash`
 --
 
-INSERT INTO `pre_finance_cash` (`id`, `customer`, `money`, `startime`, `endtime`, `rate`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`, `verify`) VALUES
-(1, '徐力', 100000.00, 1402555555, 1410858965, 20, '18687444499', '中国工商银行', '666666666666666', 0, '徐力', '42176fb78a363ba66ec3fe8159e9f3b4'),
-(2, '莫小贝', 202265.00, 1391111111, 1410858478, 20, '15633332222', '中国工商银行', '6222223333333', 0, '白展堂', '8ca12f9a653b10b404ce4446d53282a6'),
-(4, '李大嘴', 22222.00, 1400000000, 1410858491, 20, '15633332222', '中国工商银行', '666666666666666', 0, '郭芙蓉', 'ac6911a12be20420db3770228e7c0d78');
+INSERT INTO `pre_finance_cash` (`id`, `stype`, `customer`, `money`, `startime`, `endtime`, `rate`, `cbankname`, `ccardnum`, `zday`, `hkday`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`, `verify`) VALUES
+(1, 'cash', '徐力', 100000.00, 1402555555, 1410924032, 20, '', '', 0, 0, '18687444499', '中国工商银行', '666666666666666', 1, '徐力', '1320f7a5ae3752b79ec11b43261d7ddb'),
+(2, 'cash', '莫小贝', 202265.00, 1391111111, 1410858478, 20, '', '', 0, 0, '15633332222', '中国工商银行', '6222223333333', 0, '白展堂', 'e51da6ad644a59f6865aaa126af8699d'),
+(4, 'cash', '李大嘴', 22222.00, 1400000000, 1410858491, 20, '', '', 0, 0, '15633332222', '中国工商银行', '666666666666666', 0, '郭芙蓉', 'ac6911a12be20420db3770228e7c0d78');
 
 -- --------------------------------------------------------
 
