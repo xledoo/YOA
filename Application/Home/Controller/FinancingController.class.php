@@ -160,7 +160,8 @@ class FinancingController extends BaseController {
             $ex[] = explode("=",$v)[1];
         }
         $this->assign('kills',$ex);
-        $this->assign('wcard',$v);
+        $info   =   M('finance_cash')->where("id='%d'", $id)->find();
+        $this->assign('wcard',$info);
         $this->display();
     }
 
