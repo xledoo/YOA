@@ -57,6 +57,24 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
+					<label>打款银行</label>
+					<select name="edit[bankname]" class="form-control input-large">
+						<volist name="banks" id="vo">
+						<option value="{$vo.sign}">------------------{$vo.bankname}-----------------</option>
+						</volist>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>打款卡号</label>
+					<input type="text" name="edit[cardnum]" class="form-control input-large" value="{$ecard.cardnum}"/>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
 					<label>发卡行</label>
 					<select name="edit[cbankname]" class="form-control input-large">
 						<volist name="banks" id="vo">
@@ -68,7 +86,21 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label>信用卡号</label>
-					<input type="text" name="edit[ccardnum]" class="form-control input-large" value="{$ecard.cardnum}"/>
+					<input type="text" name="edit[ccardnum]" class="form-control input-large" value="{$ecard.ccardnum}"/>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>账单日期</label>
+					<input type="text" name="edit[zday]" class="form-control input-large" value="{$ecard.zday}" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>还款日期</label>
+					<input type="text" name="edit[hkday]" class="form-control input-large" value="{$ecard.hkday}"/>
 				</div>
 			</div>
 		</div>

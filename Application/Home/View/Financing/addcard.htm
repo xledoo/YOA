@@ -66,6 +66,38 @@
 					<input type="text" name="add[ccardnum]" class="form-control input-large" />
 				</div>
 			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>账单日期</label>
+					<input type="text" name="add[zday]" class="form-control input-large" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>打款银行</label>
+					<select name="add[bankname]" class="form-control input-large">
+						<volist name="banks" id="vo">
+						<option value="{$vo.sign}">------------------{$vo.bankname}-----------------</option>
+						</volist>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>还款日期</label>
+					<input type="text" name="add[hkday]" class="form-control input-large" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>打款卡号</label>
+					<input type="text" name="add[cardnum]" class="form-control input-large" />
+				</div>
+			</div>
 		</div>	
 	</div>
 	<div>

@@ -107,7 +107,7 @@ class FinancingController extends BaseController {
     //添加信用卡融资业务
     public function addcard(){
         if(IS_POST){
-            // zecho($_POST[]);
+            // zecho($_POST);
             $_POST['add']['stype']  =   'card';
             $_POST['add']['startime'] = strtotime($_POST['add']['startime']);
             M('finance_cash')->add($_POST['add']) ? $this->success('业务添加成功！') : $this->error('业务添加失败！');
