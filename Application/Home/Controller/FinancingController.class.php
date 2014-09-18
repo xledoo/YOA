@@ -59,13 +59,13 @@ class FinancingController extends BaseController {
 
     //现金融资提现
     public function wcash($id){
-        // $ary = M('finance_cash')->getDbFields();//获取表finance_cash所有字段
-        // $temp = $ary;
-        // unset($temp[11]);//销毁status + verify字段
-        // $v['verify'] = array_md5($temp);//将字段数组加密赋值给verify字段
-        $v['endtime'] = time();//获取当前提现时间戳
-        $v['status'] = 1;//切换为提现状态
-        M('finance_cash')->where("id='%d'",$id)->save($v);//更新
+        $v = M('finance_cash')->where("id='$id'", $id)->find();
+        M('finance_cash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
+
+        $vv = M('finance_cash')->where("id='$id'", $id)->find();
+        unset($vv['verify']);//销毁verify字段
+        M('finance_cash')->where("id='$id'", $id)->save(array('verify' => array_md5($vv)));//更新verify字段
+
         $info   =   M('finance_cash')->where("id=%d", $id)->find();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
@@ -149,20 +149,18 @@ class FinancingController extends BaseController {
 
     //信用卡融资提现
     public function wcard($id){
-        // $ary = M('finance_cash')->getDbFields();//获取表finance_cash所有字段
-        // $temp = $ary;
-        // unset($temp[11]);//销毁status + verify字段
-        // $v['verify'] = array_md5($temp);//将字段数组加密赋值给verify字段
-        $v['endtime'] = time();//获取当前提现时间戳
-        $v['status'] = 1;//切换为提现状态
-        M('finance_cash')->where("id='%d'",$id)->save($v);//更新
-        $info   =   M('finance_cash')->where("id=%d", $id)->find();
+        $v = M('finance_cash')->where("id='$id'", $id)->find();
+        unset($v['verify']);
+        $v['endtime'] = time();
+        $v['status'] = 1;
+        $v['verify'] = array_md5($v);
+        M('finance_cash')->where("id='%d'",$id)->save($v);
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
         }
         $this->assign('kills',$ex);
-        $this->assign('wcard',$info);
+        $this->assign('wcard',$v);
         $this->display();
     }
 
