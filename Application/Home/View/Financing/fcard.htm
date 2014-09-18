@@ -43,15 +43,19 @@
 				<td style="text-align:center;">
 					<a href="{:U('home/financing/cardinfo', array('id' => $vo['id']))}" class="btn btn-xs green">详&nbsp;情</a>
 					<a href="{:U('home/Financing/review', array('id' => $vo['id']))}" class="btn btn-xs blue">审&nbsp;核</a>
-					<a href="{:U('home/Financing/delfina',array('id' => $vo['id']))}" class="btn btn-xs red" id="delf">删&nbsp;除</a>
+					<input type="button" onclick="del({$vo.id})" class="btn btn-xs red" value="删&nbsp;除" />
 				</td>
 			</tr>
 		</volist>
 	</tbody>
 </table>
-
-<script>
-	jQuery("#delf").click(funciton(){
-		
-	})
+<script type="text/javascript">
+	function del(val){
+	  var name=confirm("确定删除该纪录？");
+	  if (name == true){
+	  	window.location.href="index.php?m=home&c=Financing&a=delfina&id="+val;
+	  }else{
+	  	window.location.reload();
+	  }
+	}
 </script>

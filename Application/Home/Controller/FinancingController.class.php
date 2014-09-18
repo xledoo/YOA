@@ -168,6 +168,7 @@ class FinancingController extends BaseController {
 
     //删除融资业务
     public function delfina($id){
-        M('finance_cash')->where("id='%d'",$id)->delete() ? $this->('删除成功') : $this->('删除失败');
+        // echo($id);
+        M('finance_cash')->where("id='%d'",$id)->delete() ? $this->success('删除成功') : $this->error('删除失败');
     }
 }
