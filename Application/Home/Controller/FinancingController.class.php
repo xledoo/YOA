@@ -64,10 +64,6 @@ class FinancingController extends BaseController {
             M('finance_cash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
         }
 
-        // $vv = M('finance_cash')->where("id='$id'", $id)->find();
-        // unset($vv['verify']);//销毁verify字段
-        // M('finance_cash')->where("id='$id'", $id)->save(array('verify' => array_md5($vv)));//更新verify字段
-
         $info   =   M('finance_cash')->where("id=%d", $id)->find();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
