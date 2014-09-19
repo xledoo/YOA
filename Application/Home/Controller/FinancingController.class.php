@@ -60,11 +60,13 @@ class FinancingController extends BaseController {
     //现金融资提现
     public function wcash($id){
         $v = M('finance_cash')->where("id='$id'", $id)->find();
-        M('finance_cash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
+        if($v['status'] != 1){
+            M('finance_cash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
+        }
 
-        $vv = M('finance_cash')->where("id='$id'", $id)->find();
-        unset($vv['verify']);//销毁verify字段
-        M('finance_cash')->where("id='$id'", $id)->save(array('verify' => array_md5($vv)));//更新verify字段
+        // $vv = M('finance_cash')->where("id='$id'", $id)->find();
+        // unset($vv['verify']);//销毁verify字段
+        // M('finance_cash')->where("id='$id'", $id)->save(array('verify' => array_md5($vv)));//更新verify字段
 
         $info   =   M('finance_cash')->where("id=%d", $id)->find();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
@@ -150,17 +152,16 @@ class FinancingController extends BaseController {
     //信用卡融资提现
     public function wcard($id){
         $v = M('finance_cash')->where("id='$id'", $id)->find();
-        unset($v['verify']);
-        $v['endtime'] = time();
-        $v['status'] = 1;
-        $v['verify'] = array_md5($v);
-        M('finance_cash')->where("id='%d'",$id)->save($v);
+        if($v['status'] != 1){
+            M('finance_cash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
+        }
+
+        $info   =   M('finance_cash')->where("id='%d'", $id)->find();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
         }
         $this->assign('kills',$ex);
-        $info   =   M('finance_cash')->where("id='%d'", $id)->find();
         $this->assign('wcard',$info);
         $this->display();
     }
