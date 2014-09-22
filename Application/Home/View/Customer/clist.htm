@@ -1,1 +1,42 @@
-当前客户列表
+<table class="table table-condensed table-hover">
+	<thead >
+		<tr>
+			<th>#</th>
+			<th>客户名</th>
+			<th>手机号码</th>
+			<th>注册时间</th>
+			<th>上次登录时间</th>
+			<th>打款银行</th>
+			<th>银行卡号</th>
+			<th style="text-align:center;">操作</th>
+		</tr>
+	</thead>
+	<tbody >
+		<volist name="cust" id="vo">
+			<tr>
+				<td></td>
+				<td>{$vo.customer}</td>
+				<td>{$vo.mobile}</td>
+				<td>{$vo.retime}</td>
+				<td>{$vo.lastime}</td>
+				<td>{$vo.bankname}</td>
+				<td>{$vo.cardnum}</td>
+				<td style="text-align:center;">
+					<a href="#" class="btn btn-xs green">详&nbsp;情</a>
+					<a href="#" class="btn btn-xs blue">编&nbsp;辑</a>
+					<input type="button" onclick="del({$vo.id})" class="btn btn-xs red" value="删&nbsp;除" />
+				</td>
+			</tr>
+		</volist>
+	</tbody>
+</table>
+<script type="text/javascript">
+	function del(val){
+	  var name=confirm("确定删除该纪录？");
+	  if (name == true){
+	  	window.location.href="index.php?m=home&c=Customer&a=delc&id="+val;
+	  }else{
+	  	window.location.reload();
+	  }
+	}
+</script>
