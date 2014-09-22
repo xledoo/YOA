@@ -21,9 +21,7 @@ class MarketController extends BaseController {
 	        foreach($_POST['mb'] as $key => $value){
 	        	$result[] = $SMS->SendSMS($value, $_POST['cont']);
 	        }
-	        if($result){
-	        	echo ("短信群发成功！");
-	        } 
+	        $result ? $this->success('短信发送成功！') : $this->error('短信发送失败！')
 
     	} else {
     		$mb = M('finance_cash')->select();
