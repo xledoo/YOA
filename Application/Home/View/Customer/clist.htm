@@ -17,9 +17,13 @@
 				<td></td>
 				<td>{$vo.customer}</td>
 				<td>{$vo.mobile}</td>
-				<td>{$vo.retime}</td>
+				<td>{$vo.regtime}</td>
 				<td>{$vo.lastime}</td>
-				<td>{$vo.bankname}</td>
+				<td>
+					<php>
+						echo $banks[$vo['bankname']]['bankname'];
+					</php>
+				</td>
 				<td>{$vo.cardnum}</td>
 				<td style="text-align:center;">
 					<a href="#" class="btn btn-xs green">详&nbsp;情</a>

@@ -11,11 +11,11 @@ class SettingController extends BaseController {
     //系统参数设置
     public function settings(){
         if(IS_POST){
-            zecho($_POST);
+            // zecho($_POST);
             foreach($_POST as $ke => $va){
-                M('common_setting')->where("skey='s%'",$ke)->save($va);
+                // M('common_setting')->where("skey='s%'",$ke)->save($va);
             }
-            // M('common_setting')->add($_POST['add']);
+            M('common_setting')->add($_POST['add']) ? $this->success('信息添加成功！') : $this->error('信息添加失败！');
         } else {
             $this->display();   
         }

@@ -17,7 +17,7 @@ class MarketController extends BaseController {
 	    	zecho($_POST);
 
 	        import('Org.Util.SMSender');
-	        $SMS    =   new \Org\Util\SMSender(C('SMS_USERNAME'),C('SMS_PASSWORD'),C('SMS_CHARSET'),C('SMS_INTERFACE'));
+	        $SMS    =   new \Org\Util\SMSender($this->_G['setting']['SMS_USERNAME']['svalue'], $this->_G['setting']['SMS_PASSWORD']['svalue'], $this->_G['setting']['SMS_CHARSET']['svalue'], $this->_G['setting']['SMS_INTERFACE']['svalue']);
 	        foreach($_POST['mb'] as $key => $value){
 	        	$result[] = $SMS->SendSMS($value, $_POST['cont']);
 	        }
