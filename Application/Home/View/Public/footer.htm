@@ -49,6 +49,8 @@
 <script type="text/javascript" src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
 <script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="assets/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
@@ -57,19 +59,69 @@
 <script src="assets/scripts/custom/components-pickers.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-jQuery(document).ready(function() {    
-   App.init(); // initlayout and core plugins
-   ComponentsPickers.init();
-   Index.init();
-   Index.initJQVMAP(); // init index page's custom scripts
-   Index.initCalendar(); // init index page's custom scripts
-   Index.initCharts(); // init index page's custom scripts
-   Index.initChat();
-   Index.initMiniCharts();
-   Index.initDashboardDaterange();
-   Index.initIntro();
-   Tasks.initDashboardWidget();
-});
+   jQuery(document).ready(function() {    
+      App.init(); // initlayout and core plugins
+      ComponentsPickers.init();
+      ComponentsDropdowns.init();
+      Index.init();
+      Index.initJQVMAP(); // init index page's custom scripts
+      Index.initCalendar(); // init index page's custom scripts
+      Index.initCharts(); // init index page's custom scripts
+      Index.initChat();
+      Index.initMiniCharts();
+      Index.initDashboardDaterange();
+      Index.initIntro();
+      Tasks.initDashboardWidget();
+   });
+   var ComponentsDropdowns = function () {
+      var handleSelect2 = function () {
+         function movieFormatResult(movie) {
+            var markup = "<table class='movie-result'><tr>";
+            if (movie.posters !== undefined && movie.posters.thumbnail !== undefined) {
+               markup += "<td valign='top'><img src='" + movie.posters.thumbnail + "'/></td>";
+            }
+            markup += "<td valign='top'><h5>" + movie.title + "</h5>";
+            if (movie.critics_consensus !== undefined) {
+               markup += "<div class='movie-synopsis'>" + movie.critics_consensus + "</div>";
+            } else if (movie.synopsis !== undefined) {
+               markup += "<div class='movie-synopsis'>" + movie.synopsis + "</div>";
+            }
+               markup += "</td></tr></table>"
+               return markup;
+            }
+         }
+         var handleSelect2Modal = function () {
+            function movieFormatResult(movie) {
+               var markup = "<table class='movie-result'><tr>";
+               if (movie.posters !== undefined && movie.posters.thumbnail !== undefined) {
+                  markup += "<td valign='top'><img src='" + movie.posters.thumbnail + "'/></td>";
+                  }
+                  markup += "<td valign='top'><h5>" + movie.title + "</h5>";
+                  if (movie.critics_consensus !== undefined) {
+                  markup += "<div class='movie-synopsis'>" + movie.critics_consensus + "</div>";
+                  } else if (movie.synopsis !== undefined) {
+                  markup += "<div class='movie-synopsis'>" + movie.synopsis + "</div>";
+                  }
+                  markup += "</td></tr></table>"
+                  return markup;
+                }
+            }
+            var handleMultiSelect = function () {
+                $('#my_multi_select1').multiSelect();
+                $('#my_multi_select2').multiSelect({
+                    selectableOptgroup: true
+                });
+            }
+            return {
+                //main function to initiate the module
+                init: function () {            
+                    handleSelect2();
+                    handleSelect2Modal();
+                    handleMultiSelect();
+                    handleBootstrapSelect();
+                }
+            };
+    }(); 
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

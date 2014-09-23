@@ -32,6 +32,12 @@ class MarketController extends BaseController {
 
     //邮箱群发
     public function email(){
-    	$this->display();
+    	if(IS_POST){
+    		zecho($_POST);
+    	} else {
+    		$mb = M('finance_cash')->select();
+	    	$this->assign('mb',$mb);
+    		$this->display();
+    	}
     }
 }
