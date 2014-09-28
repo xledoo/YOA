@@ -33,8 +33,9 @@ class MarketController extends BaseController {
     //邮件群发
     public function email(){
     	if(IS_POST){
-    		zecho($_POST);
+    		zecho($this->_G['setting']);
     		import('ORG.Util.Mail');
+    		// $mail = new PHPmailer($this->_G['setting']['MAIL_ADDRESS']['svalue'], $this->_G['setting']['MAIL_SMTP']['svalue'], $this->_G['setting']['MAIL_LOGINNAME']['svalue'], $this->_G['setting']['MAIL_PASSWORD']['svalue'], $this->_G['setting']['MAIL_CHARSET']['svalue'], $this->_G['setting']['MAIL_AUTH']['svalue'], $this->_G['setting']['MAIL_HTML']['svalue']);
     		foreach ($_POST['em'] as $key => $value) {
     			$result[] = SendMail($value,$_POST['title'],$_POST['cont'],$_POST['sign']);
     		}
