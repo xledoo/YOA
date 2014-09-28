@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?09 �?22 �?09:14
+-- 生成日期: 2014 �?09 �?28 �?03:03
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -106,6 +106,30 @@ INSERT INTO `pre_common_banks` (`bid`, `bankname`, `sign`, `status`) VALUES
 (14, '邮政储蓄银行', 'post', 1),
 (15, '浦发银行', 'spdb', 1),
 (16, '兴业银行', 'cib', 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `pre_common_customer`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_common_customer` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `costomer` varchar(50) NOT NULL,
+  `mobile` varchar(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `pre_common_customer`
+--
+
+INSERT INTO `pre_common_customer` (`id`, `costomer`, `mobile`, `email`) VALUES
+(1, '徐力', '18687444499', 'xledoo@qq.com'),
+(2, '彭普', '15924907828', '124910168@qq.com'),
+(3, '莫小贝', '15633332222', 'hoo@126.com'),
+(4, '秦文', '13955555443', '243035210@qq.com');
 
 -- --------------------------------------------------------
 

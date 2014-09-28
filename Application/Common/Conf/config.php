@@ -22,4 +22,13 @@ return array(
 	'SMS_PASSWORD'			=>	'zmin821001',
 	'SMS_CHARSET'			=>	'utf8',
 	'SMS_INTERFACE'			=>	'http://api.chanyoo.cn/{charset}/interface/send_sms.aspx?username={username}&password={password}&receiver={mobile}&content={message}',
+
+	//邮箱发送
+	'MAIL_ADDRESS'=>'pengpu1987@126.com', // 邮箱地址
+	'MAIL_SMTP'=>'smtp.126.com', // 邮箱SMTP服务器
+	'MAIL_LOGINNAME'=>'pengpu1987', // 邮箱登录帐号
+	'MAIL_PASSWORD'=>'pp135642', // 邮箱密码
+	'MAIL_CHARSET'=>'UTF-8',//编码
+	'MAIL_AUTH'=>true,//邮箱认证
+	'MAIL_HTML'=>true,//true HTML格式 false TXT格式
 );

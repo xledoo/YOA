@@ -30,13 +30,18 @@ class MarketController extends BaseController {
     	}
     }
 
-    //邮箱群发
+    //邮件群发
     public function email(){
     	if(IS_POST){
-    		zecho($_POST);
+    		// zecho($_POST);
+    		import('ORG.Util.Mail');
+    		foreach ($_POST['em'] as $key => $value) {
+    			$result[] = SendMail($value,$_POST['title'],$_POST['cont'],$_POST['sign']);
+    		}
+    		$result ? $this->success('邮件发送成功！') : $this->error('邮件发送失败！');
     	} else {
-    		$mb = M('finance_cash')->select();
-	    	$this->assign('mb',$mb);
+    		$em = M('common_customer')->select();
+	    	$this->assign('em',$em);
     		$this->display();
     	}
     }
