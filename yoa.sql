@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?09 �?28 �?03:03
+-- 生成日期: 2014 �?09 �?28 �?03:47
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -155,11 +155,18 @@ INSERT INTO `pre_common_setting` (`skey`, `svalue`, `stype`, `stitle`, `sremark`
 ('siteoff', '0', 'off', '站点开关', '站点开关'),
 ('siteurl', 'http://oa.finabao.com', 'text', '站点域名', '当前站点的域名'),
 ('siteinfo', '站点相关信息', 'textarea', '站点信息', '站点相关信息'),
-('fina_status', '0=融资\r\n1=提现\r\n2=大款', 'textarea', '认证状态设置', '认证状态设置信息'),
+('fina_status', '0=融资\r\n1=提现\r\n2=打款', 'textarea', '认证状态设置', '认证状态设置信息'),
 ('SMS_USERNAME', 'xledoo', 'text', '短信接口登录用户名', '短信接口登录用户名'),
 ('SMS_PASSWORD', 'zmin821001', 'text', '短信接口登录密码', '短信接口登录密码'),
 ('SMS_CHARSET', 'utf8', 'text', '短信接口字符集', '短信接口字符集'),
-('SMS_INTERFACE', 'http://api.chanyoo.cn/{charset}/interface/send_sms.aspx?username={username}&password={password}&receiver={mobile}&content={message}', 'textarea', '短信接口URL', '短信接口URL');
+('SMS_INTERFACE', 'http://api.chanyoo.cn/{charset}/interface/send_sms.aspx?username={username}&password={password}&receiver={mobile}&content={message}', 'textarea', '短信接口URL', '短信接口URL'),
+('MAIL_ADDRESS', 'pengpu1987@126.com', 'text', '发送邮箱地址', '发送邮件的地址'),
+('MAIL_SMTP', 'smtp.126.com', 'text', '邮箱SMTP服务器', '邮箱SMTP服务器'),
+('MAIL_LOGINNAME', 'pengpu1987', 'text', '邮箱登录帐号', '邮箱登录的账号'),
+('MAIL_PASSWORD', 'pp135642', 'text', '登录密码', '邮箱登录密码'),
+('MAIL_CHARSET', 'UTF-8', 'text', '字符集', '字符集'),
+('MAIL_AUTH', 'true', 'text', '邮箱认证', '邮箱的认证'),
+('MAIL_HTML', 'true', 'text', '文档格式', 'true HTML格式 false TXT格式');
 
 -- --------------------------------------------------------
 
