@@ -33,7 +33,7 @@ class MarketController extends BaseController {
     //邮件群发
     public function email(){
     	if(IS_POST){
-    		// zecho($_POST);
+    		zecho($_POST);
     		import('ORG.Util.Mail');
     		foreach ($_POST['em'] as $key => $value) {
     			$result[] = SendMail($value,$_POST['title'],$_POST['cont'],$_POST['sign']);
