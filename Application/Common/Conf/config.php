@@ -18,10 +18,10 @@ return array(
 	'COOKIE_PRE'			=> 'sE8t_',
 
 	//短信接口
-	'SMS_USERNAME'			=>	'xledoo',
-	'SMS_PASSWORD'			=>	'zmin821001',
-	'SMS_CHARSET'			=>	'utf8',
-	'SMS_INTERFACE'			=>	'http://api.chanyoo.cn/{charset}/interface/send_sms.aspx?username={username}&password={password}&receiver={mobile}&content={message}',
+	// 'SMS_USERNAME'			=>	'xledoo',
+	// 'SMS_PASSWORD'			=>	'zmin821001',
+	// 'SMS_CHARSET'			=>	'utf8',
+	// 'SMS_INTERFACE'			=>	'http://api.chanyoo.cn/{charset}/interface/send_sms.aspx?username={username}&password={password}&receiver={mobile}&content={message}',
 
 	//邮箱发送
 	'MAIL_ADDRESS'=>'pengpu1987@126.com', // 邮箱地址

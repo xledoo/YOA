@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?09 �?28 �?03:47
+-- 生成日期: 2014 �?09 �?29 �?09:22
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -18,6 +18,25 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- 数据库: `yoa`
 --
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `pre_admincp_checkmobile`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_admincp_checkmobile` (
+  `mobile` varchar(11) NOT NULL,
+  `sign` varchar(6) NOT NULL,
+  `sendip` varchar(15) NOT NULL,
+  `dateline` int(10) NOT NULL,
+  UNIQUE KEY `mobile` (`mobile`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `pre_admincp_checkmobile`
+--
+
 
 -- --------------------------------------------------------
 
@@ -68,6 +87,29 @@ INSERT INTO `pre_admincp_sidebar` (`id`, `upid`, `controller`, `action`, `title`
 (25, 0, 'customer', 'index', '客户信息维护', 'fa-group', 6),
 (26, 22, 'record', 'portfolio', '业务量分析', 'fa-signal', 0),
 (27, 25, 'customer', 'clist', '当前客户列表', 'fa-bar-chart-o', 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `pre_admincp_smsender`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_admincp_smsender` (
+  `id` mediumint(10) NOT NULL AUTO_INCREMENT,
+  `action` varchar(20) NOT NULL,
+  `sendip` varchar(15) NOT NULL,
+  `dateline` int(10) NOT NULL DEFAULT '0',
+  `mobile` char(11) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '0',
+  `result` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `pre_admincp_smsender`
+--
+
 
 -- --------------------------------------------------------
 
@@ -205,7 +247,7 @@ INSERT INTO `pre_finance_cash` (`id`, `stype`, `customer`, `money`, `startime`, 
 (4, 'cash', '李大嘴', 22222.00, 1400000000, 1410858491, 20, '', '', 0, 0, '15633332222', '中国工商银行', '666666666666666', 0, '郭芙蓉', 'ac6911a12be20420db3770228e7c0d78'),
 (10, 'card', '李小可', 29999.00, 1412870400, 1414944620, 12, 'hxb', '341136521444', 0, 0, '13955555443', '工商银行', '6222022502111222', 0, '燕小六', 'd44d37a306147669afae6273e9fec6da'),
 (11, 'card', '姬无命', 7458001.00, 1410000000, 1411369114, 13, 'hxb', '625221215444', 2, 8, '15987874598', 'hxb', '6222223333333', 0, '白展堂', '39cb13e9d0f18351074eecc4fa7a4015'),
-(12, 'cash', '吕轻侯', 5581246.00, 1400000000, 0, 22, '', '', 5, 1, '18654547878', 'hxb', '6222223333355', 0, '莫小贝', 'd5b9b5f57ce8b42a12185d10a0b643a4');
+(12, 'cash', '吕轻侯', 5581246.00, 1400000000, 0, 22, '', '', 5, 1, '15924907828', 'hxb', '6222223333355', 0, '莫小贝', 'd5b9b5f57ce8b42a12185d10a0b643a4');
 
 -- --------------------------------------------------------
 
