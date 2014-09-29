@@ -24,7 +24,6 @@ class MarketController extends BaseController {
 	     //    	$result[] = $SMS->SendSMS($value, $_POST['cont']);
 	        	$random     =   random(6, 1);
 		        $content    =   '您的手机号：'.$mobile.'，注册验证码：'.$random.'，一天内提交有效。感谢您的注册！';
-
 		        if(M('admincp_checkmobile')->where("mobile='%s' AND dateline > ".NOW_TIME-300, array($mobile))->find()){
 		            $this->error('验证短信已经发送 请5分钟后重试');
 		        } else {
