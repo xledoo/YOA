@@ -388,4 +388,9 @@ function array_md5($array){
 	return build_md5(implode(C('GLOBAL_AUTH_KEY'), array_reverse($array)));
 }
 
+function tofloat($num){
+	return number_format($num, 2, '.', '');
+}
+
+//exit(gmdate("Y-m-d H:i:s", 1412006400));
 ?>

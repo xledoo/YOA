@@ -1,0 +1,47 @@
+<table class="table table-condensed table-hover">
+	<thead >
+		<tr>
+			<th>ID</th>
+			<th>计划打款日</th>
+			<th>类型</th>
+			<th>打款金额</th>
+			<th>打款银行及卡号</th>
+			<th>户名</th>
+			<th>手机号</th>
+			<th>备注</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="list" id="vo">
+			<tr>
+				<td>{$vo.id}</td>
+				<td>{$vo.dateline|date="Y-m-d", ###}</td>
+				<td>{$vo.stype}</td>
+				<td>{$vo.rate}</td>
+				<td>
+					<php>
+						echo $banks[$vo['bankname']]['bankname'];
+					</php>
+				 {$vo.cardnum}</td>
+				<td>{$vo.customer}</td>
+				<td>{$vo.mobile}</td>
+				<td>{$vo.remark}</td>
+				<td>
+					<php>
+						if($vo['status'] == '1'){
+							echo $kills[$vo['status']].'<a class="btn btn-xs green">已打款</a>';
+						} else {
+							echo $kills[$vo['status']].'<a class="btn btn-xs red">未打款</a>';
+						}
+					</php>
+				</td>
+				<td>
+					<a href="{:U('home/Financing/dorate', array('id' => $vo['id']))}" class="btn btn-xs blue">更&nbsp;新</a>
+				</td>
+			</tr>
+		</volist>
+	</tbody>
+</table>
+<a href="{:U('home/financing/rate_build')}" class="btn btn-danger">手动生成本月打款计划</a>

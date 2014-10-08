@@ -23,20 +23,17 @@ class SettingController extends BaseController {
 
     //菜单项目维护
     public function sidebar(){
-    	if(IS_POST){
-            // zecho($this->_G['sidebar']);
-            zecho($_POST);
-    		foreach ($_POST['edit'] as $key => $value) {
+        if(formcheck('submit_sidebar')){
+            if(!empty($_POST['add']['title']) && !empty($_POST['add']['controller']) && !empty($_POST['add']['action'])){
+                M('admincp_sidebar')->add($_POST['add']);
+            }
+            foreach ($_POST['edit'] as $key => $value) {
                 M('admincp_sidebar')->where("id='d%'",$key)->save($value);
-    		}
-            // $map['upid'] = 0;
-            // $map['controller'] <> $value['controller'];
-            // $pam['upid'] = $key;
-            // $pam['controller'] <> $value['action'];
-            M('admincp_sidebar')->add($_POST['add']);                
-    	} else {
-    		$this->display();	
-    	}
+            }
+        } else {
+            $this->assign('formhash', formhash());
+            $this->display();
+        }
     	
     }
 }

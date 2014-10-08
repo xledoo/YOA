@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?09 �?29 �?09:22
--- 服务器版本: 5.7.4
+-- 生成日期: 2014 �?10 �?08 �?16:44
+-- 服务器版本: 5.6.10
 -- PHP 版本: 5.6.0beta4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `pre_admincp_sidebar` (
   `icon` varchar(30) NOT NULL,
   `displayorder` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
 -- 转存表中的数据 `pre_admincp_sidebar`
@@ -86,7 +86,8 @@ INSERT INTO `pre_admincp_sidebar` (`id`, `upid`, `controller`, `action`, `title`
 (24, 22, 'record', 'capital', '资金池构成', 'fa-th', 0),
 (25, 0, 'customer', 'index', '客户信息维护', 'fa-group', 6),
 (26, 22, 'record', 'portfolio', '业务量分析', 'fa-signal', 0),
-(27, 25, 'customer', 'clist', '当前客户列表', 'fa-bar-chart-o', 0);
+(27, 25, 'customer', 'clist', '当前客户列表', 'fa-bar-chart-o', 0),
+(28, 3, 'financing', 'rate', '结息打款计划', 'fa-th', 99);
 
 -- --------------------------------------------------------
 
@@ -235,19 +236,16 @@ CREATE TABLE IF NOT EXISTS `pre_finance_cash` (
   `sponsor` varchar(10) NOT NULL,
   `verify` char(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `pre_finance_cash`
 --
 
 INSERT INTO `pre_finance_cash` (`id`, `stype`, `customer`, `money`, `startime`, `endtime`, `rate`, `cbankname`, `ccardnum`, `zday`, `hkday`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`, `verify`) VALUES
-(1, 'cash', '徐力', 100000.00, 1402555555, 1411370679, 20, '', '', 0, 0, '18687444499', '中国工商银行', '666666666666666', 1, '徐力', 'a26860a2d79ac9ec3e0f531083a372c6'),
-(2, 'cash', '莫小贝', 202265.00, 1391111111, 1410858478, 20, '', '', 0, 0, '15633332222', '中国工商银行', '6222223333333', 0, '白展堂', 'e51da6ad644a59f6865aaa126af8699d'),
-(4, 'cash', '李大嘴', 22222.00, 1400000000, 1410858491, 20, '', '', 0, 0, '15633332222', '中国工商银行', '666666666666666', 0, '郭芙蓉', 'ac6911a12be20420db3770228e7c0d78'),
-(10, 'card', '李小可', 29999.00, 1412870400, 1414944620, 12, 'hxb', '341136521444', 0, 0, '13955555443', '工商银行', '6222022502111222', 0, '燕小六', 'd44d37a306147669afae6273e9fec6da'),
-(11, 'card', '姬无命', 7458001.00, 1410000000, 1411369114, 13, 'hxb', '625221215444', 2, 8, '15987874598', 'hxb', '6222223333333', 0, '白展堂', '39cb13e9d0f18351074eecc4fa7a4015'),
-(12, 'cash', '吕轻侯', 5581246.00, 1400000000, 0, 22, '', '', 5, 1, '15924907828', 'hxb', '6222223333355', 0, '莫小贝', 'd5b9b5f57ce8b42a12185d10a0b643a4');
+(1, 'cash', '徐力', 100000.00, 1404144000, 0, 20, '', '', 0, 0, '18687444499', 'ccb', '6227077774444477', 0, '徐力', '6bfa8f6bb15cc5e51b550142269d986b'),
+(2, 'card', '徐力', 100000.00, 1404144000, 0, 10, 'icbc', '4270300046233523', 2, 25, '18687444499', 'icbc', '6777777777777777', 0, '', '63b36f6701f87bc14929784d6d975717'),
+(3, 'cash', '徐力', 50000.00, 1409500800, 0, 20, '', '', 0, 0, '18687444499', 'boc', '555555555555555555', 0, 'asdf', 'd525b950b387f92a27afead2fc61c30b');
 
 -- --------------------------------------------------------
 
@@ -257,26 +255,30 @@ INSERT INTO `pre_finance_cash` (`id`, `stype`, `customer`, `money`, `startime`, 
 
 CREATE TABLE IF NOT EXISTS `pre_finance_ratelog` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `cashid` smallint(8) NOT NULL,
   `customer` varchar(20) NOT NULL,
   `mobile` varchar(11) NOT NULL,
-  `stype` varchar(20) NOT NULL,
+  `stype` enum('cash','card') NOT NULL,
   `money` float(10,2) NOT NULL,
   `rate` float(10,2) NOT NULL,
   `bankname` varchar(20) NOT NULL,
   `cardnum` varchar(25) NOT NULL,
-  `dateline` int(11) NOT NULL,
+  `dateline` int(10) NOT NULL,
   `remark` text NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `ratedate` int(10) NOT NULL,
+  `verify` char(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `pre_finance_ratelog`
 --
 
-INSERT INTO `pre_finance_ratelog` (`id`, `customer`, `mobile`, `stype`, `money`, `rate`, `bankname`, `cardnum`, `dateline`, `remark`) VALUES
-(1, '徐力', '18687444499', 'card', 100000.00, 2000.00, '中国工商银行', '666666666666666', 1410000000, '6月现金融资利息'),
-(3, '莫小贝', '13888888888', 'cash', 100000.00, 2000.00, '中国工商银行', '666666666666666', 1410000000, '8月现金融资利息'),
-(4, '李大嘴', '15633332222', 'cash', 10000000.00, 20000.00, '农业银行', '123456789987654321', 14222222, '农业银行');
+INSERT INTO `pre_finance_ratelog` (`id`, `cashid`, `customer`, `mobile`, `stype`, `money`, `rate`, `bankname`, `cardnum`, `dateline`, `remark`, `status`, `ratedate`, `verify`) VALUES
+(3, 1, '徐力', '18687444499', 'cash', 100000.00, 2000.00, 'ccb', '6227077774444477', 1412755410, '10月融资利息', 1, 0, ''),
+(2, 2, '徐力', '18687444499', 'card', 100000.00, 1000.00, 'icbc', '6777777777777777', 1412179200, '10月融资利息', 1, 0, ''),
+(4, 3, '徐力', '18687444499', 'cash', 50000.00, 1000.00, 'boc', '555555555555555555', 1412755512, '10月融资利息', 1, 0, '');
 
 -- --------------------------------------------------------
 

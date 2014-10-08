@@ -167,4 +167,61 @@ class FinancingController extends BaseController {
         // echo($id);
         M('finance_cash')->where("id='%d'",$id)->delete() ? $this->success('删除成功') : $this->error('删除失败');
     }
+
+
+    public function rate(){
+
+        $month  =   I('month') ? intval(I('month')) : date('n');
+        $yeah   =   I('yeah') ? intval(I('yeah')) : date('Y');
+
+        $mday   =   mktime(0,0,0,$month,1,$yeah);
+        $eday   =   mktime(23, 59, 59, $month, date('t'), $yeah);
+        $map['dateline']  = array(array('GT',$mday),array('LT',$eday),'and'); 
+
+        $list = M('finance_ratelog')->where($map)->select();
+        $this->assign('banks', $this->_G['banks']);
+        $this->assign('list', $list);
+        $this->display();
+    }
+
+    public function rate_build(){
+        $model  =   D('financecash');
+        $mday   =   mktime(0,0,0,date('n'),1,date('Y'));
+        $eday   =   mktime(23, 59, 59, date('n'), date('t'), date('Y'));
+        $map['dateline']  = array(array('GT',$mday),array('LT',$eday),'and');
+
+        $fina = $model->select();
+        foreach ($fina as $key => $value) {
+            if($model->review_verify($value['id'])){
+                $map['cashid']  =   $value['id'];
+                if(!M('finance_ratelog')->where($map)->find()){
+                    $value['cashid']    =   $value['id'];
+                    unset($value['id']);unset($value['startime']);
+                    unset($value['endtime']);unset($value['cbankname']);
+                    unset($value['ccardnum']);
+                    unset($value['hkday']);unset($value['status']);
+                    unset($value['sponsor']);unset($value['verify']);
+                    $value['remark']    =   date('n').'月融资利息';
+
+                    if($value['stype'] == 'cash'){
+                        $rate = $value['money'] * $value['rate'] / 1000;
+                        $value['dateline']  =   NOW_TIME;
+                    } elseif($value['stype'] == 'card'){
+                        $rate = $value['money'] * 10 / 1000;
+                        $value['dateline']  =   mktime(0,0,0,date('n'),$value['zday'],date('Y'));
+                    }
+                    unset($value['zday']);
+                    $value['rate']  =   tofloat($rate);
+                    M('finance_ratelog')->add($value);                    
+                }
+
+            }
+        }
+        $this->success('打款计划生成成功', U('home/financing/rate'));
+    }
+
+    public function dorate($id){
+        $data['status'] = '1';
+        M('finance_ratelog')->where("id='%s'",$id)->save($data) ? $this->success('打款状态已更新') : $this->error('更新失败');
+    }
 }
