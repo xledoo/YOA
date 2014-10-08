@@ -15,25 +15,25 @@ class MarketController extends BaseController {
 	    		$_POST['mb'][$key] = substr($value, -11);
 	    	}
 	    	// zecho($_POST);
-
 	        import('Org.Util.SMSender');
-	        $SMS    =   new \Org\Util\SMSender($this->_G['setting']['SMS_USERNAME']['svalue'], $this->_G['setting']['SMS_PASSWORD']['svalue'], $this->_G['setting']['SMS_CHARSET']['svalue'], $this->_G['setting']['SMS_INTERFACE']['svalue']);
-	        // $SMS    =   new \Org\Util\SMSender(C('SMS_USERNAME'),C('SMS_PASSWORD'),C('SMS_CHARSET'),C('SMS_INTERFACE'));
+	        // $SMS    =   new \Org\Util\SMSender($this->_G['setting']['SMS_USERNAME']['svalue'], $this->_G['setting']['SMS_PASSWORD']['svalue'], $this->_G['setting']['SMS_CHARSET']['svalue'], $this->_G['setting']['SMS_INTERFACE']['svalue']);
+	        $SMS    =   new \Org\Util\SMSender(C('SMS_USERNAME'),C('SMS_PASSWORD'),C('SMS_CHARSET'),C('SMS_INTERFACE'));
 	        // zecho($SMS->SendSMS('18687444499','dsfff'));
 	        foreach($_POST['mb'] as $key => $value){
+	        	// zecho($value);
 	     //    	$result[] = $SMS->SendSMS($value, $_POST['cont']);
 	        	$random     =   random(6, 1);
-		        $content    =   '您的手机号：'.$mobile.'，注册验证码：'.$random.'，一天内提交有效。感谢您的注册！';
-		        if(M('admincp_checkmobile')->where("mobile='%s' AND dateline > ".NOW_TIME-300, array($mobile))->find()){
+		        $content    =   '您的手机号：'.$value.'，注册验证码：'.$random.'，一天内提交有效。感谢您的注册！';
+		        if(M('admincp_checkmobile')->where("mobile='%s' AND dateline > ".NOW_TIME-300, array($value))->find()){
 		            $this->error('验证短信已经发送 请5分钟后重试');
 		        } else {
 		            M('admincp_checkmobile')->where("mobile='%s'")->delete();
 		        }
 		   
-		        if($result = $SMS->SendSMS($mobile, $content)){
+		        if($result = $SMS->SendSMS($value, $content)){
 		            $checkModel =   M('admincp_checkmobile');
 		            $data   =   array(
-		                'mobile'    =>  $mobile,
+		                'mobile'    =>  $value,
 		                'sendip'    =>  get_client_ip(),
 		                'dateline'  =>  NOW_TIME   
 		            );
@@ -43,7 +43,7 @@ class MarketController extends BaseController {
 		                $data['status'] =  ($result['result'] != 0) ? 1 : 0;
 		                $data['result'] =  $result['message'];
 		                $smsModel->add($data);
-		                $this->error('验证短信发送成功,请等待接收');                             
+		                $this->success('验证短信发送成功,请等待接收');                             
 		            }
 		        } else {
 		            $this->error('验证短信发送失败,请联系管理员');
