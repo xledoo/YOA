@@ -52,7 +52,11 @@
 			<tr style="color:DodgerBlue;" title="{$cardlog.bankname}，卡号：{$cardlog.cardnum}">
 				<td style="border:none;">{$cardlog.customer}</td>
 				<td style="border:none;">{$cardlog.mobile}</td>
-				<td style="border:none;">{$cardlog.stype}</td>		
+				<td style="border:none;">
+					<if condition="$cardlog.stype eq 'cash'">现金
+					<elseif condition="$cardlog.stype eq 'card'"/>信用卡
+					</if>
+				</td>		
 				<td style="border:none;">{$cardlog.dateline|date="Y-m-d",###}</td>
 				<td style="border:none;">{$cardlog.money}</td>
 				<td style="border:none;">{$cardlog.rate}</td>

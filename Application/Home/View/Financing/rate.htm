@@ -18,7 +18,11 @@
 			<tr>
 				<td>{$vo.id}</td>
 				<td>{$vo.dateline|date="Y-m-d", ###}</td>
-				<td>{$vo.stype}</td>
+				<td>
+					<if condition="$vo.stype eq 'cash'">现金
+					<elseif condition="$vo.stype eq 'card'"/>信用卡
+					</if>
+				</td>
 				<td>{$vo.rate}</td>
 				<td>
 					<php>

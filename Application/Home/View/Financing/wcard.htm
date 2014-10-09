@@ -28,7 +28,11 @@
 
 		<tr><th>打款银行</th><th colspan="2">打款卡号</th><th>介绍人</th></tr>
 		<tr style="color:DodgerBlue;">
-			<td>{$wcard.bankname}</td>
+			<td>
+				<php>
+					echo $banks[$wcard['bankname']]['bankname'];
+				</php>
+			</td>
 			<td colspan="2">{$wcard.cardnum}</td>
 			<td>{$wcard.sponsor}</td>
 		</tr>

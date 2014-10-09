@@ -71,6 +71,7 @@ class FinancingController extends BaseController {
             $ex[] = explode("=",$v)[1];
         }
         $this->assign('kills',$ex);
+        $this->assign('banks', $this->_G['banks']);
         $this->assign('wcash',$info);
         $this->display();
     }
@@ -159,6 +160,7 @@ class FinancingController extends BaseController {
             $ex[] = explode("=",$v)[1];
         }
         $this->assign('kills',$ex);
+        $this->assign('banks', $this->_G['banks']);
         $this->assign('wcard',$info);
         $this->display();
     }
