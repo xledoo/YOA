@@ -171,7 +171,7 @@ class FinancingController extends BaseController {
         M('finance_cash')->where("id='%d'",$id)->delete() ? $this->success('删除成功') : $this->error('删除失败');
     }
 
-
+    //打款计划
     public function rate(){
 
         $month  =   I('month') ? intval(I('month')) : date('n');
@@ -187,6 +187,7 @@ class FinancingController extends BaseController {
         $this->display();
     }
 
+    //打款计划生成
     public function rate_build(){
         $model  =   D('financecash');
         $mday   =   mktime(0,0,0,date('n'),1,date('Y'));
@@ -223,8 +224,9 @@ class FinancingController extends BaseController {
         $this->success('打款计划生成成功', U('home/financing/rate'));
     }
 
+    //打款状态确认
     public function dorate($id){
         $data['status'] = '1';
-        M('finance_ratelog')->where("id='%s'",$id)->save($data) ? $this->success('打款状态已更新') : $this->error('更新失败');
+        M('finance_ratelog')->where("id='%s'",$id)->save($data) ? $this->success('状态更改为 已打款') : $this->error('状态更新失败！');
     }
 }

@@ -10,7 +10,6 @@
 			<th>手机号</th>
 			<th>备注</th>
 			<th>状态</th>
-			<th>操作</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -34,19 +33,34 @@
 				<td>{$vo.mobile}</td>
 				<td>{$vo.remark}</td>
 				<td>
-					<php>
-						if($vo['status'] == '1'){
-							echo $kills[$vo['status']].'<a class="btn btn-xs green">已打款</a>';
-						} else {
-							echo $kills[$vo['status']].'<a class="btn btn-xs red">未打款</a>';
-						}
-					</php>
-				</td>
-				<td>
-					<a href="{:U('home/Financing/dorate', array('id' => $vo['id']))}" class="btn btn-xs blue">更&nbsp;新</a>
+					<if condition="$vo.status eq '1'">
+						<a class="btn btn-xs green">已打款</a>
+					<elseif condition="$vo.status eq '0'" />
+						<a onclick="torate({$vo.id})" class="btn btn-xs red">未打款</a>
+					</if>
 				</td>
 			</tr>
 		</volist>
 	</tbody>
 </table>
 <a href="{:U('home/financing/rate_build')}" class="btn btn-danger">手动生成本月打款计划</a>
+<script type="text/javascript">
+	function torate(val){
+	  var name=confirm(
+	  		"打款信息"+'\n\n'
+		  	+'户名：'+"<?php echo $vo['customer']; ?>"+'\n'
+		  	+'手机号码：'+"<?php echo $vo['mobile']; ?>"+'\n'
+		  	+'计划打款日期：'+"<?php echo date('Y-m-d',$vo['dateline']); ?>"+'\n'
+		  	+'类型：'+"<?php if($vo['stype'] == 'cash'){echo '现金';}elseif($vo['stype'] == 'card'){echo '信用卡';} ?>"+'\n'
+		  	+'打款金额：'+"<?php echo $vo['rate']; ?> 元整"+'\n'
+		  	+'银行信息：'+"<?php echo $banks[$vo['bankname']]['bankname']; ?>"+' ****'+"<?php echo substr($vo['cardnum'],-4); ?>"+'\n'
+		  	+'备注：'+"<?php echo $vo['remark']; ?>"+'\n\n'
+		  	+"确定将状态更改为 已打款？"
+	  	);
+	  if (name == true){
+	  	window.location.href="index.php?m=Home&c=Financing&a=dorate&id="+val;
+	  }else{
+	  	window.location.reload();
+	  }
+	}
+</script>
