@@ -689,7 +689,7 @@
 								.find('td');
 			year -= 1;
 			for (var i = -1; i < 11; i++) {
-				html += '<span class="year'+(i == -1 ? ' old' : i == 10 ? ' new' : '')+(currentYear == year ? ' active' : '')+(year < startYear || year > endYear ? ' disabled' : '')+'">'+year+'</span>';
+				html += '<span class="year'+(i == -1 ? ' old' : i == 10 ? ' new' : '')+(currentYear == year ? ' active' : '')+(year < startYear || year > endYear ? ' disabled' : '')+'">'+year+' '+'</span>';
 				year += 1;
 			}
 			yearCont.html(html);
@@ -1160,12 +1160,22 @@
 	];
 	$.fn.datepicker.Constructor = Datepicker;
 	var dates = $.fn.datepicker.dates = {
-		en: {
+	/*	en: {
 			days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
 			daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
 			daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
 			months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 			monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+			today: "Today",
+			clear: "Clear"
+		}*/
+		
+		en: {
+			days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+			daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+			daysMin: ["日", "一", "二", "三", "四", "五", "六", "日"],
+			months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+			monthsShort: ["1月 ", "2月 ", "3月 ", "4月 ", "5月 ", "6月 ", "7月 ", "8月 ", "9月 ", "10月 ", "11月 ", "12月 "],
 			today: "Today",
 			clear: "Clear"
 		}

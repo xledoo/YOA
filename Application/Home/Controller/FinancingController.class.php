@@ -37,6 +37,7 @@ class FinancingController extends BaseController {
             $ex[] = explode("=",$v)[1];
         }
         $this->assign('kills',$ex);
+        $this->assign('banks', $this->_G['banks']);
         $this->assign('cash', $info);
     	$this->assign('cashlog', $ralog);
     	$this->display();
