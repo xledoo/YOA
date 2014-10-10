@@ -224,8 +224,15 @@ class FinancingController extends BaseController {
         $this->success('打款计划生成成功', U('home/financing/rate'));
     }
 
+    public function rateinfo(){
+        $json['id']       =   I('id');
+        $jso = M('finance_ratelog')->where("id=%d",I('id'))->find();
+        exit(json_encode($jso));
+    }
+
     //打款状态确认
     public function dorate($id){
+        zecho($id);
         $data['status'] = '1';
         M('finance_ratelog')->where("id='%s'",$id)->save($data) ? $this->success('状态更改为 已打款') : $this->error('状态更新失败！');
     }
