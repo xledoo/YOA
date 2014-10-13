@@ -225,15 +225,19 @@ class FinancingController extends BaseController {
     }
 
     public function rateinfo(){
+        $banks = $this->_G['banks'];
         $json['id']       =   I('id');
         $jso = M('finance_ratelog')->where("id=%d",I('id'))->find();
+        $jso['dateline'] = date("Y-m-d",$jso['dateline']);
+        $jso['stype'] = $jso['stype'] == 'cash' ? '现金' : ($jso['stype'] == 'card' ? '信用卡' : '');
+        $jso['bankname'] = $banks[$jso['bankname']]['bankname'];
         exit(json_encode($jso));
     }
 
     //打款状态确认
     public function dorate($id){
-        zecho($id);
+        // zecho($id);
         $data['status'] = '1';
-        M('finance_ratelog')->where("id='%s'",$id)->save($data) ? $this->success('状态更改为 已打款') : $this->error('状态更新失败！');
+        M('finance_ratelog')->where("id='%s'",$id)->save($data) ? $this->success('状态更改为 已打款') : $this->error('打款状态更新失败！');
     }
 }
