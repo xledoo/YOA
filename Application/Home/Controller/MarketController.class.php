@@ -60,10 +60,14 @@ class MarketController extends BaseController {
 	    	foreach ($_POST['em'] as $key => $value) {
 	    		$_POST['em'][$key] = substr($value, stripos($value, " ")+1);
 	    	}
-    		foreach ($_POST['em'] as $key => $value) {
-    			$result[] = SendMail($value,$_POST['title'],$_POST['cont'],$_POST['sign']);
-    		}
-    		$result ? $this->success('邮件发送成功！') : $this->error('邮件发送失败！');
+	    	if(!empty($_POST['em']) && !empty($_POST['cont']) && !empty($_POST['title'])){
+	    		foreach ($_POST['em'] as $key => $value) {
+	    			$result[] = SendMail($value,$_POST['title'],$_POST['cont'],$_POST['sign']);
+	    		}
+	    		$result ? $this->success('邮件发送成功！') : $this->error('邮件发送失败！');
+	    	} else {
+	    		$this->error('邮箱地址或标题或发送内容不能为空！');
+	    	}
     	} else {
     		$em = M('common_customer')->select();
 	    	$this->assign('em',$em);
