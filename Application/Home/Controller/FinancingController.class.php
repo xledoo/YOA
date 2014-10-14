@@ -224,12 +224,13 @@ class FinancingController extends BaseController {
         $this->success('打款计划生成成功', U('home/financing/rate'));
     }
 
+    //返回json数据
     public function rateinfo(){
         $banks = $this->_G['banks'];
         $json['id']       =   I('id');
         $jso = M('finance_ratelog')->where("id=%d",I('id'))->find();
         $jso['dateline'] = date("Y-m-d",$jso['dateline']);
-        $jso['stype'] = $jso['stype'] == 'cash' ? '现金' : ($jso['stype'] == 'card' ? '信用卡' : '');
+        $jso['stype'] = $jso['stype'] == 'cash' ? '现金' : ($jso['stype'] == 'card' ? '信用卡' : '空');
         $jso['bankname'] = $banks[$jso['bankname']]['bankname'];
         exit(json_encode($jso));
     }

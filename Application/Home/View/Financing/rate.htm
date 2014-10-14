@@ -58,7 +58,6 @@
 	</div>
 	<div class="modal-footer" style="text-align:center;">
 		<a id="modal-a" class="btn btn-default blue">确&nbsp;定</a>
-		<!-- <button type="button" onclick="window.location.href='{:U("home/")}'" class="btn blue">确&nbsp;定</button> -->
 		<a href="{:U('home/financing/rate')}" class="btn btn-default">取&nbsp;消</a>
 	</div>
 </div>
@@ -81,7 +80,6 @@
 <script type="text/javascript">
 	function korate(val){
 		jQuery.getJSON('index.php?m=home&c=financing&a=rateinfo&id='+val, function(jso){
-			// alert(jso['customer']);
 			$('#modal-dk').replaceWith(
 				'<table class="table table-condensed table-hover">'
 				+'<tr><td>户名：' + '</td><td><b>'+ jso.customer + '</b></td>'
@@ -93,18 +91,15 @@
 				+'<tr><td>打款金额：' + '</td><td><b>'+ jso.rate + '</b> 元整</td>'
 				+'<td>备注：' + '</td><td><b>'+ jso.remark + '</b></td></tr>'
 				+'</table>'
-				+'<p><font size="5" color="green">确定 已打款？</font></p>'
+				+'<p><font size="7" color="green">确定 已打款？</font></p>'
 				);//显示所要确认的信息
 			$('#modal-a').attr({href:"index.php?m=home&c=financing&a=dorate&id="+jso.id+""});//确定按钮传如ID跳转到dorate方法
-			// $('#modal-dk').replaceWith('<p>' + jso.customer + jso.mobile+'</p><br><h3><strong>确定 已打款？</strong></h3>');
-			// $('#modal-a').replaceWith('<a'+' id="modal-a"'+' href="{:U('home/financing/dorate',array('id' => pp))}"'+' class="btn btn-default blue"'+'>'+确&nbsp;定+'</a>');
-			// $('#modal-a').attr("href","{:U('home/financing/dorate',array('id' => "+jso.id+"))}");
-
 		});
 		return false;
 	}
 </script>
 
+<!--
 <script type="text/javascript">
 	function torate(val){
 	  var name=confirm(
@@ -125,6 +120,7 @@
 	  }
 	}
 </script>
+-->
 
 <script>
 jQuery(document).ready(function() {       
