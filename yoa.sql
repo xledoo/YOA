@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?10 �?14 �?02:35
+-- 生成日期: 2014 �?10 �?14 �?08:53
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -158,7 +158,7 @@ INSERT INTO `pre_common_banks` (`bid`, `bankname`, `sign`, `status`) VALUES
 
 CREATE TABLE IF NOT EXISTS `pre_common_customer` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `costomer` varchar(50) NOT NULL,
+  `customer` varchar(50) NOT NULL,
   `mobile` varchar(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `pre_common_customer` (
 -- 转存表中的数据 `pre_common_customer`
 --
 
-INSERT INTO `pre_common_customer` (`id`, `costomer`, `mobile`, `email`) VALUES
+INSERT INTO `pre_common_customer` (`id`, `customer`, `mobile`, `email`) VALUES
 (1, '徐力', '18687444499', 'xledoo@qq.com'),
 (2, '彭普', '15924907828', '124910168@qq.com'),
 (3, '莫小贝', '15633332222', 'hoo@126.com'),
@@ -243,9 +243,9 @@ CREATE TABLE IF NOT EXISTS `pre_finance_cash` (
 --
 
 INSERT INTO `pre_finance_cash` (`id`, `stype`, `customer`, `money`, `startime`, `endtime`, `rate`, `cbankname`, `ccardnum`, `zday`, `hkday`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`, `verify`) VALUES
-(1, 'cash', '徐力', 100000.00, 1404144000, 1412827162, 20, '', '', 0, 0, '18687444499', 'ccb', '6227077774444477', 1, '徐力', '6bfa8f6bb15cc5e51b550142269d986b'),
-(2, 'card', '徐力', 100000.00, 1404144000, 1412827177, 10, 'icbc', '4270300046233523', 2, 25, '18687444499', 'icbc', '6777777777777777', 1, '', '63b36f6701f87bc14929784d6d975717'),
-(3, 'cash', '徐力', 50000.00, 1409500800, 1412906548, 20, '', '', 0, 0, '18687444499', 'boc', '555555555555555555', 1, 'asdf', 'd525b950b387f92a27afead2fc61c30b');
+(1, 'cash', '徐力', 100000.00, 1404144000, 1412827162, 20, 'gdb', '6234567892211233', 0, 0, '18687444499', 'ccb', '6227077774444477', 1, '徐力', '6bfa8f6bb15cc5e51b550142269d986b'),
+(2, 'card', '字符串', 100000.00, 1404144000, 1413271429, 10, 'icbc', '4270300046233523', 2, 25, '18666554431', 'icbc', '6777777777777777', 1, '', '63b36f6701f87bc14929784d6d975717'),
+(3, 'card', '数据库', 50000.00, 1409500800, 1412906548, 20, 'cebb', '622887655161572122', 0, 0, '18234567890', 'boc', '555555555555555555', 0, 'asdf', 'd525b950b387f92a27afead2fc61c30b');
 
 -- --------------------------------------------------------
 
@@ -277,8 +277,8 @@ CREATE TABLE IF NOT EXISTS `pre_finance_ratelog` (
 
 INSERT INTO `pre_finance_ratelog` (`id`, `cashid`, `customer`, `mobile`, `stype`, `money`, `rate`, `bankname`, `cardnum`, `dateline`, `remark`, `status`, `ratedate`, `verify`) VALUES
 (3, 1, '徐力', '18687444499', 'cash', 100000.00, 2000.00, 'ccb', '6227077774444477', 1412755410, '10月融资利息', 1, 0, ''),
-(2, 2, '徐力', '18687444499', 'card', 100000.00, 1000.00, 'icbc', '6777777777777777', 1412179200, '10月融资利息', 0, 0, ''),
-(4, 3, '徐力', '18687444499', 'cash', 50000.00, 1000.00, 'boc', '555555555555555555', 1412755512, '10月融资利息', 0, 0, ''),
+(2, 2, '李杰', '18687444499', 'card', 100000.00, 1000.00, 'icbc', '633333333333333', 1412179200, '10月融资利息', 0, 0, ''),
+(4, 3, '张子栋', '18687444499', 'cash', 50000.00, 1000.00, 'pingan', '555555555555555555', 1412755512, '10月融资利息', 0, 0, ''),
 (5, 4, '意大利', '15924907828', 'card', 70000.00, 1400.00, 'hxb', '622202554488778', 1412755512, '10月融资利息', 1, 0, '');
 
 -- --------------------------------------------------------
