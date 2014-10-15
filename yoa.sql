@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?10 �?14 �?08:53
+-- 生成日期: 2014 �?10 �?15 �?09:07
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -161,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `pre_common_customer` (
   `customer` varchar(50) NOT NULL,
   `mobile` varchar(11) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `dateline` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
@@ -168,11 +169,11 @@ CREATE TABLE IF NOT EXISTS `pre_common_customer` (
 -- 转存表中的数据 `pre_common_customer`
 --
 
-INSERT INTO `pre_common_customer` (`id`, `customer`, `mobile`, `email`) VALUES
-(1, '徐力', '18687444499', 'xledoo@qq.com'),
-(2, '彭普', '15924907828', '124910168@qq.com'),
-(3, '莫小贝', '15633332222', 'hoo@126.com'),
-(4, '秦文', '13955555443', '243035210@qq.com');
+INSERT INTO `pre_common_customer` (`id`, `customer`, `mobile`, `email`, `dateline`) VALUES
+(1, '徐力', '18687444499', 'xledoo@qq.com', 0),
+(2, '彭普', '15924907828', '124910168@qq.com', 0),
+(3, '莫小贝', '15633332222', 'hoo@126.com', 0),
+(4, '秦文', '13955555443', '243035210@qq.com', 0);
 
 -- --------------------------------------------------------
 
@@ -303,3 +304,45 @@ CREATE TABLE IF NOT EXISTS `pre_finance_settle` (
 INSERT INTO `pre_finance_settle` (`id`, `usable`, `freeze`, `dateline`, `verify`) VALUES
 (1, 100000.00, 0.00, 1410000000, ''),
 (2, 50000.00, 0.00, 1410000001, '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `pre_loan`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_loan` (
+  `id` smallint(8) NOT NULL AUTO_INCREMENT,
+  `signid` varchar(16) NOT NULL,
+  `customer` varchar(20) NOT NULL,
+  `mobile` varchar(11) NOT NULL,
+  `money` float(10,2) NOT NULL DEFAULT '0.00',
+  `rate` int(3) NOT NULL,
+  `dateline` int(10) NOT NULL,
+  `stype` varchar(20) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `pre_loan`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `pre_loan_car`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_loan_car` (
+  `id` smallint(8) NOT NULL AUTO_INCREMENT,
+  `signid` varchar(16) NOT NULL,
+  `paizhao` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `pre_loan_car`
+--
+
