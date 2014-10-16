@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?10 �?15 �?09:07
+-- 生成日期: 2014 �?10 �?16 �?09:22
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -153,10 +153,10 @@ INSERT INTO `pre_common_banks` (`bid`, `bankname`, `sign`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `pre_common_customer`
+-- 表的结构 `pre_common_member`
 --
 
-CREATE TABLE IF NOT EXISTS `pre_common_customer` (
+CREATE TABLE IF NOT EXISTS `pre_common_member` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `customer` varchar(50) NOT NULL,
   `mobile` varchar(11) NOT NULL,
@@ -166,14 +166,167 @@ CREATE TABLE IF NOT EXISTS `pre_common_customer` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- 转存表中的数据 `pre_common_customer`
+-- 转存表中的数据 `pre_common_member`
 --
 
-INSERT INTO `pre_common_customer` (`id`, `customer`, `mobile`, `email`, `dateline`) VALUES
+INSERT INTO `pre_common_member` (`id`, `customer`, `mobile`, `email`, `dateline`) VALUES
 (1, '徐力', '18687444499', 'xledoo@qq.com', 0),
 (2, '彭普', '15924907828', '124910168@qq.com', 0),
 (3, '莫小贝', '15633332222', 'hoo@126.com', 0),
 (4, '秦文', '13955555443', '243035210@qq.com', 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `pre_common_member_profile`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_common_member_profile` (
+  `uid` mediumint(8) unsigned NOT NULL,
+  `realname` varchar(255) NOT NULL DEFAULT '',
+  `gender` tinyint(1) NOT NULL DEFAULT '0',
+  `birthyear` smallint(6) unsigned NOT NULL DEFAULT '0',
+  `birthmonth` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `birthday` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `constellation` varchar(255) NOT NULL DEFAULT '',
+  `zodiac` varchar(255) NOT NULL DEFAULT '',
+  `telephone` varchar(255) NOT NULL DEFAULT '',
+  `mobile` varchar(255) NOT NULL DEFAULT '',
+  `idcardtype` varchar(255) NOT NULL DEFAULT '',
+  `idcard` varchar(255) NOT NULL DEFAULT '',
+  `address` varchar(255) NOT NULL DEFAULT '',
+  `zipcode` varchar(255) NOT NULL DEFAULT '',
+  `nationality` varchar(255) NOT NULL DEFAULT '',
+  `birthprovince` varchar(255) NOT NULL DEFAULT '',
+  `birthcity` varchar(255) NOT NULL DEFAULT '',
+  `birthdist` varchar(20) NOT NULL DEFAULT '',
+  `birthcommunity` varchar(255) NOT NULL DEFAULT '',
+  `resideprovince` varchar(255) NOT NULL DEFAULT '',
+  `residecity` varchar(255) NOT NULL DEFAULT '',
+  `residedist` varchar(20) NOT NULL DEFAULT '',
+  `residecommunity` varchar(255) NOT NULL DEFAULT '',
+  `residesuite` varchar(255) NOT NULL DEFAULT '',
+  `graduateschool` varchar(255) NOT NULL DEFAULT '',
+  `company` varchar(255) NOT NULL DEFAULT '',
+  `education` varchar(255) NOT NULL DEFAULT '',
+  `occupation` varchar(255) NOT NULL DEFAULT '',
+  `position` varchar(255) NOT NULL DEFAULT '',
+  `revenue` varchar(255) NOT NULL DEFAULT '',
+  `affectivestatus` varchar(255) NOT NULL DEFAULT '',
+  `lookingfor` varchar(255) NOT NULL DEFAULT '',
+  `bloodtype` varchar(255) NOT NULL DEFAULT '',
+  `height` varchar(255) NOT NULL DEFAULT '',
+  `weight` varchar(255) NOT NULL DEFAULT '',
+  `alipay` varchar(255) NOT NULL DEFAULT '',
+  `icq` varchar(255) NOT NULL DEFAULT '',
+  `qq` varchar(255) NOT NULL DEFAULT '',
+  `yahoo` varchar(255) NOT NULL DEFAULT '',
+  `msn` varchar(255) NOT NULL DEFAULT '',
+  `taobao` varchar(255) NOT NULL DEFAULT '',
+  `site` varchar(255) NOT NULL DEFAULT '',
+  `bio` text NOT NULL,
+  `interest` text NOT NULL,
+  `field1` text NOT NULL,
+  `field2` text NOT NULL,
+  `field3` text NOT NULL,
+  `field4` text NOT NULL,
+  `field5` text NOT NULL,
+  `field6` text NOT NULL,
+  `field7` text NOT NULL,
+  `field8` text NOT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `pre_common_member_profile`
+--
+
+INSERT INTO `pre_common_member_profile` (`uid`, `realname`, `gender`, `birthyear`, `birthmonth`, `birthday`, `constellation`, `zodiac`, `telephone`, `mobile`, `idcardtype`, `idcard`, `address`, `zipcode`, `nationality`, `birthprovince`, `birthcity`, `birthdist`, `birthcommunity`, `resideprovince`, `residecity`, `residedist`, `residecommunity`, `residesuite`, `graduateschool`, `company`, `education`, `occupation`, `position`, `revenue`, `affectivestatus`, `lookingfor`, `bloodtype`, `height`, `weight`, `alipay`, `icq`, `qq`, `yahoo`, `msn`, `taobao`, `site`, `bio`, `interest`, `field1`, `field2`, `field3`, `field4`, `field5`, `field6`, `field7`, `field8`) VALUES
+(1, '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `pre_common_member_profile_setting`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_common_member_profile_setting` (
+  `fieldid` varchar(255) NOT NULL DEFAULT '',
+  `available` tinyint(1) NOT NULL DEFAULT '0',
+  `invisible` tinyint(1) NOT NULL DEFAULT '0',
+  `needverify` tinyint(1) NOT NULL DEFAULT '0',
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `description` varchar(255) NOT NULL DEFAULT '',
+  `displayorder` smallint(6) unsigned NOT NULL DEFAULT '0',
+  `required` tinyint(1) NOT NULL DEFAULT '0',
+  `unchangeable` tinyint(1) NOT NULL DEFAULT '0',
+  `showincard` tinyint(1) NOT NULL DEFAULT '0',
+  `showinthread` tinyint(1) NOT NULL DEFAULT '0',
+  `showinregister` tinyint(1) NOT NULL DEFAULT '0',
+  `allowsearch` tinyint(1) NOT NULL DEFAULT '0',
+  `formtype` varchar(255) NOT NULL,
+  `size` smallint(6) unsigned NOT NULL DEFAULT '0',
+  `choices` text NOT NULL,
+  `validate` text NOT NULL,
+  PRIMARY KEY (`fieldid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `pre_common_member_profile_setting`
+--
+
+INSERT INTO `pre_common_member_profile_setting` (`fieldid`, `available`, `invisible`, `needverify`, `title`, `description`, `displayorder`, `required`, `unchangeable`, `showincard`, `showinthread`, `showinregister`, `allowsearch`, `formtype`, `size`, `choices`, `validate`) VALUES
+('realname', 1, 0, 0, '真实姓名', '', 0, 0, 0, 0, 0, 0, 1, 'text', 0, '', ''),
+('gender', 1, 0, 0, '性别', '', 0, 0, 0, 0, 0, 0, 1, 'select', 0, '', ''),
+('birthyear', 1, 0, 0, '出生年份', '', 0, 0, 0, 0, 0, 0, 1, 'select', 0, '', ''),
+('birthmonth', 1, 0, 0, '出生月份', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', ''),
+('birthday', 1, 0, 0, '生日', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', ''),
+('constellation', 1, 1, 0, '星座', '星座(根据生日自动计算)', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('zodiac', 1, 1, 0, '生肖', '生肖(根据生日自动计算)', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('telephone', 1, 1, 0, '固定电话', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('mobile', 1, 1, 0, '手机', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('idcardtype', 1, 1, 0, '证件类型', '身份证 护照 驾驶证等', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '身份证\n护照\n驾驶证', ''),
+('idcard', 1, 1, 0, '证件号', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('address', 1, 1, 0, '邮寄地址', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('zipcode', 1, 1, 0, '邮编', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('nationality', 0, 0, 0, '国籍', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('birthprovince', 1, 0, 0, '出生省份', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', ''),
+('birthcity', 1, 0, 0, '出生地', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', ''),
+('birthdist', 1, 0, 0, '出生县', '出生行政区/县', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', ''),
+('birthcommunity', 1, 0, 0, '出生小区', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', ''),
+('resideprovince', 1, 0, 0, '居住省份', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', ''),
+('residecity', 1, 0, 0, '居住地', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', ''),
+('residedist', 1, 0, 0, '居住县', '居住行政区/县', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', ''),
+('residecommunity', 1, 0, 0, '居住小区', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', ''),
+('residesuite', 0, 0, 0, '房间', '小区、写字楼门牌号', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('graduateschool', 1, 0, 0, '毕业学校', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('education', 1, 0, 0, '学历', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '博士\n硕士\n本科\n专科\n中学\n小学\n其它', ''),
+('company', 1, 0, 0, '公司', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('occupation', 1, 0, 0, '职业', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('position', 1, 0, 0, '职位', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('revenue', 1, 1, 0, '年收入', '单位 元', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('affectivestatus', 1, 1, 0, '情感状态', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('lookingfor', 1, 0, 0, '交友目的', '希望在网站找到什么样的朋友', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('bloodtype', 1, 1, 0, '血型', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, 'A\nB\nAB\nO\n其它', ''),
+('height', 0, 1, 0, '身高', '单位 cm', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('weight', 0, 1, 0, '体重', '单位 kg', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('alipay', 1, 1, 0, '支付宝', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('icq', 0, 1, 0, 'ICQ', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('qq', 1, 1, 0, 'QQ', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('yahoo', 0, 1, 0, 'YAHOO帐号', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('msn', 1, 1, 0, 'MSN', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('taobao', 1, 1, 0, '阿里旺旺', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('site', 1, 0, 0, '个人主页', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('bio', 1, 1, 0, '自我介绍', '', 0, 0, 0, 0, 0, 0, 0, 'textarea', 0, '', ''),
+('interest', 1, 0, 0, '兴趣爱好', '', 0, 0, 0, 0, 0, 0, 0, 'textarea', 0, '', ''),
+('field1', 0, 1, 0, '自定义字段1', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('field2', 0, 1, 0, '自定义字段2', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('field3', 0, 1, 0, '自定义字段3', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('field4', 0, 1, 0, '自定义字段4', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('field5', 0, 1, 0, '自定义字段5', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('field6', 0, 1, 0, '自定义字段6', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('field7', 0, 1, 0, '自定义字段7', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('field8', 0, 1, 0, '自定义字段8', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -207,7 +360,7 @@ INSERT INTO `pre_common_setting` (`skey`, `svalue`, `stype`, `stitle`, `sremark`
 ('MAIL_ADDRESS', 'pengpu1987@126.com', 'text', '发送邮箱地址', '发送邮件的地址'),
 ('MAIL_SMTP', 'smtp.126.com', 'text', '邮箱SMTP服务器', '邮箱SMTP服务器'),
 ('MAIL_LOGINNAME', 'pengpu1987', 'text', '邮箱登录帐号', '邮箱登录的账号'),
-('MAIL_PASSWORD', 'pp135642', 'text', '登录密码', '邮箱登录密码'),
+('MAIL_PASSWORD', '.P952788', 'text', '登录密码', '邮箱登录密码'),
 ('MAIL_CHARSET', 'UTF-8', 'text', '字符集', '字符集'),
 ('MAIL_AUTH', 'true', 'text', '邮箱认证', '邮箱的认证'),
 ('MAIL_HTML', 'true', 'text', '文档格式', 'true HTML格式 false TXT格式');
@@ -338,11 +491,42 @@ CREATE TABLE IF NOT EXISTS `pre_loan` (
 CREATE TABLE IF NOT EXISTS `pre_loan_car` (
   `id` smallint(8) NOT NULL AUTO_INCREMENT,
   `signid` varchar(16) NOT NULL,
-  `paizhao` varchar(20) NOT NULL,
+  `platenum` varchar(20) NOT NULL,
+  `cartype` varchar(64) NOT NULL,
+  `getvalue` int(11) NOT NULL,
+  `marketvalue` int(11) NOT NULL,
+  `owner` varchar(11) NOT NULL,
+  `papers` int(11) NOT NULL,
+  `usetime` int(11) NOT NULL,
+  `getime` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 转存表中的数据 `pre_loan_car`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `pre_loan_housing`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_loan_housing` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `signid` varchar(16) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `getvalue` int(11) NOT NULL,
+  `marketvalue` int(11) NOT NULL,
+  `owner` varchar(11) NOT NULL,
+  `papers` int(11) NOT NULL,
+  `usetime` int(11) NOT NULL,
+  `getime` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `pre_loan_housing`
 --
 
