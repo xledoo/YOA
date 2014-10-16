@@ -69,7 +69,7 @@ class MarketController extends BaseController {
 	    		$this->error('邮箱地址或标题或发送内容不能为空！');
 	    	}
     	} else {
-    		$em = M('common_customer')->select();
+    		$em = M('common_member')->select();
 	    	$this->assign('em',$em);
     		$this->display();
     	}
