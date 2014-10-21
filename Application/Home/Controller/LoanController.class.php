@@ -23,7 +23,7 @@ class LoanController extends BaseController {
             $info = M('loan_housing')->select();
             $this->assign('add_housing',$info);
             $fd = M('loan_housing')->getField('address');
-            $psetting = M('common_member_profile_setting')->where("fieldid='%s'",$fd)->select();
+            $psetting = M('common_member_profile_setting')->select();
             $this->assign('ps',$psetting);
             $this->display();
         }
@@ -31,7 +31,7 @@ class LoanController extends BaseController {
 
     //Add loan of car.
     public function add_car(){
-        $fd = M('loan_housing')->getFields('loan_housing');zecho($fd);
+        // $fd = M('loan_housing')->getFields('loan_housing');zecho($fd);
         $this->display();
     }
 
