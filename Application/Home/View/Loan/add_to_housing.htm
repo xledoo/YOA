@@ -1,0 +1,22 @@
+<form name="add_to_housing" action="{:U('home/loan/add_to_housing')}" method="post">
+	<h4><strong>请选择资料项</strong></h4>
+	<table class="table table-condensed table-hover">
+		<thead >
+			<tr>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody >
+			<volist name="add_to_housing" id="vo">
+				<tr>
+					<td><input type="checkbox" name="add_to_housing[]" value="{$vo.fieldid}" />{$vo.title}</td>
+					<td>{$vo.description}</td>
+					<td><a href="#">编辑</a></td>
+				</tr>
+			</volist>
+		</tbody>
+	</table>
+	<div>
+		<input type="submit" name="submit_add_to_housing" class="btn blue btn-default"  value="提交" />
+	</div>
+</form>
