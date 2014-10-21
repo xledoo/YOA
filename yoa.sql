@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?10 �?16 �?09:22
+-- 生成日期: 2014 �?10 �?21 �?09:22
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -66,7 +66,7 @@ INSERT INTO `pre_admincp_sidebar` (`id`, `upid`, `controller`, `action`, `title`
 (4, 1, 'creditcard', 'consume', '信用卡套现', 'fa-shopping-cart', 2),
 (5, 1, 'creditcard', 'repayment', '信用卡代还', 'fa-sign-in', 1),
 (6, 2, 'loan', 'add', '新增小贷业务订单', 'fa-plus', 1),
-(7, 2, 'loan', 'list', '小贷业务订单列表', 'fa-list', 2),
+(7, 2, 'loan', 'llist', '小贷业务订单列表', 'fa-list', 2),
 (8, 3, 'financing', 'fcash', '现金融资', 'fa-money', 1),
 (9, 3, 'financing', 'fcard', '信用卡融资', 'fa-tags', 2),
 (10, 0, 'setting', 'index', '系统运行设置', 'fa-cogs', 999),
@@ -399,7 +399,7 @@ CREATE TABLE IF NOT EXISTS `pre_finance_cash` (
 INSERT INTO `pre_finance_cash` (`id`, `stype`, `customer`, `money`, `startime`, `endtime`, `rate`, `cbankname`, `ccardnum`, `zday`, `hkday`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`, `verify`) VALUES
 (1, 'cash', '徐力', 100000.00, 1404144000, 1412827162, 20, 'gdb', '6234567892211233', 0, 0, '18687444499', 'ccb', '6227077774444477', 1, '徐力', '6bfa8f6bb15cc5e51b550142269d986b'),
 (2, 'card', '字符串', 100000.00, 1404144000, 1413271429, 10, 'icbc', '4270300046233523', 2, 25, '18666554431', 'icbc', '6777777777777777', 1, '', '63b36f6701f87bc14929784d6d975717'),
-(3, 'card', '数据库', 50000.00, 1409500800, 1412906548, 20, 'cebb', '622887655161572122', 0, 0, '18234567890', 'boc', '555555555555555555', 0, 'asdf', 'd525b950b387f92a27afead2fc61c30b');
+(3, 'card', '数据库', 50000.00, 1409500800, 1413515187, 20, 'cebb', '622887655161572122', 0, 0, '18234567890', 'boc', '555555555555555555', 1, 'asdf', 'd525b950b387f92a27afead2fc61c30b');
 
 -- --------------------------------------------------------
 
@@ -524,9 +524,11 @@ CREATE TABLE IF NOT EXISTS `pre_loan_housing` (
   `usetime` int(11) NOT NULL,
   `getime` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `pre_loan_housing`
 --
 
+INSERT INTO `pre_loan_housing` (`id`, `signid`, `address`, `getvalue`, `marketvalue`, `owner`, `papers`, `usetime`, `getime`) VALUES
+(1, '1', 'dssfdf', 12, 22, 'fdf', 3242, 2343, 1410000000);
