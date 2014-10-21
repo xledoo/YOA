@@ -1,0 +1,9 @@
+<form name="add_to_housing" action="{:U('home/loan/add_to_housing')}" method="post">
+	<h4><strong>资料项选择:</strong></h4>
+	<volist name="add_to_housing" id="vo">
+		<span><input type="checkbox" name="add_to_housing[]" value="{$vo.fieldid}" />{$vo.title}</span> <span style="margin-left:400px;">{$vo.description}</span><span><a class="pull-right" href="#">编辑</a></span><br>
+	</volist>
+	<div>
+		<input type="submit" name="submit_add_to_housing" class="btn blue btn-default"  value="提交" />
+	</div>
+</form>
