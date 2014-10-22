@@ -19,6 +19,8 @@ class LoanController extends BaseController {
     public function add_housing(){
         if(IS_POST){
             zecho($_POST);
+            unset($_POST['submit_add_housing']);
+            M('loan_housing')->add($_POST) ? $this->success('资料修改成功！') : $this->success('资料修改失败！');
         }else{
             $fd = M('loan_housing')->getDbFields();
             foreach($fd as $key => $value){

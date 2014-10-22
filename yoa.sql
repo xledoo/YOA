@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?10 �?21 �?09:22
+-- 生成日期: 2014 �?10 �?22 �?09:38
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -523,12 +523,16 @@ CREATE TABLE IF NOT EXISTS `pre_loan_housing` (
   `papers` int(11) NOT NULL,
   `usetime` int(11) NOT NULL,
   `getime` int(10) NOT NULL,
+  `realname` varchar(255) NOT NULL,
+  `constellation` varchar(255) NOT NULL,
+  `zodiac` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `pre_loan_housing`
 --
 
-INSERT INTO `pre_loan_housing` (`id`, `signid`, `address`, `getvalue`, `marketvalue`, `owner`, `papers`, `usetime`, `getime`) VALUES
-(1, '1', 'dssfdf', 12, 22, 'fdf', 3242, 2343, 1410000000);
+INSERT INTO `pre_loan_housing` (`id`, `signid`, `address`, `getvalue`, `marketvalue`, `owner`, `papers`, `usetime`, `getime`, `realname`, `constellation`, `zodiac`) VALUES
+(1, '1', 'dssfdf', 12, 22, 'fdf', 3242, 2343, 1410000000, '', '', ''),
+(2, '', '麒麟区', 0, 0, '', 0, 0, 0, '彭普', '水瓶', '龙');
