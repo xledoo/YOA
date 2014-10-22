@@ -20,18 +20,31 @@ class LoanController extends BaseController {
         if(IS_POST){
             zecho($_POST);
         }else{
+            $fd = M('loan_housing')->getDbFields();
+            foreach($fd as $key => $value){
+                $oo[$value] = M('common_member_profile_setting')->where("fieldid='%s'",$value)->select();
+                foreach($oo[$value] as $k => $v){
+                    $oo[$value] = $v;
+                }
+            }
+            $this->assign('lv',$oo);
             $info = M('loan_housing')->select();
-            $this->assign('add_housing',$info);
-            $fd = M('loan_housing')->getField('address');
-            $psetting = M('common_member_profile_setting')->select();
-            $this->assign('ps',$psetting);
+            $this->assign('lsing',$info);
             $this->display();
         }
     }
 
     //Add loan of car.
     public function add_car(){
-        // $fd = M('loan_housing')->getFields('loan_housing');zecho($fd);
+            $fd = M('loan_housing')->getDbFields();
+            foreach($fd as $key => $value){
+                $oo[$value] = M('common_member_profile_setting')->where("fieldid='%s'",$value)->select();
+                foreach($oo[$value] as $k => $v){
+                    $oo[$value] = $v;
+                }
+            }
+            zecho($oo);
+        // $fd = M('loan_housing')->getFields('loan_housing');
         $this->display();
     }
 

@@ -1,13 +1,25 @@
 <form name="add_housing" action="{:U('home/loan/add_housing')}" method="post">
 	<strong>新增房产抵押借贷订单</strong><a class="pull-right" href="{:U('home/loan/add_to_housing')}">编辑</a>
-	<div class="row">
-		<div class="col-md-12">
-			<volist name="ps" id="vo">
-				<div>{$vo.title}<input type="" name="{$vo.fieldid}" value="" />{$vo.description}</div>
+	<div class="form-body">
+		
+			<volist name="lv" id="vo">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>{$vo.title}</label>
+						<input type="{$vo.formtype}" name="{$vo.fieldid}" value="" />
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						{$vo.description}
+					</div>
+				</div>
+			</div>
 			</volist>
+		
+		<div>
+			<input type="submit" name="submit_add_housing" class="btn blue btn-default"  value="提交" />
 		</div>
-	</div>
-	<div>
-		<input type="submit" name="submit_add_housing" class="btn blue btn-default"  value="提交" />
 	</div>
 </form>
