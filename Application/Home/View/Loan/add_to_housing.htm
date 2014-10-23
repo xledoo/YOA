@@ -11,7 +11,7 @@
 				<tr>
 					<td><input type="checkbox" name="add_to_housing[]" value="{$vo.fieldid}" />{$vo.title}</td>
 					<td>{$vo.description}</td>
-					<td><a href="#">编辑</a></td>
+					<td><a href="{:U('home/loan/edit_housing_options',array('fieldid' => $vo['fieldid']))}">编辑</a></td>
 				</tr>
 			</volist>
 		</tbody>

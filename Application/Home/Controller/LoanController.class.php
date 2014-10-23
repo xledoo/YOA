@@ -20,7 +20,7 @@ class LoanController extends BaseController {
         if(IS_POST){
             zecho($_POST);
             unset($_POST['submit_add_housing']);
-            M('loan_housing')->add($_POST) ? $this->success('资料修改成功！') : $this->success('资料修改失败！');
+            M('loan_housing')->add($_POST) ? $this->success('资料添加成功！') : $this->success('资料添加失败！');
         }else{
             $fd = M('loan_housing')->getDbFields();
             foreach($fd as $key => $value){
@@ -30,8 +30,6 @@ class LoanController extends BaseController {
                 }
             }
             $this->assign('lv',$oo);
-            $info = M('loan_housing')->select();
-            $this->assign('lsing',$info);
             $this->display();
         }
     }
@@ -44,8 +42,9 @@ class LoanController extends BaseController {
                 foreach($oo[$value] as $k => $v){
                     $oo[$value] = $v;
                 }
+                $info[] = M('loan_housing')->getField($value,true);
             }
-            zecho($oo);
+            zecho($info);
         // $fd = M('loan_housing')->getFields('loan_housing');
         $this->display();
     }
@@ -66,6 +65,16 @@ class LoanController extends BaseController {
     	}
     }
 
+    //Edit options of table common_member_profile_seting
+    public function edit_housing_options($fieldid=""){
+        if(IS_POST){
+            zecho($_POST);
+        }else{
+            $info = M('common_member_profile_setting')->where("fieldid='%s'",$fieldid)->select();
+            $this->assign('eo',$info);
+            $this->display();
+        }
+    }
     //Edit column of table loan_car.
     public function add_to_car(){
     	zecho($_POST);
