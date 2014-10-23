@@ -1,0 +1,26 @@
+<form name="add_housing_options" action="{:U('home/loan/edit_housing_options',array('fieldid' => $eo['fieldid']))}" method="post">
+	<div class="form-body">
+		<volist name="eo" id="vo">
+		<div class="form-group">
+			title:<input type="text" name="{$vo.title}" placeholder="{$vo.title}" />
+		</div>
+		<div class="form-group">
+			fieldid:<input type="text" name="{$vo.fieldid}" placeholder="{$vo.fieldid}" />
+		</div>
+		<div class="form-group">
+			<label>类型</label>
+			<select class="form-control input-small" name="{$vo.formtype}">
+				<option value="off">开关</option>
+				<option value="text">文本框</option>
+				<option value="radio">单选框</option>
+				<option value="checkbox">复选框</option>
+				<option value="select">下拉菜单</option>
+				<option value="textarea">复文本框</option>
+			</select>
+		</div>
+		</volist>
+	<div>
+		<input type="submit" name="submit_add_housing_options" class="btn blue btn-default"  value="提交" />
+	</div>
+	</div>
+</form>
