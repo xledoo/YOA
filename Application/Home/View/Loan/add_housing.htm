@@ -6,7 +6,14 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>{$vo.title}</label>
-						<input type="{$vo.formtype}" name="{$vo.fieldid}" value="" />
+						<!-- <input type="{$vo.formtype}" name="{$vo.fieldid}" value="" /> -->
+						<php>
+							if($vo['formtype'] == 'text'){
+								echo '<input '.'type='.$vo['formtype'].' name='.$vo['fieldid'].'/>';
+							} elseif($vo['formtype'] == 'select'){
+								echo '<select '.'name='.$vo['fieldid'].' class=input-small'.'>'.'<option '.'value='.'>'.'</option>'.'</select>';
+							}
+						</php>
 					</div>
 				</div>
 				<div class="col-md-6">

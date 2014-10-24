@@ -2,10 +2,16 @@
 	<div class="form-body">
 		<volist name="eo" id="vo">
 		<div class="form-group">
-			title:<input type="text" name="{$vo.title}" placeholder="{$vo.title}" />
+			<label>title</label>
+			<input type="text" class="form-control input-small" name="{$vo.title}" placeholder="{$vo.title}" />
 		</div>
 		<div class="form-group">
-			fieldid:<input type="text" name="{$vo.fieldid}" placeholder="{$vo.fieldid}" />
+			<label>fieldid</label>
+			<input type="text" class="form-control input-small" name="{$vo.fieldid}" placeholder="{$vo.fieldid}" />
+		</div>
+		<div class="form-group">
+			<label>description</label>
+			<input type="text" class="form-control input-large" name="{$vo.description}" placeholder="{$vo.description}" />
 		</div>
 		<div class="form-group">
 			<label>类型</label>
