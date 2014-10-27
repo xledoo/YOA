@@ -7,7 +7,7 @@
 			<th>借贷时间</th>
 			<th>利息</th>
 			<th>手机号</th>
-			<th>当前状态</th>
+			<th>状态</th>
 			<th>借贷类型</th>
 			<th style="text-align:center;">操作</th>
 		</tr>
@@ -46,8 +46,11 @@
 		var auto = document.getElementById("noder");
 		if (das == 'housing') {
 			auto.href = "{:U('home/loan/add_housing')}";
-		
-		};
-		alert(auto.href);
+		} else if(das == 'car'){
+			auto.href = "{:U('home/loan/add_car')}";
+		} else{
+			auto.href = "#";
+		}
+		// alert(auto.href);
 	}
 </script>
