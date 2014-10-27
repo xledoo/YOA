@@ -1,5 +1,5 @@
 <form name="add_housing" action="{:U('home/loan/add_housing')}" method="post">
-	<strong>新增房产抵押借贷订单</strong><a class="btn btn-primary pull-right" href="{:U('home/loan/add_to_housing')}">编辑</a>
+	<strong>新增房产抵押借贷</strong><a class="btn btn-primary pull-right" href="{:U('home/loan/add_to_housing')}">编辑</a>
 	<div class="form-body">
 		<volist name="lv" id="vo">
 			<div class="row">
@@ -9,9 +9,16 @@
 						<!-- <input type="{$vo.formtype}" name="{$vo.fieldid}" value="" /> -->
 						<php>
 							if($vo['formtype'] == 'text'){
-								echo '<input '.'type='.$vo['formtype'].' name='.$vo['fieldid'].'/>';
+								echo '<input '.'type='.$vo['formtype'].' name='.$vo['fieldid'].'>';
 							} elseif($vo['formtype'] == 'select'){
-								echo '<select '.'name='.$vo['fieldid'].' class=input-small'.'>'.'<option '.'value='.'>'.'</option>'.'</select>';
+								$wstr = '<select '.'name='.$vo['fieldid'].' class=input-small'.'>';
+								foreach((explode("\n",$vo['choices'])) as $k => $v){
+									$wstr .= '<option '.'>';
+									$wstr .= $v;
+									$wstr .= '</option>';
+								}
+								$wstr .= '</select>';
+								echo $wstr;
 							}
 						</php>
 					</div>
