@@ -2,26 +2,27 @@
 	<div class="form-body">
 		<volist name="eo" id="vo">
 		<div class="form-group">
-			<label>title</label>
-			<input type="text" class="form-control input-small" name="{$vo.title}" placeholder="{$vo.title}" />
+			<label>fieldid</label>
+			<input type="text" class="form-control input-small" name="edit[fieldid]" placeholder="{$vo.fieldid}" readonly="readonly" />
 		</div>
 		<div class="form-group">
-			<label>fieldid</label>
-			<input type="text" class="form-control input-small" name="{$vo.fieldid}" placeholder="{$vo.fieldid}" />
+			<label>title</label>
+			<input type="text" class="form-control input-small" name="edit[title]" placeholder="{$vo.title}" />
 		</div>
 		<div class="form-group">
 			<label>description</label>
-			<input type="text" class="form-control input-large" name="{$vo.description}" placeholder="{$vo.description}" />
+			<input type="text" class="form-control input-large" name="edit[description]" placeholder="{$vo.description}" />
 		</div>
 		<div class="form-group">
 			<label>类型</label>
-			<select class="form-control input-small" name="{$vo.formtype}">
-				<option value="off">开关</option>
+			<select class="form-control input-small" name="edit[formtype]">
 				<option value="text">文本框</option>
+				<option value="off">开关</option>
 				<option value="radio">单选框</option>
 				<option value="checkbox">复选框</option>
 				<option value="select">下拉菜单</option>
 				<option value="textarea">复文本框</option>
+				<option value="upload">文件上传</option>
 			</select>
 		</div>
 		</volist>

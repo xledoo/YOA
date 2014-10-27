@@ -9,9 +9,9 @@
 						<!-- <input type="{$vo.formtype}" name="{$vo.fieldid}" value="" /> -->
 						<php>
 							if($vo['formtype'] == 'text'){
-								echo '<input '.'type='.$vo['formtype'].' name='.$vo['fieldid'].'>';
+								echo '<input '.'type='.$vo['formtype'].' name=add['.$vo['fieldid'].']>';
 							} elseif($vo['formtype'] == 'select'){
-								$wstr = '<select '.'name='.$vo['fieldid'].' class=input-small'.'>';
+								$wstr = '<select '.'name=add['.$vo['fieldid'].'] class=input-small'.'>';
 								foreach((explode("\n",$vo['choices'])) as $k => $v){
 									$wstr .= '<option '.'>';
 									$wstr .= $v;

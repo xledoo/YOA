@@ -1,12 +1,53 @@
-<form name="add_loan" action="{:U('home/loan/add')}" method="post">
-	<h4><strong>请选择借贷类型：</strong></h4>
-	<select name="add_loan" class="form-control input-small">
-		<option value="housing">房产抵押借贷</option>
-		<option value="car">车辆抵押借贷</option>
-	</select>
+<table class="table table-bordered table-hover">
+	<thead >
+		<tr>
+			<th>ID</th>
+			<th>借贷人</th>
+			<th>借贷金额</th>
+			<th>借贷时间</th>
+			<th>利息</th>
+			<th>手机号</th>
+			<th>当前状态</th>
+			<th>借贷类型</th>
+			<th style="text-align:center;">操作</th>
+		</tr>
+	</thead>
+	<tbody >
+		<volist name="ad" id="semir">
+			<tr>
+				<td>{$semir.id}</td>
+				<td>{$semir.customer}</td>
+				<td>{$semir.money}</td>
+				<td>{$semir.dateline|date="Y-m-d",###}</td>
+				<td>{$semir.rate}</td>
+				<td>{$semir.mobile}</td>
+				<td>
+				</td>
+				<td>
+					<select id="super" name="add_loan" onchange="some(this.id)">
+						<option value="">---请选择---</option>
+						<option value="housing">房产抵押借贷</option>
+						<option value="car">车辆抵押借贷</option>
+					</select>
+				</td>
+				<td style="text-align:center;">
+					<a id="noder" href="#" class="btn btn-xs blue">新&nbsp;增</a>
+					<input type="button" href="#" class="btn btn-xs red" value="删&nbsp;除" />
+				</td>
+			</tr>
+		</volist>
+	</tbody>
+</table>
 
-	<div>
-		<input type="submit" name="submit_add_loan" class="btn blue btn-default"  value="提交" />
-	</div>
-</form>
-
+<script>
+	function some(id){
+		var das = document.getElementById("super").value;
+		// alert(das);
+		var auto = document.getElementById("noder");
+		if (das == 'housing') {
+			auto.href = "{:U('home/loan/add_housing')}";
+		
+		};
+		alert(auto.href);
+	}
+</script>
