@@ -10,7 +10,7 @@
 			<th>利息</th>
 			<th>手机号</th>
 			<th>当前状态</th>
-			<th style="text-align:center;">操作</th>
+			<th>操作</th>
 		</tr>
 	</thead>
 	<tbody >
@@ -32,7 +32,7 @@
 						}
 					</php>
 				</td>
-				<td style="text-align:center;">
+				<td>
 					<a href="{:U('home/financing/cashinfo', array('id' => $vo['id']))}" class="btn btn-xs green">详&nbsp;情</a>
 					<a href="{:U('home/Financing/review', array('id' => $vo['id']))}" class="btn btn-xs blue">审&nbsp;核</a>
 					<input type="button" onclick="del({$vo.id})" class="btn btn-xs red" value="删&nbsp;除" />

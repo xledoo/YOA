@@ -21,3 +21,11 @@ font-family:"Microsoft YaHei", "微软雅黑", "SimSun", "宋体";
 	font-size: 12px;
 	padding-left:10px;
 }
+
+/*
+* Date:  28/10/2014;
+* Content:  表单元素td th内容居中;
+*/
+td,th {
+	text-align:center;
+}

@@ -9,7 +9,7 @@
 			<th>手机号</th>
 			<th>状态</th>
 			<th>借贷类型</th>
-			<th style="text-align:center;">操作</th>
+			<th>操作</th>
 		</tr>
 	</thead>
 	<tbody >
@@ -24,14 +24,14 @@
 				<td>
 				</td>
 				<td>
-					<select id="super" name="add_loan" onchange="some(this.id)">
+					<select id="super{$semir.id}" name="add_loan" onchange="some(this.id,this.value)">
 						<option value="">---请选择---</option>
 						<option value="housing">房产抵押借贷</option>
 						<option value="car">车辆抵押借贷</option>
 					</select>
 				</td>
-				<td style="text-align:center;">
-					<a id="noder" href="#" class="btn btn-xs blue">新&nbsp;增</a>
+				<td>
+					<a id="noder{$semir.id}" href="#" class="btn btn-xs blue">新&nbsp;增</a>
 					<input type="button" href="#" class="btn btn-xs red" value="删&nbsp;除" />
 				</td>
 			</tr>
@@ -40,17 +40,15 @@
 </table>
 
 <script>
-	function some(id){
-		var das = document.getElementById("super").value;
-		// alert(das);
-		var auto = document.getElementById("noder");
-		if (das == 'housing') {
+	function some(id,value){
+		var auto = document.getElementById("noder"+id.substr(5));
+		// alert(auto.id);
+		if (value == 'housing') {
 			auto.href = "{:U('home/loan/add_housing')}";
-		} else if(das == 'car'){
+		} else if(value == 'car'){
 			auto.href = "{:U('home/loan/add_car')}";
 		} else{
 			auto.href = "#";
 		}
-		// alert(auto.href);
 	}
 </script>
