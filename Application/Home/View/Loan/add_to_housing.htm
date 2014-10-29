@@ -1,5 +1,5 @@
 <form name="add_to_housing" action="{:U('home/loan/add_to_housing')}" method="post">
-	<h4><strong>请选择资料项</strong></h4>
+	<h4><strong>请选择资料项</strong></h4><a class="btn btn-primary pull-right" href="{:U('home/loan/add_label')}">添加资料选项</a>
 	<table class="table table-condensed table-hover">
 		<thead >
 			<tr>
@@ -11,7 +11,7 @@
 				<tr>
 					<td><input type="checkbox" name="add_to_housing[]" value="{$vo.fieldid}" />{$vo.title}</td>
 					<td>{$vo.description}</td>
-					<td><a href="{:U('home/loan/edit_housing_options',array('fieldid' => $vo['fieldid']))}">编辑</a></td>
+					<td><a href="{:U('home/loan/edit_options',array('fieldid' => $vo['fieldid']))}">编辑</a></td>
 				</tr>
 			</volist>
 		</tbody>

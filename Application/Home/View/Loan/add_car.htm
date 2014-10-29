@@ -1,1 +1,37 @@
-添加车辆抵押借贷
+<form name="add_car" action="{:U('home/loan/add_car')}" method="post">
+	<strong>新增车辆抵押借贷</strong><a class="btn btn-primary pull-right" href="{:U('home/loan/add_to_car')}">编辑资料项</a>
+	<div class="form-body">
+		<volist name="lv" id="vo">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>{$vo.title}</label>
+						<!-- <input type="{$vo.formtype}" name="{$vo.fieldid}" value="" /> -->
+						<php>
+							if($vo['formtype'] == 'text'){
+								echo '<input '.'type='.$vo['formtype'].' name=add['.$vo['fieldid'].']>';
+							} elseif($vo['formtype'] == 'select'){
+								$wstr = '<select '.'name=add['.$vo['fieldid'].'] class=input-small'.'>';
+								foreach((explode("\n",$vo['choices'])) as $k => $v){
+									$wstr .= '<option '.'>';
+									$wstr .= $v;
+									$wstr .= '</option>';
+								}
+								$wstr .= '</select>';
+								echo $wstr;
+							}
+						</php>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						{$vo.description}
+					</div>
+				</div>
+			</div>
+		</volist>
+	<div>
+		<input type="submit" name="submit_add_car" class="btn blue btn-default"  value="提交" />
+	</div>
+	</div>
+</form>

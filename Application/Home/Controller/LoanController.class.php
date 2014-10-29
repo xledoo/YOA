@@ -20,7 +20,7 @@ class LoanController extends BaseController {
     //Add loan of housing.
     public function add_housing(){
         if(IS_POST){
-            zecho($_POST);
+            // zecho($_POST);
             M('loan_housing')->add($_POST['add']) ? $this->success('资料添加成功！') : $this->success('资料添加失败！');
         }else{
             $fd = M('loan_housing')->getDbFields();
@@ -37,17 +37,20 @@ class LoanController extends BaseController {
 
     //Add loan of car.
     public function add_car(){
-            $fd = M('loan_housing')->getDbFields();
+        if(IS_POST){
+            zecho($_POST);
+            M('loan_car')->add($_POST['add']) ? $this->success('资料添加成功！') : $this->success('资料添加失败！');
+        }else{
+            $fd = M('loan_car')->getDbFields();
             foreach($fd as $key => $value){
                 $oo[$value] = M('common_member_profile_setting')->where("fieldid='%s'",$value)->select();
                 foreach($oo[$value] as $k => $v){
                     $oo[$value] = $v;
                 }
-                $info[] = M('loan_housing')->getField($value,true);
             }
-            zecho($info);
-        // $fd = M('loan_housing')->getFields('loan_housing');
-        $this->display();
+            $this->assign('lv',$oo);
+            $this->display();
+        }
     }
 
     //Edit column of table loan_housing.
@@ -66,8 +69,24 @@ class LoanController extends BaseController {
     	}
     }
 
+    //Edit column of table loan_car.
+    public function add_to_car(){
+        if(IS_POST){
+            // zecho($_POST);
+            foreach($_POST['add_to_car'] as $key => $value){
+                // $vol[] = M()->execute("alter table pre_loan_car drop column $value");//删除列
+                $vol[] = M()->execute("alter table pre_loan_car add column $value varchar(255) not null");//添加列
+            }
+            $vol  ? $this->redirect('home/loan/add_car',3,'资料选项修改成功') : $this->redirect('home/loan/add_car',3,'资料选项修改失败');
+        }else{
+            $info = M('common_member_profile_setting')->select();
+            $this->assign('add_to_car',$info);
+            $this->display();
+        }
+    }
+
     //Edit options of table common_member_profile_seting
-    public function edit_housing_options($fieldid = ""){
+    public function edit_options($fieldid = ""){
         if(IS_POST){
             // zecho($_POST);
             M('common_member_profile_setting')->where("fieldid='%s'",$fieldid)->save($_POST['edit']) ? $this->success('资料修改成功！') : $this->error('资料修改失败！');
@@ -77,10 +96,15 @@ class LoanController extends BaseController {
             $this->display();
         }
     }
-    //Edit column of table loan_car.
-    public function add_to_car(){
-    	zecho($_POST);
-    	$this->display();
+
+    //Add options from table common_member_profile_seting
+    public function add_label(){
+        if(IS_POST){
+            // zecho($_POST);
+            M('common_member_profile_setting')->add($_POST['edit']) ? $this->success('资料添加成功！') : $this->error('资料添加失败！');
+        }else{
+            $this->display();
+        }
     }
 
     //List of all loan.

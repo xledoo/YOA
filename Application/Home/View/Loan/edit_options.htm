@@ -1,4 +1,4 @@
-<form name="add_housing_options" action="{:U('home/loan/edit_housing_options',array('fieldid' => $eo['fieldid']))}" method="post">
+<form name="edit_options" action="{:U('home/loan/edit_options',array('fieldid' => $eo['fieldid']))}" method="post">
 	<div class="form-body">
 		<volist name="eo" id="vo">
 		<div class="form-group">
@@ -27,7 +27,7 @@
 		</div>
 		</volist>
 	<div>
-		<input type="submit" name="submit_add_housing_options" class="btn blue btn-default"  value="提交" />
+		<input type="submit" name="submit_edit_options" class="btn blue btn-default"  value="提交" />
 	</div>
 	</div>
 </form>
