@@ -21,7 +21,8 @@ class LoanController extends BaseController {
     public function add_housing(){
         if(IS_POST){
             // zecho($_POST);
-            M('loan_housing')->add($_POST['add']) ? $this->success('资料添加成功！') : $this->success('资料添加失败！');
+            $_POST['add']['signid'] = $_GET['id'];
+            M('loan_housing')->add($_POST['add']) ? $this->success('房产抵押借贷添加成功！') : $this->success('房产抵押借贷添加失败！');
         }else{
             $fd = M('loan_housing')->getDbFields();
             foreach($fd as $key => $value){
@@ -38,8 +39,9 @@ class LoanController extends BaseController {
     //Add loan of car.
     public function add_car(){
         if(IS_POST){
-            zecho($_POST);
-            M('loan_car')->add($_POST['add']) ? $this->success('资料添加成功！') : $this->success('资料添加失败！');
+            // zecho($_POST);
+            $_POST['add']['signid'] = $_GET['id'];
+            M('loan_car')->add($_POST['add']) ? $this->success('车辆抵押借贷添加成功！') : $this->success('车辆抵押借贷添加失败！');
         }else{
             $fd = M('loan_car')->getDbFields();
             foreach($fd as $key => $value){
@@ -89,7 +91,7 @@ class LoanController extends BaseController {
     public function edit_options($fieldid = ""){
         if(IS_POST){
             // zecho($_POST);
-            M('common_member_profile_setting')->where("fieldid='%s'",$fieldid)->save($_POST['edit']) ? $this->success('资料修改成功！') : $this->error('资料修改失败！');
+            M('common_member_profile_setting')->where("fieldid='%s'",$_POST['edit']['fieldid'])->save($_POST['edit']) ? $this->success('资料修改成功！') : $this->error('资料修改失败！');
         }else{
             $info = M('common_member_profile_setting')->where("fieldid='%s'",$fieldid)->select();
             $this->assign('eo',$info);
@@ -98,7 +100,7 @@ class LoanController extends BaseController {
     }
 
     //Add options from table common_member_profile_seting
-    public function add_label(){
+    public function add_options(){
         if(IS_POST){
             // zecho($_POST);
             M('common_member_profile_setting')->add($_POST['edit']) ? $this->success('资料添加成功！') : $this->error('资料添加失败！');

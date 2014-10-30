@@ -1,3 +1,6 @@
+<style type="text/css">
+	td,th {text-align:center;}
+</style>
 <table class="table table-bordered table-hover">
 	<thead >
 		<tr>
@@ -41,14 +44,16 @@
 
 <script>
 	function some(id,value){
-		var auto = document.getElementById("noder"+id.substr(5));
-		// alert(auto.id);
+		var ls = id.substr(5);
+		var auto = document.getElementById("noder"+ls);
+		// alert(auto.href);
 		if (value == 'housing') {
-			auto.href = "{:U('home/loan/add_housing')}";
+			auto.href = "{:U('home/loan/add_housing')}"+"&id="+ls;
 		} else if(value == 'car'){
-			auto.href = "{:U('home/loan/add_car')}";
+			auto.href = "{:U('home/loan/add_car')}"+"&id="+ls;
 		} else{
 			auto.href = "#";
 		}
+		// alert(auto.href);
 	}
 </script>

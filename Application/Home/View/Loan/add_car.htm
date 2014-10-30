@@ -1,4 +1,4 @@
-<form name="add_car" action="{:U('home/loan/add_car')}" method="post">
+<form name="add_car" action="{:U('home/loan/add_car',array('id' => $_GET['id']))}" method="post">
 	<strong>新增车辆抵押借贷</strong><a class="btn btn-primary pull-right" href="{:U('home/loan/add_to_car')}">编辑资料项</a>
 	<div class="form-body">
 		<volist name="lv" id="vo">
