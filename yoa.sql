@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?10 �?27 �?09:30
+-- 生成日期: 2014 �?10 �?31 �?05:21
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -326,7 +326,8 @@ INSERT INTO `pre_common_member_profile_setting` (`fieldid`, `available`, `invisi
 ('field5', 0, 1, 0, '自定义字段5', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
 ('field6', 0, 1, 0, '自定义字段6', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
 ('field7', 0, 1, 0, '自定义字段7', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
-('field8', 0, 1, 0, '自定义字段8', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
+('field8', 0, 1, 0, '自定义字段8', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', ''),
+('papers', 0, 0, 0, '证件复印件', '抵押物有效证件复印件', 0, 0, 0, 0, 0, 0, 0, 'file', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -483,7 +484,7 @@ CREATE TABLE IF NOT EXISTS `pre_loan` (
 
 INSERT INTO `pre_loan` (`id`, `signid`, `customer`, `mobile`, `money`, `rate`, `dateline`, `stype`, `status`) VALUES
 (1, '1', '徐力', '18687444499', 975850.00, 11, 1412755410, '', 0),
-(2, '2', '彭普', '15924907828', 45920.00, 12, 1412179500, '', 0);
+(2, '2', '阿森纳', '15924907828', 45920.00, 12, 1412179500, '', 0);
 
 -- --------------------------------------------------------
 
@@ -502,13 +503,18 @@ CREATE TABLE IF NOT EXISTS `pre_loan_car` (
   `papers` int(11) NOT NULL,
   `usetime` int(11) NOT NULL,
   `getime` int(10) NOT NULL,
+  `idcardtype` varchar(255) NOT NULL,
+  `residesuite` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `pre_loan_car`
 --
 
+INSERT INTO `pre_loan_car` (`id`, `signid`, `platenum`, `cartype`, `getvalue`, `marketvalue`, `owner`, `papers`, `usetime`, `getime`, `idcardtype`, `residesuite`) VALUES
+(1, '1', '云D33875', 'BMW', 20500, 18500, '李小龙', 0, 1410000000, 1411000000, '', ''),
+(2, '1', '', '', 0, 0, '', 0, 0, 0, '身份证', '601');
 
 -- --------------------------------------------------------
 
@@ -532,7 +538,7 @@ CREATE TABLE IF NOT EXISTS `pre_loan_housing` (
   `idcardtype` varchar(255) NOT NULL,
   `bloodtype` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `pre_loan_housing`
@@ -541,4 +547,7 @@ CREATE TABLE IF NOT EXISTS `pre_loan_housing` (
 INSERT INTO `pre_loan_housing` (`id`, `signid`, `address`, `getvalue`, `marketvalue`, `owner`, `papers`, `usetime`, `getime`, `realname`, `constellation`, `zodiac`, `idcardtype`, `bloodtype`) VALUES
 (1, '1', 'dssfdf', 12, 22, 'fdf', 3242, 2343, 1410000000, '', '', '', '', ''),
 (2, '', '麒麟区', 0, 0, '', 0, 0, 0, '彭普', '水瓶', '龙', '', ''),
-(3, '', '', 0, 0, '', 0, 0, 0, '', '', '', '身份证', 'O');
+(3, '', '', 0, 0, '', 0, 0, 0, '', '', '', '身份证', 'O'),
+(4, '1', '红塔区', 0, 0, '', 0, 0, 0, '欧阳锋', '双子座', '猪', '身份证', 'A'),
+(5, '2', '桃花岛', 0, 0, '', 0, 0, 0, '黄老邪', '金牛座', '蛇', '护照', 'B'),
+(6, '1', '', 0, 0, '', 0, 0, 0, '', '', '', '身份证', 'A');

@@ -19,6 +19,8 @@
 								}
 								$wstr .= '</select>';
 								echo $wstr;
+							} elseif ($vo['formtype'] == 'file'){
+								echo '<input '.'type='.$vo['formtype'].' name=add['.$vo['fieldid'].'][] multiple="multiple"'.' />';
 							}
 						</php>
 					</div>

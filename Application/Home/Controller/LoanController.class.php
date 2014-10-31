@@ -63,7 +63,7 @@ class LoanController extends BaseController {
                 // $vol[] = M()->execute("alter table pre_loan_housing drop column $value");//删除列
                 $vol[] = M()->execute("alter table pre_loan_housing add column $value varchar(255) not null");//添加列
             }
-            $vol  ? $this->redirect('home/loan/add_housing',3,'资料选项修改成功') : $this->redirect('home/loan/add_housing',3,'资料选项修改失败');
+            $vol ? $this->success('资料修改成功！') : $this->error('资料修改失败！');
     	}else{
 			$info = M('common_member_profile_setting')->select();
 	    	$this->assign('add_to_housing',$info);
@@ -79,7 +79,7 @@ class LoanController extends BaseController {
                 // $vol[] = M()->execute("alter table pre_loan_car drop column $value");//删除列
                 $vol[] = M()->execute("alter table pre_loan_car add column $value varchar(255) not null");//添加列
             }
-            $vol  ? $this->redirect('home/loan/add_car',3,'资料选项修改成功') : $this->redirect('home/loan/add_car',3,'资料选项修改失败');
+            $vol ? $this->success('资料修改成功！') : $this->error('资料修改失败！');
         }else{
             $info = M('common_member_profile_setting')->select();
             $this->assign('add_to_car',$info);
@@ -103,7 +103,7 @@ class LoanController extends BaseController {
     public function add_options(){
         if(IS_POST){
             // zecho($_POST);
-            M('common_member_profile_setting')->add($_POST['edit']) ? $this->success('资料添加成功！') : $this->error('资料添加失败！');
+            M('common_member_profile_setting')->add($_POST['add']) ? $this->success('资料添加成功！') : $this->error('资料添加失败！');
         }else{
             $this->display();
         }
