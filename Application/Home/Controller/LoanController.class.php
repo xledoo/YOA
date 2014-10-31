@@ -20,8 +20,26 @@ class LoanController extends BaseController {
     //Add loan of housing.
     public function add_housing(){
         if(IS_POST){
-            // zecho($_POST);
+            // zecho($_FILES);
             $_POST['add']['signid'] = $_GET['id'];
+            $config = array(
+                'maxSize'    =>    3145728,
+                'savePath'   =>    './',
+                'saveName'   =>    array('uniqid',''),
+                'exts'       =>    array('jpg', 'gif', 'png', 'jpeg'),
+                'autoSub'    =>    true,
+                'subName'    =>    array('date','Ymd'),
+            );
+            $upload = new \Think\Upload($config);// 实例化上传类
+            $info   =   $upload->upload();
+            if(!$info) {// 上传错误提示错误信息
+                $this->error($upload->getError());
+            }else{// 上传成功 获取上传文件信息
+                foreach($info as $file){
+                    // echo $file['savepath'].$file['savename'];
+                    $this->success('文件'.$file['savepath'].$file['savename'].'上传成功！');
+                }
+            }
             M('loan_housing')->add($_POST['add']) ? $this->success('房产抵押借贷添加成功！') : $this->success('房产抵押借贷添加失败！');
         }else{
             $fd = M('loan_housing')->getDbFields();
@@ -61,7 +79,11 @@ class LoanController extends BaseController {
     		// zecho($_POST);
             foreach($_POST['add_to_housing'] as $key => $value){
                 // $vol[] = M()->execute("alter table pre_loan_housing drop column $value");//删除列
-                $vol[] = M()->execute("alter table pre_loan_housing add column $value varchar(255) not null");//添加列
+                if(!in_array($value,(M('loan_housing')->getDbFields()))){
+                    $vol[] = M()->execute("alter table pre_loan_housing add column $value varchar(255) not null");//添加列
+                } else{
+                    $this->error("字段已存在，请重试！");
+                }
             }
             $vol ? $this->success('资料修改成功！') : $this->error('资料修改失败！');
     	}else{
@@ -77,7 +99,11 @@ class LoanController extends BaseController {
             // zecho($_POST);
             foreach($_POST['add_to_car'] as $key => $value){
                 // $vol[] = M()->execute("alter table pre_loan_car drop column $value");//删除列
-                $vol[] = M()->execute("alter table pre_loan_car add column $value varchar(255) not null");//添加列
+                if(!in_array($value,(M('loan_car')->getDbFields()))){
+                    $vol[] = M()->execute("alter table pre_loan_car add column $value varchar(255) not null");//添加列
+                } else{
+                    $this->error("字段已存在，请重试！");
+                }
             }
             $vol ? $this->success('资料修改成功！') : $this->error('资料修改失败！');
         }else{

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?10 �?31 �?05:21
+-- 生成日期: 2014 �?10 �?31 �?08:21
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -500,7 +500,6 @@ CREATE TABLE IF NOT EXISTS `pre_loan_car` (
   `getvalue` int(11) NOT NULL,
   `marketvalue` int(11) NOT NULL,
   `owner` varchar(11) NOT NULL,
-  `papers` int(11) NOT NULL,
   `usetime` int(11) NOT NULL,
   `getime` int(10) NOT NULL,
   `idcardtype` varchar(255) NOT NULL,
@@ -512,9 +511,9 @@ CREATE TABLE IF NOT EXISTS `pre_loan_car` (
 -- 转存表中的数据 `pre_loan_car`
 --
 
-INSERT INTO `pre_loan_car` (`id`, `signid`, `platenum`, `cartype`, `getvalue`, `marketvalue`, `owner`, `papers`, `usetime`, `getime`, `idcardtype`, `residesuite`) VALUES
-(1, '1', '云D33875', 'BMW', 20500, 18500, '李小龙', 0, 1410000000, 1411000000, '', ''),
-(2, '1', '', '', 0, 0, '', 0, 0, 0, '身份证', '601');
+INSERT INTO `pre_loan_car` (`id`, `signid`, `platenum`, `cartype`, `getvalue`, `marketvalue`, `owner`, `usetime`, `getime`, `idcardtype`, `residesuite`) VALUES
+(1, '1', '云D33875', 'BMW', 20500, 18500, '李小龙', 1410000000, 1411000000, '', ''),
+(2, '1', '', '', 0, 0, '', 0, 0, '身份证', '601');
 
 -- --------------------------------------------------------
 
@@ -529,7 +528,6 @@ CREATE TABLE IF NOT EXISTS `pre_loan_housing` (
   `getvalue` int(11) NOT NULL,
   `marketvalue` int(11) NOT NULL,
   `owner` varchar(11) NOT NULL,
-  `papers` int(11) NOT NULL,
   `usetime` int(11) NOT NULL,
   `getime` int(10) NOT NULL,
   `realname` varchar(255) NOT NULL,
@@ -537,17 +535,23 @@ CREATE TABLE IF NOT EXISTS `pre_loan_housing` (
   `zodiac` varchar(255) NOT NULL,
   `idcardtype` varchar(255) NOT NULL,
   `bloodtype` varchar(255) NOT NULL,
+  `papers` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- 转存表中的数据 `pre_loan_housing`
 --
 
-INSERT INTO `pre_loan_housing` (`id`, `signid`, `address`, `getvalue`, `marketvalue`, `owner`, `papers`, `usetime`, `getime`, `realname`, `constellation`, `zodiac`, `idcardtype`, `bloodtype`) VALUES
-(1, '1', 'dssfdf', 12, 22, 'fdf', 3242, 2343, 1410000000, '', '', '', '', ''),
-(2, '', '麒麟区', 0, 0, '', 0, 0, 0, '彭普', '水瓶', '龙', '', ''),
-(3, '', '', 0, 0, '', 0, 0, 0, '', '', '', '身份证', 'O'),
-(4, '1', '红塔区', 0, 0, '', 0, 0, 0, '欧阳锋', '双子座', '猪', '身份证', 'A'),
-(5, '2', '桃花岛', 0, 0, '', 0, 0, 0, '黄老邪', '金牛座', '蛇', '护照', 'B'),
-(6, '1', '', 0, 0, '', 0, 0, 0, '', '', '', '身份证', 'A');
+INSERT INTO `pre_loan_housing` (`id`, `signid`, `address`, `getvalue`, `marketvalue`, `owner`, `usetime`, `getime`, `realname`, `constellation`, `zodiac`, `idcardtype`, `bloodtype`, `papers`) VALUES
+(1, '1', 'dssfdf', 12, 22, 'fdf', 2343, 1410000000, '', '', '', '', '', ''),
+(2, '', '麒麟区', 0, 0, '', 0, 0, '彭普', '水瓶', '龙', '', '', ''),
+(3, '', '', 0, 0, '', 0, 0, '', '', '', '身份证', 'O', ''),
+(4, '1', '红塔区', 0, 0, '', 0, 0, '欧阳锋', '双子座', '猪', '身份证', 'A', ''),
+(5, '2', '桃花岛', 0, 0, '', 0, 0, '黄老邪', '金牛座', '蛇', '护照', 'B', ''),
+(6, '1', '', 0, 0, '', 0, 0, '', '', '', '身份证', 'A', ''),
+(7, '1', '', 0, 0, '', 0, 0, '', '', '', '身份证', 'A', ''),
+(8, '1', '', 0, 0, '', 0, 0, '', '', '', '身份证', 'A', ''),
+(9, '1', '', 0, 0, '', 0, 0, '', '', '', '身份证', 'A', ''),
+(10, '1', '', 0, 0, '', 0, 0, '', '', '', '身份证', 'A', ''),
+(11, '1', '', 0, 0, '', 0, 0, '', '', '', '身份证', 'A', '');
