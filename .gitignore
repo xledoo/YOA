@@ -3,5 +3,5 @@ Application/Common/Conf/
 ThinkPHP/
 phpmyadmin/
 upload/
-upload/
+uploads/
 .htaccess
