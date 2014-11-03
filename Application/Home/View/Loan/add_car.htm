@@ -1,4 +1,4 @@
-<form name="add_car" action="{:U('home/loan/add_car',array('id' => $_GET['id']))}" method="post">
+<form name="add_car" action="{:U('home/loan/add_car',array('id' => $_GET['id']))}" method="post" enctype="multipart/form-data">
 	<strong>新增车辆抵押借贷</strong><a class="btn btn-primary pull-right" href="{:U('home/loan/add_to_car')}">编辑资料项</a>
 	<div class="form-body">
 		<volist name="lv" id="vo">
@@ -20,7 +20,8 @@
 								$wstr .= '</select>';
 								echo $wstr;
 							} elseif ($vo['formtype'] == 'file'){
-								echo '<input '.'type='.$vo['formtype'].' name=add['.$vo['fieldid'].'][] multiple="multiple"'.' />';
+								$ystr .= '<input '.'type='.$vo['formtype'].' id='.$vo['fieldid'].' name='.$vo['fieldid'].' />';
+								echo $ystr;
 							}
 						</php>
 					</div>

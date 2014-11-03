@@ -24,7 +24,7 @@ class LoanController extends BaseController {
             $_POST['add']['signid'] = $_GET['id'];
             $config = array(
                 'maxSize'    =>    3145728,
-                'savePath'   =>    './',
+                'savePath'   =>    './housing/',
                 'saveName'   =>    array('uniqid',''),
                 'exts'       =>    array('jpg', 'gif', 'png', 'jpeg'),
                 'autoSub'    =>    true,
@@ -59,6 +59,24 @@ class LoanController extends BaseController {
         if(IS_POST){
             // zecho($_POST);
             $_POST['add']['signid'] = $_GET['id'];
+            $config = array(
+                'maxSize'    =>    3145728,
+                'savePath'   =>    './car/',
+                'saveName'   =>    array('uniqid',''),
+                'exts'       =>    array('jpg', 'gif', 'png', 'jpeg'),
+                'autoSub'    =>    true,
+                'subName'    =>    array('date','Ymd'),
+            );
+            $upload = new \Think\Upload($config);// 实例化上传类
+            $info   =   $upload->upload();
+            if(!$info) {// 上传错误提示错误信息
+                $this->error($upload->getError());
+            }else{// 上传成功 获取上传文件信息
+                foreach($info as $file){
+                    // echo $file['savepath'].$file['savename'];
+                    $this->success('文件'.$file['savepath'].$file['savename'].'上传成功！');
+                }
+            }
             M('loan_car')->add($_POST['add']) ? $this->success('车辆抵押借贷添加成功！') : $this->success('车辆抵押借贷添加失败！');
         }else{
             $fd = M('loan_car')->getDbFields();
