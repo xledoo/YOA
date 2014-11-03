@@ -114,7 +114,7 @@ class LoanController extends BaseController {
     //Edit column of table loan_car.
     public function add_to_car(){
         if(IS_POST){
-            // zecho($_FILES);
+            // zecho($_POST);
             foreach($_POST['add_to_car'] as $key => $value){
                 // $vol[] = M()->execute("alter table pre_loan_car drop column $value");//删除列
                 if(!in_array($value,(M('loan_car')->getDbFields()))){
