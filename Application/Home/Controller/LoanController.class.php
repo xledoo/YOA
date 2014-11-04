@@ -106,17 +106,8 @@ class LoanController extends BaseController {
             $vol ? $this->success('资料修改成功！') : $this->error('资料修改失败！');
     	}else{
             $pro = M('common_member_profile_setting');
-			$count = $pro->count();
-            $page = new \Think\Page($count,20);
-            $list = $pro->limit($page->firstRow.','.$page->listRows)->select();
-            $page->setConfig('first', '首页');//第一页
-            $page->setConfig('prev', '上一页');//上一页
-            $page->setConfig('next', '下一页');//下一页
-            $page->setConfig('last', '末页');//最后一页
-            $page->setConfig('theme','%HEADER% %FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%');
-            $show = $page->show();
-            $this->assign('list',$list);
-            $this->assign('show',$show);
+            $ccb = new \Common\Controller\BaseController();
+            $ccb->show_page($pro);
 	    	$this->display();
     	}
     }
@@ -136,17 +127,8 @@ class LoanController extends BaseController {
             $vol ? $this->success('资料修改成功！') : $this->error('资料修改失败！');
         }else{
             $pro = M('common_member_profile_setting');
-            $count = $pro->count();
-            $page = new \Think\Page($count,20);
-            $list = $pro->limit($page->firstRow.','.$page->listRows)->select();
-            $page->setConfig('first', '首页');//第一页
-            $page->setConfig('prev', '上一页');//上一页
-            $page->setConfig('next', '下一页');//下一页
-            $page->setConfig('last', '末页');//最后一页
-            $page->setConfig('theme','%HEADER% %FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%');
-            $show = $page->show();
-            $this->assign('list',$list);
-            $this->assign('show',$show);
+            $ccb = new \Common\Controller\BaseController();
+            $ccb->show_page($pro);
             $this->display();
         }
     }

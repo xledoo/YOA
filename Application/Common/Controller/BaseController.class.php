@@ -71,6 +71,23 @@ class BaseController extends Controller{
     	$this->_G['sidebar']	=	array_sort($this->_G['sidebar'], 'displayorder', 'asc');
 		return $this->_G['sidebar'];
 	}
+
+	/*
+		分页显示
+	*/
+	function show_page($mod = ""){
+        $count = $mod->count();
+        $page = new \Think\Page($count,5);
+        $list = $mod->limit($page->firstRow.','.$page->listRows)->select();
+        $page->setConfig('first', '首页');//第一页
+        $page->setConfig('prev', '上一页');//上一页
+        $page->setConfig('next', '下一页');//下一页
+        $page->setConfig('last', '末页');//最后一页
+        $page->setConfig('theme','%HEADER% %FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%');
+        $show = $page->show();
+        $this->assign('list',$list);
+        $this->assign('show',$show);
+	}
 }
 
 
