@@ -7,7 +7,7 @@
 			</tr>
 		</thead>
 		<tbody >
-			<volist name="add_to_housing" id="vo">
+			<volist name="list" id="vo">
 				<tr>
 					<td><input type="checkbox" name="add_to_housing[]" value="{$vo.fieldid}" />{$vo.title}</td>
 					<td>{$vo.description}</td>
@@ -16,6 +16,7 @@
 			</volist>
 		</tbody>
 	</table>
+	<div style="text-align:center;">{$show}</div>
 	<div>
 		<input type="submit" name="submit_add_to_housing" class="btn blue btn-default"  value="提交" />
 	</div>
