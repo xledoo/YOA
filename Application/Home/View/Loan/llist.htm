@@ -1,1 +1,17 @@
 小贷业务订单列表
+<p id="smg">
+	<img width="500" height="200" alt="验证码" src="{:U('Home/loan/llist',array())}" title="点击刷新"> 	
+</p>
+
+<script>
+	var captcha_img = $('#smg').find('img')  
+	var verifyimg = captcha_img.attr("src");  
+	captcha_img.attr('title', '点击刷新');  
+	captcha_img.click(function(){  
+	    if( verifyimg.indexOf('?')>0){  
+	        $(this).attr("src", verifyimg+'&random='+Math.random());  
+	    }else{  
+	        $(this).attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());  
+	    }  
+	});  
+</script>
