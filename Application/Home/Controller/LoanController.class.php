@@ -156,7 +156,7 @@ class LoanController extends BaseController {
     }
 
     //List of all loan.
-    public function llist(){
+    public function llist(){  
         $this->display();
     }
 }
