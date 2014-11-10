@@ -157,17 +157,6 @@ class LoanController extends BaseController {
 
     //List of all loan.
     public function llist(){
-        $Verify = new \Think\Verify();  
-        $Verify->fontSize = 20;  
-        $Verify->length   = 4;  
-        $Verify->useNoise = false; 
-        $Verify->useCurve = false; 
-        $Verify->codeSet = '0123456789';  
-        $Verify->imageW = 0;  
-        $Verify->imageH = 0;  
-        //$Verify->expire = 600;
-        $Verify->entry();
-        // zecho($_SESSION);
-        // $this->display();
+        $this->display();
     }
 }
