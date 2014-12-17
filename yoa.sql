@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?10 �?31 �?08:21
+-- 生成日期: 2014 �?12 �?17 �?09:10
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -391,16 +391,16 @@ CREATE TABLE IF NOT EXISTS `pre_finance_cash` (
   `sponsor` varchar(10) NOT NULL,
   `verify` char(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `pre_finance_cash`
 --
 
 INSERT INTO `pre_finance_cash` (`id`, `stype`, `customer`, `money`, `startime`, `endtime`, `rate`, `cbankname`, `ccardnum`, `zday`, `hkday`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`, `verify`) VALUES
-(1, 'cash', '徐力', 100000.00, 1404144000, 1412827162, 20, 'gdb', '6234567892211233', 0, 0, '18687444499', 'ccb', '6227077774444477', 1, '徐力', '6bfa8f6bb15cc5e51b550142269d986b'),
-(2, 'card', '字符串', 100000.00, 1404144000, 1413271429, 10, 'icbc', '4270300046233523', 2, 25, '18666554431', 'icbc', '6777777777777777', 1, '', '63b36f6701f87bc14929784d6d975717'),
-(3, 'card', '数据库', 50000.00, 1409500800, 1413515187, 20, 'cebb', '622887655161572122', 0, 0, '18234567890', 'boc', '555555555555555555', 1, 'asdf', 'd525b950b387f92a27afead2fc61c30b');
+(1, 'cash', '徐力', 100000.00, 1404144000, 1412827162, 20, 'gdb', '6234567892211233', 0, 0, '18687444499', 'ccb', '6227077774444477', 1, '徐力', '7179ac1c553fb2e603f801d2e09d519a'),
+(2, 'card', '字符串', 100000.00, 1404144000, 1413271429, 10, 'icbc', '4270300046233523', 2, 25, '18666554431', 'icbc', '6777777777777777', 1, '', 'f1295f767283b7e289852d2d6f232370'),
+(4, 'card', 'jordan', 500000.00, 1418140800, 1418719336, 30, 'abc', '62225132548741', 25, 30, '1395555544', 'cib', '6222300014587952', 1, 'john', '');
 
 -- --------------------------------------------------------
 
@@ -424,17 +424,15 @@ CREATE TABLE IF NOT EXISTS `pre_finance_ratelog` (
   `ratedate` int(10) NOT NULL,
   `verify` char(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `pre_finance_ratelog`
 --
 
 INSERT INTO `pre_finance_ratelog` (`id`, `cashid`, `customer`, `mobile`, `stype`, `money`, `rate`, `bankname`, `cardnum`, `dateline`, `remark`, `status`, `ratedate`, `verify`) VALUES
-(3, 1, '徐力', '18687444499', 'cash', 100000.00, 2000.00, 'ccb', '6227077774444477', 1412755410, '10月融资利息', 1, 0, ''),
-(2, 2, '李杰', '18687444499', 'card', 100000.00, 1000.00, 'icbc', '633333333333333', 1412179200, '10月融资利息', 0, 0, ''),
-(4, 3, '张子栋', '18687444499', 'cash', 50000.00, 1000.00, 'pingan', '555555555555555555', 1412755512, '10月融资利息', 0, 0, ''),
-(5, 4, '意大利', '15924907828', 'card', 70000.00, 1400.00, 'hxb', '622202554488778', 1412755512, '10月融资利息', 1, 0, '');
+(1, 1, '徐力', '18687444499', 'cash', 100000.00, 2000.00, 'ccb', '6227077774444477', 1418781518, '12月融资利息', 0, 0, ''),
+(2, 2, '字符串', '18666554431', 'card', 100000.00, 1000.00, 'icbc', '6777777777777777', 1417449600, '12月融资利息', 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -472,19 +470,22 @@ CREATE TABLE IF NOT EXISTS `pre_loan` (
   `mobile` varchar(11) NOT NULL,
   `money` float(10,2) NOT NULL DEFAULT '0.00',
   `rate` int(3) NOT NULL,
-  `dateline` int(10) NOT NULL,
+  `lastmoney` float(10,2) NOT NULL DEFAULT '0.00',
+  `startime` int(10) NOT NULL,
   `stype` varchar(20) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `pre_loan`
 --
 
-INSERT INTO `pre_loan` (`id`, `signid`, `customer`, `mobile`, `money`, `rate`, `dateline`, `stype`, `status`) VALUES
-(1, '1', '徐力', '18687444499', 975850.00, 11, 1412755410, '', 0),
-(2, '2', '阿森纳', '15924907828', 45920.00, 12, 1412179500, '', 0);
+INSERT INTO `pre_loan` (`id`, `signid`, `customer`, `mobile`, `money`, `rate`, `lastmoney`, `startime`, `stype`, `status`) VALUES
+(1, '1', '徐力', '18687444499', 975850.00, 11, 0.00, 1412755410, '', 0),
+(2, '2', '阿森纳', '15924907828', 45920.00, 12, 0.00, 1412179500, '', 0),
+(3, '', '李伟', '18787422556', 251777.55, 9, 0.00, 1418140800, '', 0),
+(4, '', '张无忌', '15966633255', 865410.50, 14, 0.00, 1417536000, '', 1);
 
 -- --------------------------------------------------------
 

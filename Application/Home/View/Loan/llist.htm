@@ -1,1 +1,71 @@
-小贷业务订单列表
+<style type="text/css">
+	td,th {text-align:center;}
+</style>
+<table class="table table-bordered table-hover">
+	<thead >
+		<tr>
+			<th>ID</th>
+			<th>借贷人</th>
+			<th>借贷金额</th>
+			<th>借贷时间</th>
+			<th>利息</th>
+			<th>打款金额</th>
+			<th>手机号</th>
+			<th>借贷类型</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody >
+		<volist name="ad" id="semir">
+			<tr>
+				<td>{$semir.id}</td>
+				<td>{$semir.customer}</td>
+				<td>{$semir.money}</td>
+				<td>{$semir.startime|date="Y-m-d",###}</td>
+				<td>{$semir.rate}</td>
+				<td>{$semir.lastmoney}</td>
+				<td>{$semir.mobile}</td>
+				<td>
+				</td>
+				<td>
+					<if condition="$semir.status eq '1'">
+						<a class="btn btn-xs green">已打款</a>
+					<elseif condition="$semir.status eq '0'" />
+						<a data-toggle="modal" href="#full-width" onclick="koloan({$semir.id})" class="btn btn-xs red">未打款</a>
+					</if>
+				</td>
+				<td>
+					<a id="noder{$semir.id}" href="#" class="btn btn-xs green">详&nbsp;情</a>
+					<input type="button" onclick="del({$semir.id})" class="btn btn-xs red" value="删&nbsp;除" />
+				</td>
+			</tr>
+		</volist>
+	</tbody>
+</table>
+
+<script>
+	function some(id,value){
+		var ls = id.substr(5);
+		var auto = document.getElementById("noder"+ls);
+		// alert(auto.href);
+		if (value == 'housing') {
+			auto.href = "{:U('home/loan/add_housing')}"+"&id="+ls;
+		} else if(value == 'car'){
+			auto.href = "{:U('home/loan/add_car')}"+"&id="+ls;
+		} else{
+			auto.href = "#";
+		}
+		// alert(auto.href);
+	}
+</script>
+<script type="text/javascript">
+	function del(val){
+	  var name=confirm("确定删除该纪录？");
+	  if (name == true){
+	  	window.location.href="index.php?m=home&c=Loan&a=delfina&id="+val;
+	  }else{
+	  	window.location.reload();
+	  }
+	}
+</script>

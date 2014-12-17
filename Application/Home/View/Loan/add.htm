@@ -1,17 +1,20 @@
 <style type="text/css">
 	td,th {text-align:center;}
 </style>
+<a href="{:U('home/loan/add_loaner')}" class="btn btn-md blue pull-right">添加借贷人 <i class="fa fa-plus"></i></a>
 <table class="table table-bordered table-hover">
 	<thead >
 		<tr>
 			<th>ID</th>
 			<th>借贷人</th>
 			<th>借贷金额</th>
-			<th>借贷时间</th>
 			<th>利息</th>
+			<th>打款金额</th>
+			<th>持续时间</th>
 			<th>手机号</th>
+			<th>借贷时间</th>
+			<th>借款类型</th>
 			<th>状态</th>
-			<th>借贷类型</th>
 			<th>操作</th>
 		</tr>
 	</thead>
@@ -21,11 +24,11 @@
 				<td>{$semir.id}</td>
 				<td>{$semir.customer}</td>
 				<td>{$semir.money}</td>
-				<td>{$semir.dateline|date="Y-m-d",###}</td>
 				<td>{$semir.rate}</td>
+				<td>{$semir.lastmoney}</td>
+				<td><php>echo intval((NOW_TIME - $semir['startime'])/(3600*24)).'天';</php></td>
 				<td>{$semir.mobile}</td>
-				<td>
-				</td>
+				<td>{$semir.startime|date="Y-m-d",###}</td>
 				<td>
 					<select id="super{$semir.id}" name="add_loan" onchange="some(this.id,this.value)">
 						<option value="">---请选择---</option>
@@ -34,14 +37,20 @@
 					</select>
 				</td>
 				<td>
-					<a id="noder{$semir.id}" href="#" class="btn btn-xs blue">新&nbsp;增</a>
-					<input type="button" href="#" class="btn btn-xs red" value="删&nbsp;除" />
+					<if condition="$semir.status eq '1'">
+						<a class="btn btn-xs green">已打款</a>
+					<elseif condition="$semir.status eq '0'" />
+						<a data-toggle="modal" href="#full-width" onclick="koloan({$semir.id})" class="btn btn-xs red">未打款</a>
+					</if>
+				</td>
+				<td>
+					<a id="noder{$semir.id}" href="#" class="btn btn-xs blue">新增业务</a>
+					<input type="button" onclick="del({$semir.id})" class="btn btn-xs red" value="删&nbsp;除" />
 				</td>
 			</tr>
 		</volist>
 	</tbody>
 </table>
-
 <script>
 	function some(id,value){
 		var ls = id.substr(5);
@@ -55,5 +64,25 @@
 			auto.href = "#";
 		}
 		// alert(auto.href);
+	}
+</script>
+<script type="text/javascript">
+	function koloan(val){
+	  var name=confirm("确定已打款？");
+	  if (name == true){
+	  	window.location.href="index.php?m=home&c=Loan&a=doloan&id="+val;
+	  }else{
+	  	window.location.reload();
+	  }
+	}
+</script>
+<script type="text/javascript">
+	function del(val){
+	  var name=confirm("确定删除该条借贷人信息？");
+	  if (name == true){
+	  	window.location.href="index.php?m=home&c=Loan&a=delloan&id="+val;
+	  }else{
+	  	window.location.reload();
+	  }
 	}
 </script>

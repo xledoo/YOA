@@ -1,0 +1,75 @@
+
+<form name="add_loaner" action="{:U('home/loan/add_loaner')}" method="post">
+	<h4><strong>新增借贷人信息</strong></h4>
+	<div class="form-body">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>借贷人</label>
+					<input type="text" name="add[customer]" class="form-control input-large" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>借贷金额</label>
+					<input type="text" name="add[money]" class="form-control input-large" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>手机号码</label>
+					<input type="text" name="add[mobile]" class="form-control input-large" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>利息</label>
+					<input type="text" name="add[rate]" class="form-control input-large" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>打款金额</label>
+					<input type="text" name="add[lastmoney]" class="form-control input-large" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>XXXX</label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>借贷时间</label>
+					<div class="input-group input-large date date-picker" data-date="date()" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+						<input type="text" class="form-control" name="add[startime]">
+						<span class="input-group-btn">
+							<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>借贷类型</label>
+					<select name="add[bankname]" class="form-control input-large">
+						<volist name="banks" id="vo">
+						<option value="{$vo.sign}">------------------{$vo.bankname}-----------------</option>
+						</volist>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-2"><input type="submit" name="submit_addcash" class="btn blue btn-lg"  value="提&nbsp;交" /></div>
+			<div class="col-md-6"></div>
+		</div>	
+	</div>
+</form>

@@ -17,6 +17,29 @@ class LoanController extends BaseController {
     	}
     }
 
+    //添加借贷人信息
+    public function add_loaner(){
+        if(IS_POST){
+            zecho(strtotime($_POST['add']['startime']));
+            $_POST['add']['startime'] = strtotime($_POST['add']['startime']);
+            M('loan')->add($_POST['add']) ? $this->success("新增成功！",U('home/Loan/add')) : $this->error("新增失败");
+        } else{
+            $this->display();
+        }
+    }
+
+    //借贷人信息审核
+    public function doloan($id){
+        // zecho($id);
+        $data['status'] = '1';
+        M('loan')->where("id='%s'",$id)->save($data) ? $this->success('状态更改为 已打款') : $this->error('打款状态更新失败！');
+    }
+
+    //删除借贷人信息
+    public function delloan($id){
+        M('loan')->where("id='%d'",$id)->delete() ? $this->success('删除成功') : $this->error('删除失败');
+    }
+
     //Add loan of housing.
     public function add_housing(){
         if(IS_POST){
@@ -105,9 +128,10 @@ class LoanController extends BaseController {
             }
             $vol ? $this->success('资料修改成功！') : $this->error('资料修改失败！');
     	}else{
-            $pro = M('common_member_profile_setting');
-            $ccb = new \Common\Controller\BaseController();
-            $ccb->show_page($pro);
+            $pro = M('common_member_profile_setting')->select();
+            $this->assign('list',$pro);
+            // $ccb = new \Common\Controller\BaseController();
+            // $ccb->show_page($pro);
 	    	$this->display();
     	}
     }
@@ -126,9 +150,10 @@ class LoanController extends BaseController {
             }
             $vol ? $this->success('资料修改成功！') : $this->error('资料修改失败！');
         }else{
-            $pro = M('common_member_profile_setting');
-            $ccb = new \Common\Controller\BaseController();
-            $ccb->show_page($pro);
+            $pro = M('common_member_profile_setting')->select();
+            $this->assign('list',$pro);
+            // $ccb = new \Common\Controller\BaseController();
+            // $ccb->show_page($pro);
             $this->display();
         }
     }
@@ -157,6 +182,12 @@ class LoanController extends BaseController {
 
     //List of all loan.
     public function llist(){
-        $this->display();
+        if(IS_POST){
+
+        } else{
+            $info = M('loan')->select();
+            $this->assign('ad',$info);
+            $this->display();
+        }
     }
 }
