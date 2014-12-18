@@ -17,27 +17,27 @@
 		</tr>
 	</thead>
 	<tbody >
-		<volist name="ad" id="semir">
+		<volist name="ad" id="pepsi">
 			<tr>
-				<td>{$semir.id}</td>
-				<td>{$semir.customer}</td>
-				<td>{$semir.money}</td>
-				<td>{$semir.startime|date="Y-m-d",###}</td>
-				<td>{$semir.rate}</td>
-				<td>{$semir.lastmoney}</td>
-				<td>{$semir.mobile}</td>
+				<td>{$pepsi.id}</td>
+				<td>{$pepsi.customer}</td>
+				<td>{$pepsi.money}</td>
+				<td>{$pepsi.startime|date="Y-m-d",###}</td>
+				<td>{$pepsi.rate}</td>
+				<td>{$pepsi.lastmoney}</td>
+				<td>{$pepsi.mobile}</td>
 				<td>
 				</td>
 				<td>
-					<if condition="$semir.status eq '1'">
+					<if condition="$pepsi.status eq '1'">
 						<a class="btn btn-xs green">已打款</a>
-					<elseif condition="$semir.status eq '0'" />
-						<a data-toggle="modal" href="#full-width" onclick="koloan({$semir.id})" class="btn btn-xs red">未打款</a>
+					<elseif condition="$pepsi.status eq '0'" />
+						<a data-toggle="modal" href="#full-width" onclick="koloan({$pepsi.id})" class="btn btn-xs red">未打款</a>
 					</if>
 				</td>
 				<td>
-					<a id="noder{$semir.id}" href="#" class="btn btn-xs green">详&nbsp;情</a>
-					<input type="button" onclick="del({$semir.id})" class="btn btn-xs red" value="删&nbsp;除" />
+					<a id="noder{$pepsi.id}" href="{:U('home/Loan/loaninfo')}" class="btn btn-xs green">详&nbsp;情</a>
+					<input type="button" onclick="del({$pepsi.id})" class="btn btn-xs red" value="删&nbsp;除" />
 				</td>
 			</tr>
 		</volist>

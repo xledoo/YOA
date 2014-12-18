@@ -35,6 +35,17 @@ class LoanController extends BaseController {
         M('loan')->where("id='%s'",$id)->save($data) ? $this->success('状态更改为 已打款') : $this->error('打款状态更新失败！');
     }
 
+    //借贷订单详情
+    public function loaninfo(){
+        // $md = D('Loan');
+        // $data = $md->relation(true)->select();
+        // zecho($data);
+        // $Model = new Model();
+        // $list = $Model->table('pre_loan_car car, pre_loan loan')->where('car.signid = loan.id')->select();zecho($list);
+        // $this->assign('pepsi',$list);
+        $this->display();
+    }
+
     //删除借贷人信息
     public function delloan($id){
         M('loan')->where("id='%d'",$id)->delete() ? $this->success('删除成功') : $this->error('删除失败');
