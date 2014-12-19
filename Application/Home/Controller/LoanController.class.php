@@ -50,25 +50,33 @@ class LoanController extends BaseController {
         $da1 = M('loan_housing')->select();
         $da2 = M('loan_car')->select();
 
-        $da3 = array_merge($da2,$da1);
-
-        foreach($da3 as $kk => $vv){
-            $cm = M('Loan')->where("id='%d'",$vv['signid'])->find();
-            unset($cm['id']);unset($cm['signid']);
-            $da3[$kk] = $te = array_merge($cm,$vv);
-            if(M('common_member_profile_setting')->where("fieldid='%s'",$te)->select()){
-                
+        foreach($da1 as $k1 => $v1){
+            $cm1 = M('Loan')->where("id='%d'",$v1['signid'])->find();
+            unset($cm1['id']);unset($cm1['signid']);$cm1['stype'] = 'housing';
+            $da1[$k1] = array_merge($v1,$cm1);
+            foreach($da2 as $k2 => $v2){
+                $cm2 = M('Loan')->where("id='%d'",$v2['signid'])->find();
+                unset($cm2['id']);unset($cm2['signid']);$cm2['stype'] = 'car';
+                $da2[$k2] = array_merge($v2,$cm2);
+                $da3 = array_merge($da1,$da2);
             }
         }
-        zecho($da3);
-            $fd = M('loan_housing')->getDbFields();
-            foreach($fd as $key => $value){
-                $oo[$value] = M('common_member_profile_setting')->where("fieldid='%s'",$value)->select();
-                foreach($oo[$value] as $k => $v){
-                    $oo[$value] = $v;
-                }
-            }
-            zecho($da3);
+        // zecho($da3);
+        // $da3 = array_merge($da2,$da1);
+
+        // foreach($da3 as $kk => $vv){
+        //     $cm = M('Loan')->where("id='%d'",$vv['signid'])->find();
+        //     unset($cm['id']);unset($cm['signid']);
+        //     $da3[$kk] = array_merge($vv,$cm);
+        //     foreach($vv as $ke => $va){
+        //         $tt = M('common_member_profile_setting')->where("fieldid='%s'",$ke)->find();
+        //         if($tt){
+        //             $dot[] = $tt;
+        //         }
+        //     }
+        // }
+        // zecho($da1);
+        $this->assign('bmw',$da3);
         $this->display();
     }
 

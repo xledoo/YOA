@@ -1,38 +1,34 @@
 <a href="{:U('home/Loan/llist')}" class="btn btn-md blue pull-right">返&nbsp;回&nbsp;<i class="fa fa-reply"></i></a>
 <div style="font:bold 16px Microsoft YaHei;">现金融资详情</div>
+<volist name='bmw' id='sharp'>
 <table class="table table-bordered table-hover">
 	<tbody>
 		<tr><th>ID</th><th>客户名称</th><th>联系电话</th><th>融资时间</th></tr>
 		<tr style="color:DodgerBlue;">
-			<td>{$cash.id}</td>
-			<td>{$cash.customer}</td>
-			<td>{$cash.mobile}</td>
-			<td>{$cash.startime|date="Y-m-d", ###}</td>
+			<td>{$sharp.stype}</td>
+			<td>{$sharp.customer}</td>
+			<td>{$sharp.mobile}</td>
+			<td>{$sharp.startime|date="Y-m-d", ###}</td>
 		</tr>
 		<tr><th>融资金额</th><th>融资利息</th><th>持续时间</th><th>当前状态</th></tr>
 		<tr style="color:DodgerBlue;">
-			<td>{$cash.money}</td>
-			<td>{$cash.rate}</td>
-			<td><php>echo intval((NOW_TIME - $cash['startime'])/(3600*24)).'天';</php></td>
+			<td>{$sharp.money}</td>
+			<td>{$sharp.rate}</td>
+			<td><php>echo intval((NOW_TIME - $sharp['startime'])/(3600*24)).'天';</php></td>
 			<td>
-				<php>
-					if(D("financecash")->review_verify($cash['id'])){
-						echo $kills[$cash['status']].'(<span class="text-success">已审核</span>)';
-					} else {
-						echo $kills[$cash['status']].'(<span class="text-danger">未审核</span>)';
-					}
-				</php>
+
 			</td>
 		</tr>
 		<tr><th>打款银行</th><th colspan="2">打款卡号</th><th>介绍人</th></tr>
 		<tr style="color:DodgerBlue;">
 			<td>
 					<php>
-						echo $banks[$cash['bankname']]['bankname'];
+						echo $banks[$sharp['bankname']]['bankname'];
 					</php>
 			</td>
-			<td colspan="2">{$cash.cardnum}</td>
-			<td>{$cash.sponsor}</td>
+			<td colspan="2">{$sharp.cardnum}</td>
+			<td>{$sharp.sponsor}</td>
 		</tr>
 	</tbody>
 </table>
+</volist>
