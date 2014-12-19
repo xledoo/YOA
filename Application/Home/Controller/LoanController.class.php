@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
+use Think\Model;
 class LoanController extends BaseController {
     public function add(){
     	if(IS_POST){
@@ -37,12 +38,37 @@ class LoanController extends BaseController {
 
     //借贷订单详情
     public function loaninfo(){
+        // $mod = new Model('loan');
+        // $list = $mod->join('LEFT JOIN loan ON loan.id = loan_housing.signid');
+        // zecho($list);
         // $md = D('Loan');
         // $data = $md->relation(true)->select();
         // zecho($data);
         // $Model = new Model();
         // $list = $Model->table('pre_loan_car car, pre_loan loan')->where('car.signid = loan.id')->select();zecho($list);
         // $this->assign('pepsi',$list);
+        $da1 = M('loan_housing')->select();
+        $da2 = M('loan_car')->select();
+
+        $da3 = array_merge($da2,$da1);
+
+        foreach($da3 as $kk => $vv){
+            $cm = M('Loan')->where("id='%d'",$vv['signid'])->find();
+            unset($cm['id']);unset($cm['signid']);
+            $da3[$kk] = $te = array_merge($cm,$vv);
+            if(M('common_member_profile_setting')->where("fieldid='%s'",$te)->select()){
+                
+            }
+        }
+        zecho($da3);
+            $fd = M('loan_housing')->getDbFields();
+            foreach($fd as $key => $value){
+                $oo[$value] = M('common_member_profile_setting')->where("fieldid='%s'",$value)->select();
+                foreach($oo[$value] as $k => $v){
+                    $oo[$value] = $v;
+                }
+            }
+            zecho($da3);
         $this->display();
     }
 
