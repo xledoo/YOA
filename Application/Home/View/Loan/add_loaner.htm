@@ -58,10 +58,10 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label>借贷类型</label>
-					<select name="add[bankname]" class="form-control input-large">
-						<volist name="banks" id="vo">
-						<option value="{$vo.sign}">------------------{$vo.bankname}-----------------</option>
-						</volist>
+					<select name="add[stype]" class="form-control input-large">
+						<option value="">------请选择借贷类型------</option>
+						<option value="housing">房产抵押</option>
+						<option value="car">车辆抵押</option>
 					</select>
 				</div>
 			</div>

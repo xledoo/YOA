@@ -65,8 +65,7 @@
 		}
 		// alert(auto.href);
 	}
-</script>
-<script type="text/javascript">
+
 	function koloan(val){
 	  var name=confirm("确定已打款？");
 	  if (name == true){
@@ -75,12 +74,11 @@
 	  	window.location.reload();
 	  }
 	}
-</script>
-<script type="text/javascript">
+
 	function del(val){
 	  var name=confirm("确定删除该条借贷人信息？");
 	  if (name == true){
-	  	window.location.href="index.php?m=home&c=Loan&a=delloan&id="+val;
+	  	window.location.href="index.php?m=home&c=Loan&a=del_loan&id="+val;
 	  }else{
 	  	window.location.reload();
 	  }

@@ -27,6 +27,11 @@
 				<td>{$pepsi.lastmoney}</td>
 				<td>{$pepsi.mobile}</td>
 				<td>
+					<if condition="$pepsi.stype eq 'housing'">
+						<a class="btn btn-xs blue">房产抵押</a>
+					<elseif condition="$pepsi.stype eq 'car'" />
+						<a data-toggle="modal" href="#full-width" class="btn btn-xs blue">车辆抵押</a>
+					</if>
 				</td>
 				<td>
 					<if condition="$pepsi.status eq '1'">
@@ -36,7 +41,7 @@
 					</if>
 				</td>
 				<td>
-					<a id="noder{$pepsi.id}" href="{:U('home/Loan/loaninfo')}" class="btn btn-xs green">详&nbsp;情</a>
+					<a id="noder{$pepsi.id}" href="{:U('home/Loan/loaninfo',array('id' => $pepsi['id']))}" class="btn btn-xs green">详&nbsp;情</a>
 					<input type="button" onclick="del({$pepsi.id})" class="btn btn-xs red" value="删&nbsp;除" />
 				</td>
 			</tr>
@@ -45,25 +50,20 @@
 </table>
 
 <script>
-	function some(id,value){
-		var ls = id.substr(5);
-		var auto = document.getElementById("noder"+ls);
-		// alert(auto.href);
-		if (value == 'housing') {
-			auto.href = "{:U('home/loan/add_housing')}"+"&id="+ls;
-		} else if(value == 'car'){
-			auto.href = "{:U('home/loan/add_car')}"+"&id="+ls;
-		} else{
-			auto.href = "#";
-		}
-		// alert(auto.href);
+	function koloan(val){
+	  var name=confirm("确定已打款？");
+	  if (name == true){
+	  	window.location.href="index.php?m=home&c=Loan&a=doloan&id="+val;
+	  }else{
+	  	window.location.reload();
+	  }
 	}
-</script>
-<script type="text/javascript">
+
 	function del(val){
+		// alert(val);
 	  var name=confirm("确定删除该纪录？");
 	  if (name == true){
-	  	window.location.href="index.php?m=home&c=Loan&a=delfina&id="+val;
+	  	window.location.href="index.php?m=home&c=Loan&a=del_loaninfo&id="+val;
 	  }else{
 	  	window.location.reload();
 	  }

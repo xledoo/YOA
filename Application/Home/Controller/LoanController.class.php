@@ -37,7 +37,7 @@ class LoanController extends BaseController {
     }
 
     //借贷订单详情
-    public function loaninfo(){
+    public function loaninfo($id){
         // $mod = new Model('loan');
         // $list = $mod->join('LEFT JOIN loan ON loan.id = loan_housing.signid');
         // zecho($list);
@@ -59,9 +59,14 @@ class LoanController extends BaseController {
                 unset($cm2['id']);unset($cm2['signid']);$cm2['stype'] = 'car';
                 $da2[$k2] = array_merge($v2,$cm2);
                 $da3 = array_merge($da1,$da2);
+                foreach($da3 as $v3){
+                    if($v3['id'] == $id){
+                        $dota = $v3;
+                    }
+                }
             }
         }
-        // zecho($da3);
+        // zecho($dota);
         // $da3 = array_merge($da2,$da1);
 
         // foreach($da3 as $kk => $vv){
@@ -75,13 +80,41 @@ class LoanController extends BaseController {
         //         }
         //     }
         // }
-        // zecho($da1);
-        $this->assign('bmw',$da3);
+        // zecho($id);
+        $this->assign('sharp',$dota);
         $this->display();
     }
 
+    //List of all loan.
+    public function llist(){
+        $da1 = M('loan_housing')->select();
+        $da2 = M('loan_car')->select();
+
+        foreach($da1 as $k1 => $v1){
+            $cm1 = M('Loan')->where("id='%d'",$v1['signid'])->find();
+            unset($cm1['id']);unset($cm1['signid']);$cm1['stype'] = 'housing';
+            $da1[$k1] = array_merge($v1,$cm1);
+            foreach($da2 as $k2 => $v2){
+                $cm2 = M('Loan')->where("id='%d'",$v2['signid'])->find();
+                unset($cm2['id']);unset($cm2['signid']);$cm2['stype'] = 'car';
+                $da2[$k2] = array_merge($v2,$cm2);
+                $da3 = array_merge($da1,$da2);
+                // foreach($da3 as $k3 => $v3){
+
+                // }
+            }
+        }
+        $this->assign('ad',$da3);
+        $this->display();
+    }
+
+    //删除借贷人信订单息
+    public function del_loaninfo($id){
+        
+    }
+
     //删除借贷人信息
-    public function delloan($id){
+    public function del_loan($id){
         M('loan')->where("id='%d'",$id)->delete() ? $this->success('删除成功') : $this->error('删除失败');
     }
 
@@ -221,17 +254,6 @@ class LoanController extends BaseController {
             // zecho($_POST);
             M('common_member_profile_setting')->add($_POST['add']) ? $this->success('资料添加成功！') : $this->error('资料添加失败！');
         }else{
-            $this->display();
-        }
-    }
-
-    //List of all loan.
-    public function llist(){
-        if(IS_POST){
-
-        } else{
-            $info = M('loan')->select();
-            $this->assign('ad',$info);
             $this->display();
         }
     }

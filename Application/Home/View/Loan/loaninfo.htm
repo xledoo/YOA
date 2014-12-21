@@ -1,34 +1,33 @@
 <a href="{:U('home/Loan/llist')}" class="btn btn-md blue pull-right">返&nbsp;回&nbsp;<i class="fa fa-reply"></i></a>
-<div style="font:bold 16px Microsoft YaHei;">现金融资详情</div>
-<volist name='bmw' id='sharp'>
+<div style="font:bold 16px Microsoft YaHei;">借贷订单详情</div>
+
 <table class="table table-bordered table-hover">
 	<tbody>
-		<tr><th>ID</th><th>客户名称</th><th>联系电话</th><th>融资时间</th></tr>
+		<tr><th>ID</th><th>借贷人</th><th>联系电话</th><th>借贷时间</th></tr>
 		<tr style="color:DodgerBlue;">
-			<td>{$sharp.stype}</td>
+			<td>{$sharp.id}</td>
 			<td>{$sharp.customer}</td>
 			<td>{$sharp.mobile}</td>
 			<td>{$sharp.startime|date="Y-m-d", ###}</td>
 		</tr>
-		<tr><th>融资金额</th><th>融资利息</th><th>持续时间</th><th>当前状态</th></tr>
+		<tr><th>借贷金额</th><th>借贷利息</th><th>借贷类型</th><th>当前状态</th></tr>
 		<tr style="color:DodgerBlue;">
 			<td>{$sharp.money}</td>
 			<td>{$sharp.rate}</td>
-			<td><php>echo intval((NOW_TIME - $sharp['startime'])/(3600*24)).'天';</php></td>
 			<td>
-
+					<if condition="$sharp.stype eq 'housing'">
+						<a class="btn btn-xs blue">房产抵押</a>
+					<elseif condition="$sharp.stype eq 'car'" />
+						<a data-toggle="modal" href="#full-width" class="btn btn-xs blue">车辆抵押</a>
+					</if>
 			</td>
-		</tr>
-		<tr><th>打款银行</th><th colspan="2">打款卡号</th><th>介绍人</th></tr>
-		<tr style="color:DodgerBlue;">
 			<td>
-					<php>
-						echo $banks[$sharp['bankname']]['bankname'];
-					</php>
+					<if condition="$sharp.status eq '1'">
+						<a class="btn btn-xs green">已打款</a>
+					<elseif condition="$sharp.status eq '0'" />
+						<a data-toggle="modal" href="#full-width" onclick="koloan({$sharp.id})" class="btn btn-xs red">未打款</a>
+					</if>
 			</td>
-			<td colspan="2">{$sharp.cardnum}</td>
-			<td>{$sharp.sponsor}</td>
 		</tr>
 	</tbody>
 </table>
-</volist>
