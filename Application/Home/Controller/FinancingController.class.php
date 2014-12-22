@@ -7,7 +7,7 @@ class FinancingController extends BaseController {
 
     //现金融资
     public function fcash(){
-    	$fc = M('finance_cash')->where("stype='cash'")->select();
+    	$fc = D("FinanceCash")->where("stype='cash'")->select();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
@@ -23,7 +23,7 @@ class FinancingController extends BaseController {
     		// zecho($_POST);
             $_POST['add']['stype']  =   'cash';
             $_POST['add']['startime'] = strtotime($_POST['add']['startime']);
-            M('finance_cash')->add($_POST['add']) ? $this->success('业务添加成功！') : $this->error('业务添加失败！');
+            D('FinanceCash')->add($_POST['add']) ? $this->success('业务添加成功！') : $this->error('业务添加失败！');
     	} else {
             $this->assign('banks', $this->_G['banks']);
     		$this->display();
@@ -52,9 +52,9 @@ class FinancingController extends BaseController {
             // zecho($_POST);
             $_POST['edit']['startime'] = strtotime($_POST['edit']['startime']);
             $_POST['edit']['endtime'] = strtotime($_POST['edit']['endtime']);
-            M('finance_cash')->where("id='%d'", $id)->save($_POST['edit']) ? $this->success('信息修改成功！') : $this->error('信息修改失败！');
+            D('FinanceCash')->where("id='%d'", $id)->save($_POST['edit']) ? $this->success('信息修改成功！') : $this->error('信息修改失败！');
         } else {
-            $info   =   M('finance_cash')->where("id='%d'", $id)->find();
+            $info   =   D('FinanceCash')->where("id='%d'", $id)->find();
             $this->assign('banks', $this->_G['banks']);
             $this->assign('ecash',$info);
             $this->display();
@@ -63,12 +63,12 @@ class FinancingController extends BaseController {
 
     //现金融资提现
     public function wcash($id){
-        $v = M('finance_cash')->where("id='$id'", $id)->find();
+        $v = D('FinanceCash')->where("id='$id'", $id)->find();
         if($v['status'] != 1){
-            M('finance_cash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
+            D('FinanceCash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
         }
 
-        $info   =   M('finance_cash')->where("id=%d", $id)->find();
+        $info   =   D('FinanceCash')->where("id=%d", $id)->find();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
@@ -85,7 +85,7 @@ class FinancingController extends BaseController {
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
         }
-        $info   =   M('finance_cash')->where("id=%d", $id)->getField('status');
+        $info   =   D('FinanceCash')->where("id=%d", $id)->getField('status');
         return D("financecash")->review_pass($id) ? $this->success($ex[$info].'审核通过') : $this->error($ex[$info].'审核失败或已审核');
     }
 
@@ -96,7 +96,7 @@ class FinancingController extends BaseController {
 
     //信用卡融资
     public function fcard(){
-        $fc = M('finance_cash')->where("stype='card'")->select();
+        $fc = D('FinanceCash')->where("stype='card'")->select();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
@@ -113,7 +113,7 @@ class FinancingController extends BaseController {
             // zecho($_POST);
             $_POST['add']['stype']  =   'card';
             $_POST['add']['startime'] = strtotime($_POST['add']['startime']);
-            M('finance_cash')->add($_POST['add']) ? $this->success('业务添加成功！') : $this->error('业务添加失败！');
+            D('FinanceCash')->add($_POST['add']) ? $this->success('业务添加成功！') : $this->error('业务添加失败！');
         } else {
             $this->assign('banks', $this->_G['banks']);
             $this->display();
@@ -122,7 +122,7 @@ class FinancingController extends BaseController {
 
     //信用卡融资详情
     public function cardinfo($id){
-        $info   =   M('finance_cash')->where("id=%d", $id)->find();
+        $info   =   D('FinanceCash')->where("id=%d", $id)->find();
         $ralog = M('finance_ratelog')->where("mobile='%s' AND customer='%s'", array($info['mobile'], $info['customer']))->select();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
@@ -141,9 +141,9 @@ class FinancingController extends BaseController {
             // zecho($_POST);
             $_POST['edit']['startime'] = strtotime($_POST['edit']['startime']);
             $_POST['edit']['endtime'] = strtotime($_POST['edit']['endtime']);
-            M('finance_cash')->where("id='%d'", $id)->save($_POST['edit']) ? $this->success('信息修改成功！') : $this->error('信息修改失败！');
+            D('FinanceCash')->where("id='%d'", $id)->save($_POST['edit']) ? $this->success('信息修改成功！') : $this->error('信息修改失败！');
         } else {
-            $info   =   M('finance_cash')->where("id='%d'", $id)->find();
+            $info   =   D('FinanceCash')->where("id='%d'", $id)->find();
             $this->assign('banks', $this->_G['banks']);
             $this->assign('ecard',$info);
             $this->display();
@@ -152,12 +152,12 @@ class FinancingController extends BaseController {
 
     //信用卡融资提现
     public function wcard($id){
-        $v = M('finance_cash')->where("id='$id'", $id)->find();
+        $v = D('FinanceCash')->where("id='$id'", $id)->find();
         if($v['status'] != 1){
-            M('finance_cash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
+            D('FinanceCash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
         }
 
-        $info   =   M('finance_cash')->where("id='%d'", $id)->find();
+        $info   =   D('FinanceCash')->where("id='%d'", $id)->find();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
@@ -170,7 +170,7 @@ class FinancingController extends BaseController {
 
     //删除融资业务
     public function delfina($id){zecho($id);
-        M('finance_cash')->where("id='%d'",$id)->delete() ? $this->success('删除成功') : $this->error('删除失败');
+        D('FinanceCash')->where("id='%d'",$id)->delete() ? $this->success('删除成功') : $this->error('删除失败');
     }
 
     //打款计划
