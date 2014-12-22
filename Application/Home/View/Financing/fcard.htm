@@ -33,7 +33,7 @@
 				<td>****{$vo.ccardnum|substr=-4}</td>
 				<td>
 					<php>
-						if(D("financecash")->review_verify($vo['id'])){
+						if(D("financeCash")->review_verify($vo['id'])){
 							echo $kills[$vo['status']].'(<span class="text-success">已审核</span>)';
 						} else {
 							echo $kills[$vo['status']].'(<span class="text-danger">未审核</span>)';

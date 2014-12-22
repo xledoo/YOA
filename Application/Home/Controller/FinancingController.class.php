@@ -3,6 +3,8 @@ namespace Home\Controller;
 use Common\Controller\BaseController;
 class FinancingController extends BaseController {
 
+    // $financing = D("FinanceCash");
+
     //现金融资
     public function fcash(){
     	$fc = M('finance_cash')->where("stype='cash'")->select();
@@ -30,7 +32,8 @@ class FinancingController extends BaseController {
 
     //现金融资详情
     public function cashinfo($id){
-    	$info	=	M('finance_cash')->where("id=%d", $id)->find();
+        // zecho(D("FinanceCash")->where("id=%d",$id)->getCash());
+    	$info	=	D("FinanceCash")->where(array('id' => $id))->find();
     	$ralog = M('finance_ratelog')->where("mobile='%s' AND customer='%s'", array($info['mobile'], $info['customer']))->select();
     	$ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){

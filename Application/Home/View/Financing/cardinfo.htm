@@ -16,7 +16,7 @@
 			<td><php>echo intval((NOW_TIME - $card['startime'])/(3600*24)).'天';</php></td>
 			<td>
 				<php>
-					if(D("financecash")->review_verify($card['id'])){
+					if(D("financeCash")->review_verify($card['id'])){
 						echo $kills[$card['status']].'(<span class="text-success">已审核</span>)';
 					} else {
 						echo $kills[$card['status']].'(<span class="text-danger">未审核</span>)';

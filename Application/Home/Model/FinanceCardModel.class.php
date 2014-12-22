@@ -4,27 +4,11 @@ namespace Home\Model;
 
 use Think\Model;
 
-class FinanceCashModel extends Model {
-
-	protected $tableName = 'finance_cash';
-
-	public function Cash_select($map = array()){
-		if($map){
-			$result = $this->where($map)->select();
-		} else {
-			$result = $this->select();
-		}
-		return $result;
+class FinanceCardModel extends Model {
+	protected $tableName = 'finance_card';
+	public function dselect(){
+		return $this->select();
 	}
-
-	public function Cash_add($map = array()){
-		return $this->add($map);
-	}
-
-	public function Cash_update($map = array()){
-		return $this->save($map);
-	}
-	
 	/*
 	通过审核
 	*/
