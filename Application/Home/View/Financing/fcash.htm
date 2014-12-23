@@ -1,4 +1,4 @@
-<a href="{:U('home/financing/addcash')}" class="btn blue pull-right">新增现金融资&nbsp;&nbsp;<i class="fa fa-plus"></i></a>
+<a href="{:U('home/financing/addcash')}" class="btn blue pull-right">新增&nbsp;现金&nbsp;融资&nbsp;&nbsp;<i class="fa fa-plus"></i></a>
 <table class="table table-condensed table-hover">
 	<thead >
 		<tr>
@@ -34,7 +34,7 @@
 				</td>
 				<td>
 					<a href="{:U('home/financing/cashinfo', array('id' => $vo['id']))}" class="btn btn-xs green">详&nbsp;情</a>
-					<a href="{:U('home/Financing/review', array('id' => $vo['id']))}" class="btn btn-xs blue">审&nbsp;核</a>
+					<a href="{:U('home/Financing/cash_review', array('id' => $vo['id']))}" class="btn btn-xs blue">审&nbsp;核</a>
 					<input type="button" onclick="del({$vo.id})" class="btn btn-xs red" value="删&nbsp;除" />
 				</td>
 			</tr>
@@ -45,7 +45,7 @@
 	function del(val){
 	  var name=confirm("确定删除该纪录？");
 	  if (name == true){
-	  	window.location.href="index.php?m=home&c=Financing&a=delfina&id="+val;
+	  	window.location.href="index.php?m=home&c=Financing&a=del_cash&id="+val;
 	  }else{
 	  	window.location.reload();
 	  }

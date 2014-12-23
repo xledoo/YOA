@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?12 �?17 �?09:10
+-- 生成日期: 2014 �?12 �?23 �?09:16
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -369,6 +369,40 @@ INSERT INTO `pre_common_setting` (`skey`, `svalue`, `stype`, `stitle`, `sremark`
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `pre_finance_card`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_finance_card` (
+  `id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `stype` enum('cash','card') NOT NULL,
+  `customer` varchar(20) NOT NULL,
+  `money` float(10,2) NOT NULL,
+  `startime` int(10) NOT NULL,
+  `endtime` int(10) NOT NULL DEFAULT '0',
+  `rate` int(3) NOT NULL DEFAULT '20',
+  `cbankname` varchar(20) NOT NULL,
+  `ccardnum` varchar(25) NOT NULL,
+  `zday` tinyint(2) NOT NULL,
+  `hkday` tinyint(2) NOT NULL,
+  `mobile` char(11) NOT NULL,
+  `bankname` varchar(20) NOT NULL,
+  `cardnum` varchar(25) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '0',
+  `sponsor` varchar(10) NOT NULL,
+  `verify` char(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- 转存表中的数据 `pre_finance_card`
+--
+
+INSERT INTO `pre_finance_card` (`id`, `stype`, `customer`, `money`, `startime`, `endtime`, `rate`, `cbankname`, `ccardnum`, `zday`, `hkday`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`, `verify`) VALUES
+(7, 'cash', '佟湘玉', 100000000.00, 1417708800, 0, 10, 'abc', '6232514877', 15, 25, '15842576977', 'abc', '62220254', 0, '李大嘴', 'b55262624e069d9b4eafe1bdb169cc11');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `pre_finance_cash`
 --
 
@@ -391,16 +425,14 @@ CREATE TABLE IF NOT EXISTS `pre_finance_cash` (
   `sponsor` varchar(10) NOT NULL,
   `verify` char(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `pre_finance_cash`
 --
 
 INSERT INTO `pre_finance_cash` (`id`, `stype`, `customer`, `money`, `startime`, `endtime`, `rate`, `cbankname`, `ccardnum`, `zday`, `hkday`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`, `verify`) VALUES
-(1, 'cash', '徐力', 100000.00, 1404144000, 1412827162, 20, 'gdb', '6234567892211233', 0, 0, '18687444499', 'ccb', '6227077774444477', 1, '徐力', '7179ac1c553fb2e603f801d2e09d519a'),
-(2, 'card', '字符串', 100000.00, 1404144000, 1413271429, 10, 'icbc', '4270300046233523', 2, 25, '18666554431', 'icbc', '6777777777777777', 1, '', 'f1295f767283b7e289852d2d6f232370'),
-(4, 'card', 'jordan', 500000.00, 1418140800, 1418719336, 30, 'abc', '62225132548741', 25, 30, '1395555544', 'cib', '6222300014587952', 1, 'john', '');
+(2, 'cash', '张子栋', 75000000.00, 1418140800, 0, 12, '', '', 0, 0, '18655498874', 'ecitic', '62220222222222222', 0, '胖大海', '');
 
 -- --------------------------------------------------------
 

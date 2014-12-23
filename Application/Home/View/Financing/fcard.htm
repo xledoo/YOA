@@ -1,4 +1,4 @@
-<a href="{:U('home/financing/addcard')}" class="btn blue pull-right">新增信用卡融资&nbsp;&nbsp;<i class="fa fa-plus"></i></a>
+<a href="{:U('home/financing/addcard')}" class="btn blue pull-right">新增&nbsp;信用卡&nbsp;融资&nbsp;&nbsp;<i class="fa fa-plus"></i></a>
 <table class="table table-condensed table-hover">
 	<thead >
 		<tr>
@@ -33,7 +33,7 @@
 				<td>****{$vo.ccardnum|substr=-4}</td>
 				<td>
 					<php>
-						if(D("financeCash")->review_verify($vo['id'])){
+						if(D("financeCard")->review_verify($vo['id'])){
 							echo $kills[$vo['status']].'(<span class="text-success">已审核</span>)';
 						} else {
 							echo $kills[$vo['status']].'(<span class="text-danger">未审核</span>)';
@@ -42,7 +42,7 @@
 				</td>
 				<td>
 					<a href="{:U('home/financing/cardinfo', array('id' => $vo['id']))}" class="btn btn-xs green">详&nbsp;情</a>
-					<a href="{:U('home/Financing/review', array('id' => $vo['id']))}" class="btn btn-xs blue">审&nbsp;核</a>
+					<a href="{:U('home/Financing/card_review', array('id' => $vo['id']))}" class="btn btn-xs blue">审&nbsp;核</a>
 					<input type="button" onclick="del({$vo.id})" class="btn btn-xs red" value="删&nbsp;除" />
 				</td>
 			</tr>
@@ -53,7 +53,7 @@
 	function del(val){
 	  var name=confirm("确定删除该纪录？");
 	  if (name == true){
-	  	window.location.href="index.php?m=home&c=Financing&a=delfina&id="+val;
+	  	window.location.href="index.php?m=home&c=Financing&a=del_card&id="+val;
 	  }else{
 	  	window.location.reload();
 	  }

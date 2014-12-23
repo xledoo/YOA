@@ -9,7 +9,7 @@
 			<td>{$wcash.mobile}</td>
 			<td>
 				<php>
-					if(D("financecash")->review_verify($wcash['id'])){
+					if(D("financeCash")->review_verify($wcash['id'])){
 						echo $kills[$wcash['status']].'(<span class="text-success">已审核</span>)';
 					} else {
 						echo $kills[$wcash['status']].'(<span class="text-danger">未审核</span>)';
@@ -41,6 +41,6 @@
 
 <div class="">
 	<div class="clearfix pull-right">
-		<a href="#" class="btn btn-md green">提&nbsp;现&nbsp;<i class="fa fa-link"></i></a>
+		<a href="#" class="btn btn-md green">确&nbsp;认&nbsp;提&nbsp;现&nbsp;<i class="fa fa-link"></i></a>
 	</div>
 </div>

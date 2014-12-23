@@ -1,13 +1,16 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
+
 class FinancingController extends BaseController {
 
-    // $financing = D("FinanceCash");
+    // $financing = D('FinanceCash');
+    // $financing = new \Home\Model\FinanceCashModel();
 
     //现金融资
     public function fcash(){
-    	$fc = D("FinanceCash")->where("stype='cash'")->select();
+        $financing = D('FinanceCash');
+    	$fc = $financing->Cash_select();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
@@ -19,11 +22,12 @@ class FinancingController extends BaseController {
 
     //添加现金融资业务
     public function addcash(){
+        $financing = D('FinanceCash');
     	if(IS_POST){
     		// zecho($_POST);
-            $_POST['add']['stype']  =   'cash';
+            // $_POST['add']['stype']  =   'cash';
             $_POST['add']['startime'] = strtotime($_POST['add']['startime']);
-            D('FinanceCash')->add($_POST['add']) ? $this->success('业务添加成功！') : $this->error('业务添加失败！');
+            $financing->Cash_add($_POST['add']) ? $this->success('业务添加成功！') : $this->error('业务添加失败！');
     	} else {
             $this->assign('banks', $this->_G['banks']);
     		$this->display();
@@ -32,9 +36,9 @@ class FinancingController extends BaseController {
 
     //现金融资详情
     public function cashinfo($id){
-        // zecho(D("FinanceCash")->where("id=%d",$id)->getCash());
-    	$info	=	D("FinanceCash")->where(array('id' => $id))->find();
-    	$ralog = M('finance_ratelog')->where("mobile='%s' AND customer='%s'", array($info['mobile'], $info['customer']))->select();
+        $financing = D('FinanceCash');
+    	$info	=	$financing->Cash_select($id);
+    	$ralog = M('finance_ratelog')->where(array('mobile' => $info['mobile'], 'customer' => $info['customer']))->select();
     	$ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
@@ -48,13 +52,14 @@ class FinancingController extends BaseController {
 
     //编辑现金融资业务
     public function editcash($id){
+        $financing = D('FinanceCash');
         if(IS_POST){
             // zecho($_POST);
             $_POST['edit']['startime'] = strtotime($_POST['edit']['startime']);
             $_POST['edit']['endtime'] = strtotime($_POST['edit']['endtime']);
-            D('FinanceCash')->where("id='%d'", $id)->save($_POST['edit']) ? $this->success('信息修改成功！') : $this->error('信息修改失败！');
+            $financing->Cash_save($id,$_POST['edit']) ? $this->success('信息修改成功！') : $this->error('信息修改失败！');
         } else {
-            $info   =   D('FinanceCash')->where("id='%d'", $id)->find();
+            $info   =   $financing->Cash_select($id);
             $this->assign('banks', $this->_G['banks']);
             $this->assign('ecash',$info);
             $this->display();
@@ -63,12 +68,14 @@ class FinancingController extends BaseController {
 
     //现金融资提现
     public function wcash($id){
-        $v = D('FinanceCash')->where("id='$id'", $id)->find();
+        $financing = D('FinanceCash');
+        $info = $v = $financing->Cash_select($id);
         if($v['status'] != 1){
-            D('FinanceCash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
+            $financing->Cash_save($id,array('endtime' => time(),'status' => 1));
+            // D('FinanceCash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
         }
 
-        $info   =   D('FinanceCash')->where("id=%d", $id)->find();
+        // $info   =   $financing->Cash_select(array('id' => $id));
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
@@ -80,13 +87,21 @@ class FinancingController extends BaseController {
     }
 
     //审核
-    public function review($id){
+    public function cash_review($id){
+        $financing = D('FinanceCash');
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
         }
-        $info   =   D('FinanceCash')->where("id=%d", $id)->getField('status');
-        return D("financecash")->review_pass($id) ? $this->success($ex[$info].'审核通过') : $this->error($ex[$info].'审核失败或已审核');
+        $info   =   $financing->where("id=%d", $id)->getField('status');
+        return $financing->review_pass($id) ? $this->success($ex[$info].'审核通过') : $this->error($ex[$info].'审核失败或已审核');
+    }
+
+    //删除现金融资业务
+    public function del_cash($id){
+        $financing = D('FinanceCash');
+        $financing->Cash_delete($id) ? $this->success('删除成功') : $this->error('删除失败');
+        // D('FinanceCard')->where("id='%d'",$id)->delete() ? $this->success('删除成功') : $this->error('删除失败');
     }
 
     //资金拆借
@@ -96,7 +111,8 @@ class FinancingController extends BaseController {
 
     //信用卡融资
     public function fcard(){
-        $fc = D('FinanceCash')->where("stype='card'")->select();
+        $financing = D('FinanceCard');
+        $fc = $financing->Card_select();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
@@ -109,11 +125,12 @@ class FinancingController extends BaseController {
 
     //添加信用卡融资业务
     public function addcard(){
+        $financing = D('FinanceCard');
         if(IS_POST){
             // zecho($_POST);
-            $_POST['add']['stype']  =   'card';
+            // $_POST['add']['stype']  =   'card';
             $_POST['add']['startime'] = strtotime($_POST['add']['startime']);
-            D('FinanceCash')->add($_POST['add']) ? $this->success('业务添加成功！') : $this->error('业务添加失败！');
+            $financing->add($_POST['add']) ? $this->success('业务添加成功！') : $this->error('业务添加失败！');
         } else {
             $this->assign('banks', $this->_G['banks']);
             $this->display();
@@ -122,7 +139,8 @@ class FinancingController extends BaseController {
 
     //信用卡融资详情
     public function cardinfo($id){
-        $info   =   D('FinanceCash')->where("id=%d", $id)->find();
+        $financing = D('FinanceCard');
+        $info   =   $financing->Card_select($id);
         $ralog = M('finance_ratelog')->where("mobile='%s' AND customer='%s'", array($info['mobile'], $info['customer']))->select();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
@@ -137,13 +155,14 @@ class FinancingController extends BaseController {
 
     //编辑信用卡融资业务
     public function editcard($id){
+        $financing = D('FinanceCard');
         if(IS_POST){
             // zecho($_POST);
             $_POST['edit']['startime'] = strtotime($_POST['edit']['startime']);
             $_POST['edit']['endtime'] = strtotime($_POST['edit']['endtime']);
-            D('FinanceCash')->where("id='%d'", $id)->save($_POST['edit']) ? $this->success('信息修改成功！') : $this->error('信息修改失败！');
+            $financing->Card_save($id, $_POST['edit']) ? $this->success('信息修改成功！') : $this->error('信息修改失败！');
         } else {
-            $info   =   D('FinanceCash')->where("id='%d'", $id)->find();
+            $info   =  $financing->Card_select($id);
             $this->assign('banks', $this->_G['banks']);
             $this->assign('ecard',$info);
             $this->display();
@@ -152,12 +171,14 @@ class FinancingController extends BaseController {
 
     //信用卡融资提现
     public function wcard($id){
-        $v = D('FinanceCash')->where("id='$id'", $id)->find();
+        $financing = D('FinanceCard');
+        $info = $v = $financing->Card_select($id);
         if($v['status'] != 1){
-            D('FinanceCash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
+            $financing->Card_save($id,array('endtime' => time(),'status' => 1));
+            // D('FinanceCash')->where("id='%d'",$id)->save(array('endtime' => time(),'status' => 1));//更新为提现状态
         }
 
-        $info   =   D('FinanceCash')->where("id='%d'", $id)->find();
+        // $info   =   D('FinanceCash')->where("id='%d'", $id)->find();
         $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
         foreach($ko as $k => $v){
             $ex[] = explode("=",$v)[1];
@@ -168,13 +189,27 @@ class FinancingController extends BaseController {
         $this->display();
     }
 
-    //删除融资业务
-    public function delfina($id){zecho($id);
-        D('FinanceCash')->where("id='%d'",$id)->delete() ? $this->success('删除成功') : $this->error('删除失败');
+    //审核
+    public function card_review($id){
+        $financing = D('FinanceCard');
+        $ko = explode("\n",$this->_G['setting']['fina_status']['svalue']);
+        foreach($ko as $k => $v){
+            $ex[] = explode("=",$v)[1];
+        }
+        $info   =   $financing->where("id=%d", $id)->getField('status');
+        return $financing->review_pass($id) ? $this->success($ex[$info].'审核通过') : $this->error($ex[$info].'审核失败或已审核');
+    }
+
+    //删除信用卡融资业务
+    public function del_card($id){
+        $financing = D('FinanceCard');
+        $financing->Card_delete($id) ? $this->success('删除成功') : $this->error('删除失败');
+        // D('FinanceCard')->where("id='%d'",$id)->delete() ? $this->success('删除成功') : $this->error('删除失败');
     }
 
     //打款计划
     public function rate(){
+        $ratelog = D('FinanceRatelog');
 
         $month  =   I('month') ? intval(I('month')) : date('n');
         $yeah   =   I('yeah') ? intval(I('yeah')) : date('Y');
@@ -183,7 +218,7 @@ class FinancingController extends BaseController {
         $eday   =   mktime(23, 59, 59, $month, date('t'), $yeah);
         $map['dateline']  = array(array('GT',$mday),array('LT',$eday),'and'); 
 
-        $list = M('finance_ratelog')->where($map)->select();
+        $list = $ratelog->Rate_select($map);
         $this->assign('banks', $this->_G['banks']);
         $this->assign('list', $list);
         $this->display();
@@ -191,16 +226,26 @@ class FinancingController extends BaseController {
 
     //打款计划生成
     public function rate_build(){
-        $model  =   D('financecash');
+        $fcash  =   D('FinanceCash');
+        $fcard  =   D('FinanceCard');
+        $ratelog = D('FinanceRatelog');
+        
         $mday   =   mktime(0,0,0,date('n'),1,date('Y'));
         $eday   =   mktime(23, 59, 59, date('n'), date('t'), date('Y'));
         $map['dateline']  = array(array('GT',$mday),array('LT',$eday),'and');
 
-        $fina = $model->select();
+        // $fcash = $fcash->Cash_select();
+        // $fcard = $fcard->Card_select();
+        $fina = array_merge($fcash->Cash_select(), $fcard->Card_select());
         foreach ($fina as $key => $value) {
-            if($model->review_verify($value['id'])){
+            if($value['stype'] = 'cash'){
+                $ca = $fcash->review_verify($value['id']);
+            } elseif($value['stype'] = 'card') {
+                $ca = $fcard->review_verify($value['id']);
+            }
+            if($ca){
                 $map['cashid']  =   $value['id'];
-                if(!M('finance_ratelog')->where($map)->find()){
+                if(!$ratelog->Rate_select($map)){
                     $value['cashid']    =   $value['id'];
                     unset($value['id']);unset($value['startime']);
                     unset($value['endtime']);unset($value['cbankname']);
@@ -218,7 +263,9 @@ class FinancingController extends BaseController {
                     }
                     unset($value['zday']);
                     $value['rate']  =   tofloat($rate);
-                    M('finance_ratelog')->add($value);                    
+                    // M('finance_ratelog')->add($value); 
+                    // zecho($value); 
+                    $ratelog->Rate_add($value);                  
                 }
 
             }
@@ -228,9 +275,11 @@ class FinancingController extends BaseController {
 
     //返回json数据
     public function rateinfo(){
+        $ratelog = D('FinanceRatelog');
         $banks = $this->_G['banks'];
         $json['id']       =   I('id');
-        $jso = M('finance_ratelog')->where("id=%d",I('id'))->find();
+        $jso = $ratelog->Rate_select(I('id'));
+        // $jso = M('finance_ratelog')->where("id=%d",I('id'))->find();
         $jso['dateline'] = date("Y-m-d",$jso['dateline']);
         $jso['stype'] = $jso['stype'] == 'cash' ? '现金' : ($jso['stype'] == 'card' ? '信用卡' : '空');
         $jso['bankname'] = $banks[$jso['bankname']]['bankname'];
@@ -239,8 +288,10 @@ class FinancingController extends BaseController {
 
     //打款状态确认
     public function dorate($id){
+        $ratelog = D('FinanceRatelog');
         // zecho($id);
         $data['status'] = '1';
-        M('finance_ratelog')->where("id='%s'",$id)->save($data) ? $this->success('状态更改为 已打款') : $this->error('打款状态更新失败！');
+        $ratelog->Rate_save($id, $date) ? $this->success('状态更改为 已打款') : $this->error('打款状态更新失败！');
+        // M('finance_ratelog')->where("id='%s'",$id)->save($data) ? $this->success('状态更改为 已打款') : $this->error('打款状态更新失败！');
     }
 }
