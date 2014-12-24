@@ -49,7 +49,7 @@ class FinancingController extends BaseController {
         $this->assign('kills',$ex);
         $this->assign('banks', $this->_G['banks']);
         $this->assign('cash', $info);
-    	$this->assign('cashlog', $ralog);
+    	$this->assign('cashlog', $ratelog);
     	$this->display();
     }
 
@@ -155,7 +155,7 @@ class FinancingController extends BaseController {
         $this->assign('kills',$ex);
         $this->assign('banks', $this->_G['banks']);
         $this->assign('card', $info);
-        $this->assign('cardlog', $ralog);
+        $this->assign('cardlog', $ratelog);
         $this->display();
     }
 

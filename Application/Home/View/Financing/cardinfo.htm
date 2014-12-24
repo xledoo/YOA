@@ -49,7 +49,7 @@
 	<tbody>
 		<tr><th>客户名</th><th>手机号</th><th>打款类型</th><th>打款时间</th><th>金额</th><th>利息</th><th>打款备注</th></tr>
 		<volist name="cardlog" id="cardlog">
-			<tr style="color:DodgerBlue;" title="{$cardlog.bankname}，卡号：{$cardlog.cardnum}">
+			<tr style="color:DodgerBlue;" title="{$banks[$cardlog[bankname]][bankname]}，卡号：{$cardlog.cardnum}">
 				<td style="border:none;">{$cardlog.customer}</td>
 				<td style="border:none;">{$cardlog.mobile}</td>
 				<td style="border:none;">
