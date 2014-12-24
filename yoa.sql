@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 �?12 �?23 �?09:16
+-- 生成日期: 2014 �?12 �?24 �?06:23
 -- 服务器版本: 5.7.4
 -- PHP 版本: 5.6.0beta4
 
@@ -391,14 +391,15 @@ CREATE TABLE IF NOT EXISTS `pre_finance_card` (
   `sponsor` varchar(10) NOT NULL,
   `verify` char(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `pre_finance_card`
 --
 
 INSERT INTO `pre_finance_card` (`id`, `stype`, `customer`, `money`, `startime`, `endtime`, `rate`, `cbankname`, `ccardnum`, `zday`, `hkday`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`, `verify`) VALUES
-(7, 'cash', '佟湘玉', 100000000.00, 1417708800, 0, 10, 'abc', '6232514877', 15, 25, '15842576977', 'abc', '62220254', 0, '李大嘴', 'b55262624e069d9b4eafe1bdb169cc11');
+(1, 'card', '白展堂', 7500000.00, 1418313600, 0, 4, 'abc', '6222025654789', 5, 25, '15966666666', 'abc', '6222022589999887', 0, '莫小贝', '9467756b21cd9b712911775d99bb6a38'),
+(2, 'card', '张子栋', 6500000.00, 1417536000, 0, 3, 'cmb', '6222032156497', 2, 15, '18655441122', 'boco', '653214569872315', 0, '李大嘴', '');
 
 -- --------------------------------------------------------
 
@@ -432,7 +433,8 @@ CREATE TABLE IF NOT EXISTS `pre_finance_cash` (
 --
 
 INSERT INTO `pre_finance_cash` (`id`, `stype`, `customer`, `money`, `startime`, `endtime`, `rate`, `cbankname`, `ccardnum`, `zday`, `hkday`, `mobile`, `bankname`, `cardnum`, `status`, `sponsor`, `verify`) VALUES
-(2, 'cash', '张子栋', 75000000.00, 1418140800, 0, 12, '', '', 0, 0, '18655498874', 'ecitic', '62220222222222222', 0, '胖大海', '');
+(1, 'cash', '佟湘玉', 1052500.00, 1417536000, 0, 6, '', '', 0, 0, '18745684447', 'abc', '6222022513214568', 0, '吕轻侯', '36ff67a440197db93d230932a78e9f1e'),
+(2, 'cash', '莫小贝', 150000.00, 1417276800, 0, 2, '', '', 0, 0, '15866554444', 'gdb', '62220513564897', 0, '祝无双', '');
 
 -- --------------------------------------------------------
 
@@ -463,8 +465,8 @@ CREATE TABLE IF NOT EXISTS `pre_finance_ratelog` (
 --
 
 INSERT INTO `pre_finance_ratelog` (`id`, `cashid`, `customer`, `mobile`, `stype`, `money`, `rate`, `bankname`, `cardnum`, `dateline`, `remark`, `status`, `ratedate`, `verify`) VALUES
-(1, 1, '徐力', '18687444499', 'cash', 100000.00, 2000.00, 'ccb', '6227077774444477', 1418781518, '12月融资利息', 0, 0, ''),
-(2, 2, '字符串', '18666554431', 'card', 100000.00, 1000.00, 'icbc', '6777777777777777', 1417449600, '12月融资利息', 0, 0, '');
+(1, 1, '佟湘玉', '18745684447', 'cash', 1052500.00, 6315.00, 'abc', '6222022513214568', 1419400994, '12月融资利息', 1, 0, ''),
+(2, 1, '白展堂', '15966666666', 'card', 7500000.00, 75000.00, 'abc', '6222022589999887', 1417708800, '12月融资利息', 0, 0, '');
 
 -- --------------------------------------------------------
 
